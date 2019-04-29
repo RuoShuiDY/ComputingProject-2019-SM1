@@ -4,6 +4,6 @@ import com.txg.project.domain.Lecturer;
 
 public interface LecturerService {
 
-	Lecturer lecturerLogin(Lecturer lecturer);
+	Lecturer lecturerLogin(String email,String password);
 	
 }

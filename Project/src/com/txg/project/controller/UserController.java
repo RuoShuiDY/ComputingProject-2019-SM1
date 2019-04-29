@@ -23,20 +23,23 @@ public class UserController {
 	
 	@RequestMapping("/login")
 	public String login(
-			@RequestParam(value="username", required=true, defaultValue="null")String username,
-			@RequestParam(value="password", required=true, defaultValue="null")String password) {
-		Lecturer lecturer= new Lecturer();
-		try {
-			lecturer.setLecturerId(Integer.parseInt(username));
-			lecturer.setPassword(password);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		Lecturer loginResult = lecturerService.lecturerLogin(lecturer);
-		if(loginResult!=null) {
-			System.out.println("Login Successfully!");
-		}else {
-			System.out.println("Login Fail");
+			@RequestParam(value="email", required=true, defaultValue="null")String email,
+			@RequestParam(value="password", required=true, defaultValue="null")String password,
+			@RequestParam(value="id", required=true, defaultValue="Professor")String id,
+			Model model) {
+			
+		if (id.equals("PROFESSOR")) {
+			Lecturer lecturer = lecturerService.lecturerLogin(email, password);
+			if (lecturer!=null) {
+				model.addAttribute("msg", true);
+				model.addAttribute("lecturer", lecturer);
+				System.out.println(lecturer);
+				return "menu";
+			}else {
+				model.addAttribute("msg", false);
+			}
+		}else if(id.equals("TUTOR")) {
+			
 		}
 		return "login";
 	}

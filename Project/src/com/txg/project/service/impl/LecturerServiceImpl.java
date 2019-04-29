@@ -13,8 +13,16 @@ public class LecturerServiceImpl implements LecturerService{
 	private LecturerMapper lecturerMapper;
 
 	@Override
-	public Lecturer lecturerLogin(Lecturer lecturer) {
+	public Lecturer lecturerLogin(String email, String password) {
 		// TODO Auto-generated method stub
+		Lecturer lecturer = new Lecturer();
+		try {
+			lecturer.setLecturerEmail(email);
+			lecturer.setPassword(password);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
 		return lecturerMapper.lecturerLogin(lecturer);
 	}
 	
