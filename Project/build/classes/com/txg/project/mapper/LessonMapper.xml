@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.txg.project.mapper.LessonMapper">
+	
+	<resultMap type="Lesson" id="lessonResultMap">
+		<id property="lessonId" column="lesson_id" />
+		<result property="semester" column="semester"/>
+		<result property="year" column="year"/>
+		<result property="state" column="state"/>
+		<association property="classDict" javaType="ClassDict">
+			<id property="classId" column="class_id"/>
+			<result property="className" column="class_name"/>
+		</association>
+	</resultMap>
+	
+	<select id="selectAll" parameterType="QueryLesson" resultMap="lessonResultMap">
+		SELECT  `lesson_id`,`lecturer_id`,`semester`,`year`,`state`,
+				c.`class_id`,`class_name`
+		FROM `lesson_table` l LEFT JOIN `class_dict` c
+		ON l.`class_id` = c.`class_id`
+		<where>
+			lecturer_id = #{lecturerId}
+
+			<if test="queryClassId!=null and queryClassId!=''">
+				AND c.class_id = #{queryClassId}
+			</if>
+			<if test="querySemester!=null and querySemester!=''">
+				AND semester = #{querySemester}
+			</if>
+			<if test="queryYear!=null and queryYear!=''">
+				AND year = #{queryYear}
+			</if>
+		</where>
+	</select>
+	
+	<insert id="addLesson" parameterType="Lesson">
+		INSERT INTO `lesson_table` (
+  			`class_id`,`lecturer_id`,`semester`,`year`,`state`) 
+		VALUES(
+    		#{classDict.classId},#{lecturer.lecturerId},#{semester},#{year},'ABLE') 
+	</insert>
+
+</mapper>

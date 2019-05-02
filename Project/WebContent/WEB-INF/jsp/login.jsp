@@ -7,7 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link href="../../assets/css/bootstrap.css" rel="stylesheet" />
 <link href="../../assets/css/font-awesome.css" rel="stylesheet" />
-<link href="../../assets/css/style.css" rel="stylesheet" />
+<link href="../../assets/css/login_style.css" rel="stylesheet" />
+
 </head>
 <body>
 	<div class="wrapper">
@@ -24,7 +25,7 @@
 				<form class="login" action="login" method="post">
 					<h2>LOGIN NOW</h2>
 					<p>Email</p>
-					<input type="text" name="email" placeholder="" required autofocus />
+					<input type="text" name="email" placeholder="" required autofocus"/>
 					<p>Password</p>
 					<input type="password" name="password" placeholder="" required />
 					<div class="identity">
@@ -47,4 +48,9 @@
 		<footer> </footer>
 	</div>
 </body>
+<script type="text/javascript">
+	if (${msg} == false) {
+		window.alert("Username or password wrong");
+	}
+</script>
 </html>

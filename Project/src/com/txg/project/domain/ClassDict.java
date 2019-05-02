@@ -16,5 +16,9 @@ public class ClassDict {
 	public void setClassName(String className) {
 		this.className = className;
 	}
+	@Override
+	public String toString() {
+		return "ClassDict [classId=" + classId + ", className=" + className + "]";
+	}
 	
 }
