@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			lecturer_id = #{lecturerId}
 
 			<if test="queryClassId!=null and queryClassId!=''">
-				AND c.class_id = #{queryClassId}
+				AND c.class_id LIKE #{queryClassId}
 			</if>
 			<if test="querySemester!=null and querySemester!=''">
 				AND semester = #{querySemester}
@@ -41,5 +41,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES(
     		#{classDict.classId},#{lecturer.lecturerId},#{semester},#{year},'ABLE') 
 	</insert>
+	
+	<select id="selectLesson" parameterType="Lesson" resultType="Integer">
+		SELECT COUNT(*) from lesson_table 
+		WHERE class_id=#{classDict.classId} 
+		AND lecturer_id=#{lecturer.lecturerId} 
+		AND semester=#{semester} 
+		AND year=#{year}
+	</select>
+	
+	<delete id="deleteLesson" parameterType="Integer" >
+		DELETE FROM lesson_table WHERE lesson_id = #{lessonId}
+	</delete>
 
 </mapper>

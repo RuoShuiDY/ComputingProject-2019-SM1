@@ -10,4 +10,6 @@ public interface LessonService {
 	List<Lesson> findAllLessons(QueryLesson query);
 
 	Integer addLesson(Lesson lesson);
+	
+	Integer deleteLesson(Integer lessonId);
 }

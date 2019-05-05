@@ -21,7 +21,7 @@ public class LessonServiceImpl implements LessonService{
 		// TODO Auto-generated method stub
 		if(query.getQueryClassId() != null && !query.getQueryClassId().equals("")) {
 			String classCombine = query.getQueryClassId(); 			
-			query.setQueryClassId(classCombine.substring(0, classCombine.indexOf(" ")));
+			query.setQueryClassId("%"+classCombine.substring(0, classCombine.indexOf(" "))+"%");
 		}
 		return lessonMapper.selectAll(query);
 	}
@@ -29,7 +29,17 @@ public class LessonServiceImpl implements LessonService{
 	@Override
 	public Integer addLesson(Lesson lesson) {
 		// TODO Auto-generated method stub
-		return lessonMapper.addLesson(lesson);
+		if(lessonMapper.selectLesson(lesson)>0) {
+			return 0;
+		}else {
+			return lessonMapper.addLesson(lesson);
+		}
+	}
+
+	@Override
+	public Integer deleteLesson(Integer lessonId) {
+		// TODO Auto-generated method stub
+		return lessonMapper.deleteLesson(lessonId);
 	}
 
 }

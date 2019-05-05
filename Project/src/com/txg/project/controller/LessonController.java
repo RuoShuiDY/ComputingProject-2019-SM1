@@ -7,8 +7,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.txg.project.domain.ClassDict;
 import com.txg.project.domain.Lecturer;
@@ -46,7 +48,7 @@ public class LessonController {
 	}
 	
 	@RequestMapping(value = "/addlesson")
-	public String addLesson(Lesson lesson, HttpSession session,
+	public String addLesson(Model model, Lesson lesson, HttpSession session,
 			@RequestParam(value="class_id",required = true)String classId) {
 		Lecturer lecturer = (Lecturer) session.getAttribute("lecturer");
 		lesson.setLecturer(lecturer);
@@ -57,7 +59,29 @@ public class LessonController {
 		
 		//System.out.println(lesson);
 		Integer result = lessonService.addLesson(lesson);
-		return "subject";
+		if(result != 0) {
+			model.addAttribute("operation",true);
+			model.addAttribute("msg", "Insertion Success");		
+		}else {
+			model.addAttribute("operation",false);
+			model.addAttribute("msg", "Insertion fail");
+		}
+		return "redirect:lessonlist";
+	}
+	@RequestMapping(value="/deletelesson")
+	@ResponseBody
+	public void deleteLesson(Model model,
+			@RequestParam(value="lesson_id",required=true)Integer lessonId) {
+		Integer result = lessonService.deleteLesson(lessonId);
+		if(result != 0) 
+		{
+			model.addAttribute("operation", true);
+			model.addAttribute("msg","Delete Success");
+		}else {
+			model.addAttribute("operation",false);
+			model.addAttribute("msg", "Delete Fail");
+		}
+		//return "forward:lessonlist";
 	}
 	
 }

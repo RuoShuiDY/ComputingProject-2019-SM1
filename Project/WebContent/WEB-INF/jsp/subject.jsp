@@ -101,29 +101,30 @@
 
 				<!-- search Subject-->
 				<div class="searchSubject">
-				<form action="lessonlist" method="post">
-					<label for="subject">Subject ID/Subject Name:</label> <input
-						type="text" name="queryClassId" list="subject">
-					<datalist id="subject">
-						<c:forEach items="${classes}" var="classes">
-							<option value="${classes.classId } ${classes.className}"></option>
-						</c:forEach>
-						<!--  
+					<form action="lessonlist" method="post">
+						<label for="subject">Subject ID/Subject Name:</label> <input
+							type="text" name="queryClassId" list="subject">
+						<datalist id="subject">
+							<c:forEach items="${classes}" var="classes">
+								<option value="${classes.classId } ${classes.className}"></option>
+							</c:forEach>
+							<!--  
 						<option value="COMP90004 Cloud Computing"></option>
 						<option value="COMP90024 Java"></option>
 						-->
-					</datalist>
-					<label for="semester">Semester:</label> <select id="semester" name="querySemester">
-						<option selected="selected"></option>
-						<option>Semester1</option>
-						<option>Semester2</option>
-						<option>Summer Term</option>
-						<option>Winter Term</option>
-					</select> <label for="year">Year:</label> <input type="text" id="year"
-						class="yearpicker" value="" name="queryYear"/>
-					<script src="../../assets/js/yearpicker.js" async></script>
-					<button type="submit" name="button">Search</button>
-				</form>
+						</datalist>
+						<label for="semester">Semester:</label> <select id="semester"
+							name="querySemester">
+							<option selected="selected"></option>
+							<option>Semester1</option>
+							<option>Semester2</option>
+							<option>Summer Term</option>
+							<option>Winter Term</option>
+						</select> <label for="year">Year:</label> <input type="text" id="year"
+							class="yearpicker" value="" name="queryYear" />
+						<script src="../../assets/js/yearpicker.js" async></script>
+						<button type="submit" name="button">Search</button>
+					</form>
 				</div>
 				<!-- display Subject-->
 				<div class="displaySubject">
@@ -143,18 +144,20 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${lessonlist }" var="lesson">
+							<c:forEach items="${lessonlist }" var="lesson" varStatus="status">
 								<tr>
-									<td>${lesson.lessonId }</td>
+									<td>${status.count }</td>
+									<!-- <td>${lesson.lessonId }</td> -->
 									<td>${lesson.classDict.classId }</td>
 									<td>${lesson.classDict.className }</td>
 									<td>${lesson.semester }</td>
 									<td>${lesson.year }</td>
 									<td>
-										<button type="button" name="button" >
+										<button type="button" name="button">
 											<i class="fa fa-edit"></i><span>Update</span>
 										</button>
-										<button type="button" name="button" >
+										<button type="button" name="button"
+											onclick="deleteInfo(${lesson.lessonId})">
 											<i class="fa fa-minus"></i><span>Delete</span>
 										</button>
 									</td>
@@ -238,7 +241,11 @@
 						}
 					});
 				});
-		
+		function deleteInfo(lesson_id){
+			$.post("deletelesson",{"lesson_id":lesson_id},function(result){
+				window.location.reload();
+			});
+		} 
 	</script>
 	</div>
 </body>

@@ -13,4 +13,8 @@ public interface LessonMapper {
 	List<Lesson> selectAll(QueryLesson query);
 
 	Integer addLesson(Lesson lesson);
+	
+	Integer selectLesson(Lesson lesson);
+	
+	Integer deleteLesson(Integer lessonId);
 }
