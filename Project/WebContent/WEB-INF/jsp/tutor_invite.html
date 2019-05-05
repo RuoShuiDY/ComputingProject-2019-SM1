@@ -67,10 +67,10 @@
                 <a class="nav-link" href="#tutorSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i><span>Tutor Information</span></a>
                 <ul class="list-unstyled" id="tutorSubmenu">
                   <li>
-                    <a class="nav-link" href="#"><span>Tutor Invitation</span></a>
+                    <a class="nav-link active" href="#"><span>Tutor Invitation</span></a>
                   </li>
                   <li>
-                    <a class="nav-link active" href="tutor.html"><span>Tutor Overview</span></a>
+                    <a class="nav-link" href="tutor.html"><span>Tutor Overview</span></a>
                   </li>
                 </ul>
               </li>
@@ -95,73 +95,68 @@
         </nav>
 
         <!-- page content -->
-        <div class="page-content col-xs-10 col-sm-10 col-md-10 col-lg-10">
+        <div class="page-content col-xs-9 col-sm-9 col-md-9 col-lg-9">
           <div class="content">
-
-            <!-- breadcrumb -->
-            <ol class="breadcrumb row">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item"><a href="#">Tutor Information</a></li>
-              <li class="breadcrumb-item active">Tutor Overview</a></li>
-            </ol>
-
+              <div class="row">
+                <!-- breadcrumb -->
+                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
+                  <ol class="breadcrumb row">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Tutor Information</a></li>
+                    <li class="breadcrumb-item active">Tutor Invitation</a></li>
+                  </ol>
+                </div>
+                <!-- Invite Tutor-->
+                <div class="col-lg-2">
+                  <div class="sendInvitation row">
+                    <button type="button" id="invite" name="button">Send New Invitation</button>
+                  </div>
+                </div>
+            </div>
             <!-- display Tutor-->
             <div class="displayTutor">
-              <table id="tutor_table" class="table-responsive table table-hover">
+              <table id="tutor_table" class="table table-hover">
                 <thead>
                   <tr>
                     <th>No.</th>
-                    <th>Tutor ID</th>
                     <th>Tutor Email</th>
-                    <th>Tutor Name</th>
-                    <th>Contact</th>
                     <th>Subject ID</th>
                     <th>Subject Name</th>
                     <th>Semester</th>
                     <th>Year</th>
-                    <th><span id="table_th">Operations</span></th>
+                    <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                       <td>1</td>
-                      <td>T1234567890</td>
-                      <td>1234567890@gmail.com</td>
-                      <td>Yue Deng</td>
-                      <td>0000000000</td>
+                      <td>evelynguo410@gmail.com</td>
                       <td>COMP90024</td>
                       <td>Cloud Computing</td>
                       <td>Semester1</td>
                       <td>2019</td>
-                      <td>
-                        <button type="button" class="update_button" name="button"><i class="fa fa-edit"></i><span>Update</span></button>
-                        <button type="button" class="delete_button" name="button"><i class="fa fa-minus"></i><span>Delete</span></button>
-                      </td>
+                      <td>Invited</td>
                   </tr>
                   <tr>
                     <td>2</td>
-                    <td>T1234567890</td>
-                    <td>1234567890@gmail.com</td>
-                    <td>Yuxin Guo</td>
-                    <td>0000000000</td>
+                    <td>evelynguo410@gmail.com</td>
                     <td>COMP90024</td>
                     <td>Cloud Computing</td>
                     <td>Semester1</td>
                     <td>2019</td>
-                    <td>
-                      <button type="button" class="update_button" name="button"><i class="fa fa-edit"></i><span>Update</span></button>
-                      <button type="button" class="delete_button" name="button"><i class="fa fa-minus"></i><span>Delete</span></button>
-                    </td>
+                    <td>Activated</td>
                   </tr>
                 </tbody>
               </table>
 
-              <!-- add subject -->
-              <div class="form_vertical addSubject" style="display:none">
+              <!-- invite tutor -->
+              <div class="form_vertical inviteTutor" style="display:none">
                 <form class="popup_form" action="index.html" method="post">
-                  <h5 class="popup_form_topic">Add Subject</h5>
+                  <h5 class="popup_form_topic">Tutor Invitation</h5>
+                  <label for="year">Tutor Email:</label>
+                  <input type="text" class="showTooltip" value=""/>
                   <label for="subject_id"><span class="badge badge-secondary"></span> Subject ID:</label>
-                  <input type="text" id="subjectid_add_input" class="showTooltip" name="subject_id" list="subject" autocomplete="off">
+                  <input type="text" id="check" class="showTooltip" name="subject_id" list="subject" autocomplete="off">
                   <datalist id="subject">
                     <option value="COMP90004"></option>
                     <option value="COMP90024"></option>
@@ -177,38 +172,11 @@
                   <br>
                   <label for="year">Year:</label>
                   <input type="text" class="yearpicker showTooltip" value=""/>
+                  <script src="../../assets/js/yearpicker.js" async></script>
                   <br>
-                  <button type="button" name="button" class="form_vertical_button disabled" id="add_submit"><i class="fa fa-plus"></i><span>Add</span></button>
+                  <button type="button" name="button" class="form_vertical_button disabled" id="invite_submit"><i class="fa fa-envelope"></i><span>Invite</span></button>
                 </form>
               </div>
-
-              <!-- update subject -->
-              <div class="form_vertical updateSubject" style="display:none">
-                <form class="popup_form" action="index.html" method="post">
-                  <h5 class="popup_form_topic">Update Subject</h5>
-                  <label><span class="badge badge-secondary"></span> Subject ID:</label>
-                  <label class="showTooltip subjectid-label"></label>
-                  <br>
-                  <label for="semester">Semester:</label>
-                  <select class="showTooltipSelect">
-                    <option>Semester1</option>
-                    <option>Semester2</option>
-                    <option>Summer Term</option>
-                    <option>Winter Term</option>
-                  </select>
-                  <br>
-                  <label for="year">Year:</label>
-                  <input type="text" class="yearpicker showTooltip" value=""/>
-                  <br>
-                  <button type="button" name="button" class="disabled form_vertical_button" id="update_submit"><i class="fa fa-edit"></i><span>Update</span></button>
-                </form>
-              </div>
-
-              <!-- confirm dialog-->
-              <div id="dialog-confirm" title="Delete?">
-                <p>This items will be permanently deleted and </br> <strong>cannot</strong> be recovered. Are you sure?</p>
-              </div>
-          </div>
             </div>
           </div>
         </div>
@@ -218,27 +186,26 @@
         $(document).ready(function () {
             $('#tutor_table').DataTable();
             $('#year').val("");
-            $('#dialog-confirm').hide();
 
-            $('#add').click(function() {
-  						if ($(".addSubject").css("display") == "none") {
-  							$(".addSubject").show();
+            $('#invite').click(function() {
+  						if ($(".inviteTutor").css("display") == "none") {
+  							$(".inviteTutor").show();
   						} else {
-  							$(".addSubject").hide();
+  							$(".inviteTutor").hide();
               }
 						});
 
-            $('#subjectid_add_input').blur(function(){
+            $('#check').blur(function(){
               var flag = false;
               var options=$("#subject").prop("options");
               for(var i=0;i<options.length;i++){
                 var text = options[i].value;
-                if(text==$('#subjectid_add_input').val()){
+                if(text==$('#check').val()){
                   $('.badge').removeClass("badge-danger");
                   $('.badge').addClass("badge-success");
                   $('.badge').html("Valid");
                   flag = true;
-                  $('#add_submit').removeClass("disabled")
+                  $('#invite_submit').removeClass("disabled")
                   break;
                 }
               }
@@ -246,7 +213,7 @@
                 $('.badge').removeClass("badge-success");
                 $('.badge').addClass("badge-danger");
                 $('.badge').html("Invalid");
-                $('#add_submit').addClass("disabled")
+                $('#invite_submit').addClass("disabled")
               }
             });
             //showtooltip
@@ -266,40 +233,10 @@
               $(this).attr("title",text);
             });
 
-            $('.update_button').click(function() {
-  						if ($(".updateSubject").css("display") == "none") {
-  							$(".updateSubject").show();
-                $(".subjectid-label").html($(this).parents("tr").find(".subject_id").text());
-  						} else {
-  							$(".updateSubject").hide();
-              }
-						});
-
-            $('#update_submit').click(function(){
-                $(".updateSubject").hide();
-            });
-
-            $('#add_submit').click(function(){
-              if(!$('#add_submit').hasClass("disabled")){
-                $(".addSubject").hide();
+            $('#invite_submit').click(function(){
+              if(!$('#invite_submit').hasClass("disabled")){
+                $(".inviteTutor").hide();
               };
-            });
-
-            $('.delete_button').click(function(){
-              $("#dialog-confirm").dialog({
-                resizable: false,
-                height: "auto",
-                width: 350,
-                modal: true,
-                buttons: {
-                  "Delete": function() {
-                    $( this ).dialog( "close" );
-                  },
-                  Cancel: function() {
-                    $( this ).dialog( "close" );
-                  }
-                }
-              });
             });
         });
       </script>
