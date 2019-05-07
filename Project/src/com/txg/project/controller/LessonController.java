@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.txg.project.domain.ClassDict;
 import com.txg.project.domain.Lecturer;
 import com.txg.project.domain.Lesson;
+import com.txg.project.mapper.LessonMapper;
 import com.txg.project.queryDomain.QueryLesson;
 import com.txg.project.service.ClassDictService;
 import com.txg.project.service.LessonService;
@@ -28,7 +29,7 @@ public class LessonController {
 	@Autowired
 	private ClassDictService classDictService;
 	
-	
+	/*
 	@RequestMapping(value="/lessonlist")
 	public String showLessonList(Model model,HttpSession session,QueryLesson query) {
 		Lecturer lecturer = (Lecturer) session.getAttribute("lecturer");
@@ -41,6 +42,20 @@ public class LessonController {
 		}
 		query.setLecturerId(lecturer.getLecturerId());
 		List<Lesson> list = lessonService.findAllLessons(query);
+		model.addAttribute("lessonlist",list);
+		List<ClassDict> classes = classDictService.findAll();
+		model.addAttribute("classes", classes);
+		return "subject";
+	}*/
+	
+	@RequestMapping(value = "/lessonlist")
+	public String showLessonList(Model model, HttpSession session) {
+		Lecturer lecturer = (Lecturer) session.getAttribute("lecturer");
+		if(lecturer == null) {
+			model.addAttribute("msg", "Session expired.");
+			return "redirect:/user/loginUI";
+		}
+		List<Lesson> list = lessonService.findAllLessons(lecturer.getLecturerId());
 		model.addAttribute("lessonlist",list);
 		List<ClassDict> classes = classDictService.findAll();
 		model.addAttribute("classes", classes);
@@ -82,6 +97,28 @@ public class LessonController {
 			model.addAttribute("msg", "Delete Fail");
 		}
 		//return "forward:lessonlist";
+	}
+	
+	@RequestMapping(value="/updatelesson")
+	public String updateLesson(Model model,
+			@RequestParam(value="lesson_id",required=true) Integer lessonId,
+			String semester,Integer year) {
+		Lesson lesson = new Lesson();
+		lesson.setLessonId(lessonId);
+		lesson.setSemester(semester);
+		lesson.setYear(year);
+		
+		Integer result = lessonService.updateLesson(lesson);
+		if(result != 0) 
+		{
+			model.addAttribute("operation", true);
+			model.addAttribute("msg","Update Success");
+		}else {
+			model.addAttribute("operation",false);
+			model.addAttribute("msg", "Update Fail");
+		}
+		return "redirect:lessonlist";
+		
 	}
 	
 }

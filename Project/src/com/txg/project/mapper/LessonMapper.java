@@ -9,12 +9,16 @@ import com.txg.project.queryDomain.QueryLesson;
 
 @Repository
 public interface LessonMapper {
-
+	/*
 	List<Lesson> selectAll(QueryLesson query);
-
+	*/
 	Integer addLesson(Lesson lesson);
 	
 	Integer selectLesson(Lesson lesson);
 	
 	Integer deleteLesson(Integer lessonId);
+
+	List<Lesson> selectAllLessons(Integer lecturer_id);
+	
+	Integer updateLesson(Lesson lesson);
 }

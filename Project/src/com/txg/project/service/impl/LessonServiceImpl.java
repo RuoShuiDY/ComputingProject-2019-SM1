@@ -16,6 +16,7 @@ public class LessonServiceImpl implements LessonService{
 	@Autowired
 	private LessonMapper lessonMapper;
 	
+	/*
 	@Override
 	public List<Lesson> findAllLessons(QueryLesson query) {
 		// TODO Auto-generated method stub
@@ -24,7 +25,7 @@ public class LessonServiceImpl implements LessonService{
 			query.setQueryClassId("%"+classCombine.substring(0, classCombine.indexOf(" "))+"%");
 		}
 		return lessonMapper.selectAll(query);
-	}
+	}*/
 
 	@Override
 	public Integer addLesson(Lesson lesson) {
@@ -40,6 +41,18 @@ public class LessonServiceImpl implements LessonService{
 	public Integer deleteLesson(Integer lessonId) {
 		// TODO Auto-generated method stub
 		return lessonMapper.deleteLesson(lessonId);
+	}
+
+	@Override
+	public List<Lesson> findAllLessons(Integer lecturer_id) {
+		// TODO Auto-generated method stub
+		return lessonMapper.selectAllLessons(lecturer_id);
+	}
+
+	@Override
+	public Integer updateLesson(Lesson lesson) {
+		// TODO Auto-generated method stub
+		return lessonMapper.updateLesson(lesson);
 	}
 
 }

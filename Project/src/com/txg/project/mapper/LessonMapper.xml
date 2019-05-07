@@ -35,6 +35,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 	
+	<select id="selectAllLessons" parameterType="Integer" resultMap="lessonResultMap">
+		SELECT  `lesson_id`,`lecturer_id`,`semester`,`year`,`state`,
+				c.`class_id`,`class_name`
+		FROM `lesson_table` l LEFT JOIN `class_dict` c
+		ON l.`class_id` = c.`class_id`
+		WHERE lecturer_id = #{lecturerId}
+	</select>
+	
 	<insert id="addLesson" parameterType="Lesson">
 		INSERT INTO `lesson_table` (
   			`class_id`,`lecturer_id`,`semester`,`year`,`state`) 
@@ -53,5 +61,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteLesson" parameterType="Integer" >
 		DELETE FROM lesson_table WHERE lesson_id = #{lessonId}
 	</delete>
+
+	<update id="updateLesson" parameterType="Lesson">
+		UPDATE lesson_table 
+		SET semester=#{semester},year=#{year}
+		WHERE lesson_id=#{lessonId}
+	</update>
 
 </mapper>

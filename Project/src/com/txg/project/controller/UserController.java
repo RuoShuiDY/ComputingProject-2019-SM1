@@ -44,7 +44,7 @@ public class UserController {
 				session.setAttribute("id", "Professor");
 				session.setAttribute("lecturer", lecturer);
 				//return "menu";
-				return "redirect:/lesson/lessonlist";
+				return "redirect:/dashboard/dashboardUI";
 			}else {
 				model.addAttribute("msg", false);
 			}
