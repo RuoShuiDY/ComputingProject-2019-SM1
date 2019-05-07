@@ -18,8 +18,10 @@
     <link href="assets/css/main_style.css" rel="stylesheet" />
     <!-- year picker css -->
     <link rel="stylesheet" href="assets/css/yearpicker.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- jquery ui css and js -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- dataTables -->
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
     <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
@@ -81,15 +83,15 @@
                 <a class="nav-link" href="#emailSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-envelope"></i><span>Send Email</span></a>
                 <ul class="collapse list-unstyled" id="emailSubmenu">
                   <li>
-                    <a class="nav-link" href="#"><span>Individual Sending</span></a>
+                    <a class="nav-link" href="individual_email.html"><span>Individual Sending</span></a>
                   </li>
                   <li>
-                    <a class="nav-link" href="#"><span>Group Sending</span></a>
+                    <a class="nav-link" href="group_sending."><span>Group Sending</span></a>
                   </li>
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-bar-chart-o"></i><span>Score Charts</span></a>
+                <a class="nav-link" href="score_charts.html"><i class="fa fa-bar-chart-o"></i><span>Score Charts</span></a>
               </li>
             </ul>
         </nav>
@@ -99,7 +101,7 @@
           <div class="content">
               <div class="row">
                 <!-- breadcrumb -->
-                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
+                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                   <ol class="breadcrumb row">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item"><a href="#">Tutor Information</a></li>
@@ -107,10 +109,16 @@
                   </ol>
                 </div>
                 <!-- Invite Tutor-->
-                <div class="col-lg-2">
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                  <button class="sleeve" id="invite">
+                    <i class="fa fa-envelope"></i><span class="sleeve_text">Invitation</span>
+                    <span class="insert">SEND</span>
+                  </button>
+                  <!--
                   <div class="sendInvitation row">
-                    <button type="button" id="invite" name="button">Send New Invitation</button>
+                    <button type="button" class="btn-primary" id="invite" name="button"> </button>
                   </div>
+                  -->
                 </div>
             </div>
             <!-- display Tutor-->
@@ -151,6 +159,7 @@
 
               <!-- invite tutor -->
               <div class="form_vertical inviteTutor" style="display:none">
+                <a class="close" data-dismiss="addSubject">&times;</a>
                 <form class="popup_form" action="index.html" method="post">
                   <h5 class="popup_form_topic">Tutor Invitation</h5>
                   <label for="year">Tutor Email:</label>
@@ -174,7 +183,10 @@
                   <input type="text" class="yearpicker showTooltip" value=""/>
                   <script src="../../assets/js/yearpicker.js" async></script>
                   <br>
-                  <button type="button" name="button" class="form_vertical_button disabled" id="invite_submit"><i class="fa fa-envelope"></i><span>Invite</span></button>
+                  <div class="row">
+                    <button type="button" name="button" class="form_vertical_button disabled col-lg-5 col-md-5 col-sm-5 col-xs-5" id="invite_submit"><i class="fa fa-envelope"></i><span>Invite</span></button>
+                    <button type="button" name="button" class="form_vertical_button cancel col-lg-5 col-md-5 col-sm-5 col-xs-5"><i class="fa fa-times-circle"></i></i><span>Cancel</span></button>
+                  </div>
                 </form>
               </div>
             </div>
@@ -237,6 +249,10 @@
               if(!$('#invite_submit').hasClass("disabled")){
                 $(".inviteTutor").hide();
               };
+            });
+
+            $('.cancel,.close').click(function(){
+              $(this).parents(".form_vertical").hide();
             });
         });
       </script>

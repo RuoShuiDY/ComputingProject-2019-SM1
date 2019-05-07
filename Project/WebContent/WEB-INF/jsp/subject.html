@@ -18,8 +18,10 @@
     <link href="assets/css/main_style.css" rel="stylesheet" />
     <!-- year picker css -->
     <link rel="stylesheet" href="assets/css/yearpicker.css">
+    <!-- jquery ui css and js -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- dataTables -->
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
     <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
@@ -147,6 +149,7 @@
 
               <!-- add subject -->
               <div class="form_vertical addSubject" style="display:none">
+                <a class="close" data-dismiss="addSubject">&times;</a>
                 <form class="popup_form" action="index.html" method="post">
                   <h5 class="popup_form_topic">Add Subject</h5>
                   <label for="subject_id"><span class="badge badge-secondary"></span> Subject ID:</label>
@@ -168,13 +171,16 @@
                   <input type="text" class="yearpicker showTooltip" value=""/>
                   <script src="../../assets/js/yearpicker.js" async></script>
                   <br>
-                  <button type="button" name="button" class="form_vertical_button disabled" id="add_submit"><i class="fa fa-plus"></i><span>Add</span></button>
-                  <button type="button" name="button" class="form_vertical_button disabled" id="add_submit"><i class="fa fa-plus"></i><span>Cancel</span></button>
+                  <div class="row">
+                    <button type="button" name="button" class="form_vertical_button disabled col-lg-5 col-md-5 col-sm-5 col-xs-5" id="add_submit"><i class="fa fa-plus"></i><span>Add</span></button>
+                    <button type="button" name="button" class="form_vertical_button cancel col-lg-5 col-md-5 col-sm-5 col-xs-5"><i class="fa fa-times-circle"></i></i><span>Cancel</span></button>
+                  </div>
                 </form>
               </div>
 
               <!-- update subject -->
               <div class="form_vertical updateSubject" style="display:none">
+                <a class="close" data-dismiss="updateSubject">&times;</a>
                 <form class="popup_form" action="index.html" method="post">
                   <h5 class="popup_form_topic">Update Subject</h5>
                   <label><span class="badge badge-secondary"></span> Subject ID:</label>
@@ -192,7 +198,10 @@
                   <input type="text" class="yearpicker showTooltip" value=""/>
                   <script src="../../assets/js/yearpicker.js" async></script>
                   <br>
-                  <button type="button" name="button" class="disabled form_vertical_button" id="update_submit"><i class="fa fa-edit"></i><span>Update</span></button>
+                  <div class="row">
+                    <button type="button" name="button" class="disabled form_vertical_button col-lg-5 col-md-5 col-sm-5 col-xs-5" id="update_submit"><i class="fa fa-edit"></i><span>Update</span></button>
+                    <button type="button" name="button" class="form_vertical_button cancel col-lg-5 col-md-5 col-sm-5 col-xs-5"><i class="fa fa-times-circle"></i></i><span>Cancel</span></button>
+                  </div>
                 </form>
               </div>
 
@@ -368,6 +377,10 @@
                   }
                 }
               });
+            });
+
+            $('.cancel,.close').click(function(){
+              $(this).parents(".form_vertical").hide();
             });
         });
       </script>

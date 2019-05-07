@@ -18,7 +18,7 @@
     <link href="assets/css/main_style.css" rel="stylesheet" />
     <!-- year picker css -->
     <link rel="stylesheet" href="assets/css/yearpicker.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
@@ -81,10 +81,10 @@
                 <a class="nav-link" href="#emailSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-envelope"></i><span>Send Email</span></a>
                 <ul class="collapse list-unstyled" id="emailSubmenu">
                   <li>
-                    <a class="nav-link" href="#"><span>Individual Sending</span></a>
+                    <a class="nav-link" href="individual_email.html"><span>Individual Sending</span></a>
                   </li>
                   <li>
-                    <a class="nav-link" href="#"><span>Group Sending</span></a>
+                    <a class="nav-link" href="group_sending.html"><span>Group Sending</span></a>
                   </li>
                 </ul>
               </li>
@@ -110,6 +110,7 @@
               <table id="tutor_table" class="table-responsive table table-hover">
                 <thead>
                   <tr>
+                    <th id="id">ID</th>
                     <th>No.</th>
                     <th>Tutor ID</th>
                     <th>Tutor Email</th>
@@ -124,6 +125,7 @@
                 </thead>
                 <tbody>
                   <tr>
+                      <td id="id">2</td>
                       <td>1</td>
                       <td id="tutor_id">T1234567890</td>
                       <td id="tutor_email">1234567890@gmail.com</td>
@@ -139,6 +141,7 @@
                       </td>
                   </tr>
                   <tr>
+                    <td id="id">2</td>
                     <td>2</td>
                     <td>T1234567890</td>
                     <td>1234567890@gmail.com</td>
@@ -208,6 +211,8 @@
             $('#tutor_table').DataTable();
             $('#year').val("");
             $('#dialog-confirm').hide();
+            $('#tutor_table tr').find('#id').hide();
+
 
             $('#subjectid_add_input').blur(function(){
               var flag = false;
@@ -275,6 +280,7 @@
                 modal: true,
                 buttons: {
                   "Delete": function() {
+                    console.log($(this).parents('tr').find('#id').html());
                     $( this ).dialog( "close" );
                   },
                   Cancel: function() {
