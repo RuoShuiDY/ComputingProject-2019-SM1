@@ -25,16 +25,13 @@
 <link href="../../assets/css/main_style.css" rel="stylesheet" />
 <!-- year picker css -->
 <link rel="stylesheet" href="../../assets/css/yearpicker.css">
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- jquery ui css and js -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script
-	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script
-	src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-<link
-	href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css"
-	rel="stylesheet" />
+<!-- dataTables -->
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -72,41 +69,45 @@
 
 		<!--  page -->
 		<div class="row" id="page">
-			<!-- sidebar -->
-			<nav id="sidebar"
-				class="bg-light navbar-light col-xs-2 col-sm-2 col-md-2 col-lg-2">
-				<ul class="list-unstyled">
-					<li class="nav-item"><a class="nav-link" href="dashboard.html"><i
-							class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
-					<li class="nav-item"><a class="nav-link active"
-						href="subject.html"><i class="fa fa-book"></i><span>Subject
-								Information</span></a></li>
-					<li class="nav-item"><a class="nav-link" href="#tutorSubmenu"
-						data-toggle="collapse" aria-expanded="false"
-						class="dropdown-toggle"><i class="fa fa-user"></i><span>Tutor
-								Information</span></a>
-						<ul class="collapse list-unstyled" id="tutorSubmenu">
-							<li><a class="nav-link" href="tutor_invite.html"><span>Tutor
-										Invitation</span></a></li>
-							<li><a class="nav-link" href="tutor.html"><span>Tutor
-										Overview</span></a></li>
-						</ul></li>
-					<li class="nav-item"><a class="nav-link" href="#"><i
-							class="fa fa-file"></i><span>Scores & Results</span></a></li>
-					<li class="nav-item"><a class="nav-link" href="#emailSubmenu"
-						data-toggle="collapse" aria-expanded="false"
-						class="dropdown-toggle"><i class="fa fa-envelope"></i><span>Send
-								Email</span></a>
-						<ul class="collapse list-unstyled" id="emailSubmenu">
-							<li><a class="nav-link" href="#"><span>Individual
-										Sending</span></a></li>
-							<li><a class="nav-link" href="#"><span>Group
-										Sending</span></a></li>
-						</ul></li>
-					<li class="nav-item"><a class="nav-link" href="#"><i
-							class="fa fa-bar-chart-o"></i><span>Score Charts</span></a></li>
-				</ul>
-			</nav>
+        <!-- sidebar -->
+        <nav id="sidebar" class="bg-light navbar-light col-xs-2 col-sm-2 col-md-2 col-lg-2">
+          <ul class="list-unstyled">
+              <li class="nav-item">
+                <a class="nav-link" href="dashboard.html"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="#"><i class="fa fa-book"></i><span>Subject Information</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#tutorSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i><span>Tutor Information</span></a>
+                <ul class="collapse list-unstyled" id="tutorSubmenu">
+                  <li>
+                    <a class="nav-link" href="tutor_invite.html"><span>Tutor Invitation</span></a>
+                  </li>
+                  <li>
+                    <a class="nav-link" href="tutor.html"><span>Tutor Overview</span></a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="results.html"><i class="fa fa-file"></i><span>Scores & Results</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#emailSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-envelope"></i><span>Send Email</span></a>
+                <ul class="collapse list-unstyled" id="emailSubmenu">
+                  <li>
+                    <a class="nav-link" href="individual_email.html"><span>Individual Sending</span></a>
+                  </li>
+                  <li>
+                    <a class="nav-link" href="group_sending.html"><span>Group Sending</span></a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="score_charts.html"><i class="fa fa-bar-chart-o"></i><span>Score Charts</span></a>
+              </li>
+            </ul>
+        </nav>
 
 			<!-- page content -->
 			<div class="page-content col-xs-10 col-sm-10 col-md-10 col-lg-10">
@@ -159,6 +160,7 @@
 
 						<!-- add subject -->
 						<div class="form_vertical addSubject" style="display: none">
+							<a class="close" data-dismiss="addSubject">&times;</a>
 							<form class="popup_form" action="addlesson" method="post">
 								<h5 class="popup_form_topic">Add Subject</h5>
 								<label for="subject_id"><span
@@ -177,19 +179,25 @@
 									<option>Semester2</option>
 									<option>Summer Term</option>
 									<option>Winter Term</option>
-								</select> <br> <label for="year">Year:</label> <input type="text"
+								</select> 
+								<br>
+								<label for="year">Year:</label> <input type="text"
 									class="yearpicker showTooltip" value="" name="year" />
 								<script src="../../assets/js/yearpicker.js" async></script>
 								<br>
-								<button type="submit" name="button"
-									class="form_vertical_button disabled" id="add_submit">
-									<i class="fa fa-plus"></i><span>Add</span>
-								</button>
+								<div class="row">
+									<button type="submit" name="button"
+										class="form_vertical_button disabled col-lg-5 col-md-5 col-sm-5 col-xs-5" id="add_submit">
+										<i class="fa fa-plus"></i><span>Add</span>
+									</button>
+									<button type="button" name="button" class="form_vertical_button cancel col-lg-5 col-md-5 col-sm-5 col-xs-5"><i class="fa fa-times-circle"></i></i><span>Cancel</span></button>
+								</div>
 							</form>
 						</div>
 
 						<!-- update subject -->
 						<div class="form_vertical updateSubject" style="display: none">
+							<a class="close" data-dismiss="updateSubject">&times;</a>
 							<form class="popup_form" action="updatelesson" method="post">
 								<input id="hidden_lesson_id" type="hidden" name="lesson_id" />
 								<h5 class="popup_form_topic">Update Subject</h5>
@@ -204,10 +212,12 @@
 									class="yearpicker showTooltip" value="" name="year" />
 								<script src="../../assets/js/yearpicker.js" async></script>
 								<br>
-								<button type="submit" name="button"
-									class="disabled form_vertical_button" id="update_submit">
-									<i class="fa fa-edit"></i><span>Update</span>
-								</button>
+								<div class="row">
+									<button type="submit" name="button"
+										class="disabled form_vertical_button col-lg-5 col-md-5 col-sm-5 col-xs-5" id="update_submit">
+										<i class="fa fa-edit"></i><span>Update</span>
+									</button>
+									<button type="button" name="button" class="form_vertical_button cancel col-lg-5 col-md-5 col-sm-5 col-xs-5"><i class="fa fa-times-circle"></i></i><span>Cancel</span></button>
 							</form>
 						</div>
 
@@ -411,6 +421,10 @@
 									}
 								});
 							});
+
+							$('.cancel,.close').click(function(){
+              					$(this).parents(".form_vertical").hide();
+            				});
 						});
 	</script>
 	</div>

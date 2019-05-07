@@ -18,7 +18,7 @@
     <link href="assets/css/main_style.css" rel="stylesheet" />
     <!-- year picker css -->
     <link rel="stylesheet" href="assets/css/yearpicker.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
@@ -61,7 +61,7 @@
                 <a class="nav-link" href="dashboard.html"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="subject.html"><i class="fa fa-book"></i><span>Subject Information</span></a>
+                <a class="nav-link active" href="#"><i class="fa fa-book"></i><span>Subject Information</span></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#tutorSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i><span>Tutor Information</span></a>
@@ -75,21 +75,21 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-file"></i><span>Scores & Results</span></a>
+                <a class="nav-link" href="results.html"><i class="fa fa-file"></i><span>Scores & Results</span></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#emailSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-envelope"></i><span>Send Email</span></a>
                 <ul class="collapse list-unstyled" id="emailSubmenu">
                   <li>
-                    <a class="nav-link" href="#"><span>Individual Sending</span></a>
+                    <a class="nav-link" href="individual_email.html"><span>Individual Sending</span></a>
                   </li>
                   <li>
-                    <a class="nav-link" href="#"><span>Group Sending</span></a>
+                    <a class="nav-link" href="group_sending.html"><span>Group Sending</span></a>
                   </li>
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-bar-chart-o"></i><span>Score Charts</span></a>
+                <a class="nav-link" href="score_charts.html"><i class="fa fa-bar-chart-o"></i><span>Score Charts</span></a>
               </li>
             </ul>
         </nav>
@@ -169,6 +169,7 @@
                   <script src="../../assets/js/yearpicker.js" async></script>
                   <br>
                   <button type="button" name="button" class="form_vertical_button disabled" id="add_submit"><i class="fa fa-plus"></i><span>Add</span></button>
+                  <button type="button" name="button" class="form_vertical_button disabled" id="add_submit"><i class="fa fa-plus"></i><span>Cancel</span></button>
                 </form>
               </div>
 
