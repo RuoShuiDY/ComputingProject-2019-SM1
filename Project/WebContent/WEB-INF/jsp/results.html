@@ -18,8 +18,10 @@
     <link href="assets/css/main_style.css" rel="stylesheet" />
     <!-- year picker css -->
     <link rel="stylesheet" href="assets/css/yearpicker.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- jquery ui css and js -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- dataTables -->
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
     <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
@@ -67,7 +69,7 @@
                 <a class="nav-link" href="#tutorSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i><span>Tutor Information</span></a>
                 <ul class="list-unstyled" id="tutorSubmenu">
                   <li>
-                    <a class="nav-link" href="#"><span>Tutor Invitation</span></a>
+                    <a class="nav-link" href="tutor_invite.html"/><span>Tutor Invitation</span></a>
                   </li>
                   <li>
                     <a class="nav-link" href="tutor.html"><span>Tutor Overview</span></a>
@@ -106,7 +108,7 @@
 
             <!-- display Tutor-->
             <div class="displayTutor">
-              <table id="tutor_table" class="table-responsive table table-hover">
+              <table id="results_table" class="table-responsive table table-hover">
                 <thead>
                   <tr>
                     <th>No.</th>
@@ -153,54 +155,6 @@
                 </tbody>
               </table>
 
-              <!-- add subject -->
-              <div class="form_vertical addSubject" style="display:none">
-                <form class="popup_form" action="index.html" method="post">
-                  <h5 class="popup_form_topic">Add Subject</h5>
-                  <label for="subject_id"><span class="badge badge-secondary"></span> Subject ID:</label>
-                  <input type="text" id="subjectid_add_input" class="showTooltip" name="subject_id" list="subject" autocomplete="off">
-                  <datalist id="subject">
-                    <option value="COMP90004"></option>
-                    <option value="COMP90024"></option>
-                  </datalist>
-                  <br>
-                  <label for="semester">Semester:</label>
-                  <select class="showTooltipSelect">
-                    <option>Semester1</option>
-                    <option>Semester2</option>
-                    <option>Summer Term</option>
-                    <option>Winter Term</option>
-                  </select>
-                  <br>
-                  <label for="year">Year:</label>
-                  <input type="text" class="yearpicker showTooltip" value=""/>
-                  <br>
-                  <button type="button" name="button" class="form_vertical_button disabled" id="add_submit"><i class="fa fa-plus"></i><span>Add</span></button>
-                </form>
-              </div>
-
-              <!-- update subject -->
-              <div class="form_vertical updateSubject" style="display:none">
-                <form class="popup_form" action="index.html" method="post">
-                  <h5 class="popup_form_topic">Update Subject</h5>
-                  <label><span class="badge badge-secondary"></span> Subject ID:</label>
-                  <label class="showTooltip subjectid-label"></label>
-                  <br>
-                  <label for="semester">Semester:</label>
-                  <select class="showTooltipSelect">
-                    <option>Semester1</option>
-                    <option>Semester2</option>
-                    <option>Summer Term</option>
-                    <option>Winter Term</option>
-                  </select>
-                  <br>
-                  <label for="year">Year:</label>
-                  <input type="text" class="yearpicker showTooltip" value=""/>
-                  <br>
-                  <button type="button" name="button" class="disabled form_vertical_button" id="update_submit"><i class="fa fa-edit"></i><span>Update</span></button>
-                </form>
-              </div>
-
               <!-- confirm dialog-->
               <div id="dialog-confirm" title="Delete?">
                 <p>This items will be permanently deleted and </br> <strong>cannot</strong> be recovered. Are you sure?</p>
@@ -213,7 +167,7 @@
 
       <script language="javascript">
         $(document).ready(function () {
-            $('#tutor_table').DataTable();
+            $('#results_table').DataTable();
             $('#year').val("");
             $('#dialog-confirm').hide();
 

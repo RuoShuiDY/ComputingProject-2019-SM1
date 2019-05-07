@@ -18,8 +18,10 @@
     <link href="assets/css/main_style.css" rel="stylesheet" />
     <!-- year picker css -->
     <link rel="stylesheet" href="assets/css/yearpicker.css">
+    <!-- jquery ui css and js -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- dataTables -->
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
     <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
@@ -89,7 +91,7 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-bar-chart-o"></i><span>Score Charts</span></a>
+                <a class="nav-link" href="score_charts.html"><i class="fa fa-bar-chart-o"></i><span>Score Charts</span></a>
               </li>
             </ul>
         </nav>
@@ -161,6 +163,7 @@
 
               <!-- update tutor -->
               <div class="form_vertical updateTutor" style="display:none">
+                <a class="close" data-dismiss="addSubject">&times;</a>
                 <form class="popup_form" action="index.html" method="post">
                   <h5 class="popup_form_topic">Update Tutor Information</h5>
                   <label><span class="badge badge-secondary"></span> Tutor ID:</label>
@@ -192,8 +195,10 @@
                   <label for="year">Year:</label>
                   <input type="text" class="yearpicker showTooltip showLabel" value=""/>
                   <br>
-                  <button type="button" name="button" class="disabled form_vertical_button" id="update_submit"><i class="fa fa-edit"></i><span>Update</span></button>
-                </form>
+                  <div class="row">
+                    <button type="button" name="button" class="form_vertical_button disabled col-lg-5 col-md-5 col-sm-5 col-xs-5" id="update_submit"><i class="fa fa-envelope"></i><span>Update</span></button>
+                    <button type="button" name="button" class="form_vertical_button cancel col-lg-5 col-md-5 col-sm-5 col-xs-5"><i class="fa fa-times-circle"></i></i><span>Cancel</span></button>
+                  </div>                </form>
               </div>
 
               <!-- confirm dialog-->
@@ -212,29 +217,7 @@
             $('#year').val("");
             $('#dialog-confirm').hide();
             $('#tutor_table tr').find('#id').hide();
-
-
-            $('#subjectid_add_input').blur(function(){
-              var flag = false;
-              var options=$("#subject").prop("options");
-              for(var i=0;i<options.length;i++){
-                var text = options[i].value;
-                if(text==$('#subjectid_add_input').val()){
-                  $('.badge').removeClass("badge-danger");
-                  $('.badge').addClass("badge-success");
-                  $('.badge').html("Valid");
-                  flag = true;
-                  $('#add_submit').removeClass("disabled")
-                  break;
-                }
-              }
-              if(!flag){
-                $('.badge').removeClass("badge-success");
-                $('.badge').addClass("badge-danger");
-                $('.badge').html("Invalid");
-                $('#add_submit').addClass("disabled")
-              }
-            });
+            
             //showtooltip
             $('.showTooltip').hover(function(){
               var text = $(this).val();
@@ -288,6 +271,10 @@
                   }
                 }
               });
+            });
+
+            $('.cancel,.close').click(function(){
+              $(this).parents(".form_vertical").hide();
             });
         });
       </script>

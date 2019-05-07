@@ -201,6 +201,7 @@
 
             $('#invite').click(function() {
   						if ($(".inviteTutor").css("display") == "none") {
+                $('#invite').blur();
   							$(".inviteTutor").show();
   						} else {
   							$(".inviteTutor").hide();
