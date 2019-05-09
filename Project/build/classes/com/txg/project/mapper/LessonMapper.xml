@@ -50,8 +50,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     		#{classDict.classId},#{lecturer.lecturerId},#{semester},#{year},'ABLE') 
 	</insert>
 	
-	<select id="selectLesson" parameterType="Lesson" resultType="Integer">
-		SELECT COUNT(*) from lesson_table 
+	<select id="selectLesson" parameterType="Lesson" resultType="Lesson">
+		SELECT lesson_id from lesson_table 
 		WHERE class_id=#{classDict.classId} 
 		AND lecturer_id=#{lecturer.lecturerId} 
 		AND semester=#{semester} 
@@ -67,5 +67,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SET semester=#{semester},year=#{year}
 		WHERE lesson_id=#{lessonId}
 	</update>
+
+	<select id="findUniqueLesson" parameterType="Integer" resultType="ClassDict">
+		SELECT DISTINCT lt.`class_id`,cd.`class_name` FROM lesson_table lt LEFT JOIN class_dict cd
+		ON lt.`class_id` = cd.`class_id`
+		WHERE lt.`lecturer_id` = #{lecturerId}
+	</select>
 
 </mapper>

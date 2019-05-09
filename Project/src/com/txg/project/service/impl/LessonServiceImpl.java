@@ -4,12 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.txg.project.domain.ClassDict;
 import com.txg.project.domain.Lesson;
 import com.txg.project.mapper.LessonMapper;
 import com.txg.project.queryDomain.QueryLesson;
 import com.txg.project.service.LessonService;
 
+@Transactional
 @Service
 public class LessonServiceImpl implements LessonService{
 
@@ -30,7 +33,7 @@ public class LessonServiceImpl implements LessonService{
 	@Override
 	public Integer addLesson(Lesson lesson) {
 		// TODO Auto-generated method stub
-		if(lessonMapper.selectLesson(lesson)>0) {
+		if(lessonMapper.selectLesson(lesson) != null) {
 			return 0;
 		}else {
 			return lessonMapper.addLesson(lesson);
@@ -53,6 +56,18 @@ public class LessonServiceImpl implements LessonService{
 	public Integer updateLesson(Lesson lesson) {
 		// TODO Auto-generated method stub
 		return lessonMapper.updateLesson(lesson);
+	}
+
+	@Override
+	public List<ClassDict> findUniqueLesson(Integer lecturerId) {
+		// TODO Auto-generated method stub
+		return lessonMapper.findUniqueLesson(lecturerId);
+	}
+
+	@Override
+	public Lesson selectLessonByDetail(Lesson lesson) {
+		// TODO Auto-generated method stub
+		return lessonMapper.selectLesson(lesson);
 	}
 
 }

@@ -1,7 +1,5 @@
 package com.txg.project.controller;
 
-import java.lang.ProcessBuilder.Redirect;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.txg.project.domain.Lecturer;
 import com.txg.project.domain.Tutor;
 import com.txg.project.service.LecturerService;
-import com.txg.project.service.TutorService;
+import com.txg.project.service.TutorLessonService;
 
 @Controller
 @RequestMapping("/user")
@@ -22,7 +20,7 @@ public class UserController {
 	@Autowired
 	private LecturerService lecturerService;
 	@Autowired
-	private TutorService tutorService;
+	private TutorLessonService tutorLessonService;
 	
 	@RequestMapping(value="/loginUI")
 	public String loginUI() {
@@ -43,13 +41,13 @@ public class UserController {
 				model.addAttribute("lecturer", lecturer);
 				session.setAttribute("id", "Professor");
 				session.setAttribute("lecturer", lecturer);
-				//return "menu";
-				return "redirect:/dashboard/dashboardUI";
+				//return "redirect:/dashboard/dashboardUI";
+				return "redirect:/tutor/tutor_invite_list"; 
 			}else {
 				model.addAttribute("msg", false);
 			}
 		}else if(id.equals("TUTOR")) {
-			Tutor tutor = tutorService.tutorLogin(email, password);
+			Tutor tutor = tutorLessonService.tutorLogin(email, password);
 			if (tutor != null) {
 				model.addAttribute("msg", true);
 				model.addAttribute("tutor", tutor);

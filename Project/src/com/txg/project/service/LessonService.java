@@ -2,6 +2,7 @@ package com.txg.project.service;
 
 import java.util.List;
 
+import com.txg.project.domain.ClassDict;
 import com.txg.project.domain.Lesson;
 
 public interface LessonService {
@@ -16,4 +17,8 @@ public interface LessonService {
 	Integer deleteLesson(Integer lessonId);
 	
 	Integer updateLesson(Lesson lesson);
+
+	List<ClassDict> findUniqueLesson(Integer lecturerId);
+	
+	Lesson selectLessonByDetail(Lesson lesson);
 }
