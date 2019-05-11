@@ -19,4 +19,10 @@ public interface TutorLessonMapper {
 	Integer addTutorLesson(TutorLesson tutorLesson);
 
 	Integer addTutor(Tutor tutor);
+
+	List<TutorLesson> findAllActivatedTutorLesson(Integer lecturerId);
+
+	Integer deleteTutorLesson(Integer tutorLessonId);
+
+	Integer updateInfo(TutorLesson tutorLesson);
 }

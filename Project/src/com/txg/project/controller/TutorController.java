@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.txg.project.domain.ClassDict;
 import com.txg.project.domain.Lecturer;
@@ -88,6 +89,59 @@ public class TutorController implements ApplicationContextAware{
 		sMail.start();
 		return "redirect:/tutor/tutor_invite_list";
 	}
+	
+	@RequestMapping(value = "/overview")
+	public String showActivated(HttpSession session,Model model) {
+		Lecturer lecturer = (Lecturer) session.getAttribute("lecturer");
+		List<TutorLesson> activatedList = tutorLessonService.findAllActivatedTutorLesson(lecturer.getLecturerId());
+		model.addAttribute("activatedList",activatedList);
+		for(TutorLesson tl:activatedList) {
+			System.out.println(tl);
+		}
+		return "tutor";
+	}
+	
+	@RequestMapping(value="/deleteId")
+	@ResponseBody
+	public void deleteTutorLesson(Integer tutorLessonId, Model model) {
+		Integer result = tutorLessonService.deleteTutorLesson(tutorLessonId);
+		if(result == 1) {
+			model.addAttribute("operation", true);
+			model.addAttribute("msg","Delete Success");
+		}else {
+			model.addAttribute("operation",false);
+			model.addAttribute("msg", "Delete Fail");
+		}
+	}
+	
+	@RequestMapping(value="/updateInfo")
+	public String updateInfo(Model model, HttpSession session,Integer tutorLessonId, String classId, Integer year, String semester) {
+		Lecturer lecturer = (Lecturer) session.getAttribute("lecturer");
+		Lesson lesson = new Lesson();
+		lesson.setLecturer(lecturer);
+		lesson.setSemester(semester);
+		lesson.setYear(year);
+		
+		ClassDict classDict = new ClassDict();
+		classDict.setClassId(classId);
+		
+		lesson.setClassDict(classDict);
+		lesson = lessonService.selectLessonByDetail(lesson);
+		
+		TutorLesson tutorLesson = new TutorLesson();
+		tutorLesson.setTutorLessonId(tutorLessonId);
+		tutorLesson.setLesson(lesson);
+		Integer result = tutorLessonService.updateInfo(tutorLesson);
+		if(result == 1) {
+			model.addAttribute("operation", true);
+			model.addAttribute("msg","Update Success");
+		}else {
+			model.addAttribute("operation",false);
+			model.addAttribute("msg", "Update Fail");
+		}
+		return "redirect:/tutor/overview";
+	}
+	
 	@Override
 	public void setApplicationContext(ApplicationContext arg0) throws BeansException {
 		// TODO Auto-generated method stub

@@ -19,4 +19,10 @@ public interface TutorLessonService {
 	Integer inviteTutor(TutorLesson tutorLesson);
 
 	Integer addTutorInfo(Tutor tutor);
+
+	List<TutorLesson> findAllActivatedTutorLesson(Integer lecturerId);
+
+	Integer deleteTutorLesson(Integer tutorLessonId);
+
+	Integer updateInfo(TutorLesson tutorLesson);
 }

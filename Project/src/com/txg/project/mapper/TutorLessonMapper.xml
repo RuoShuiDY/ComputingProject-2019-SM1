@@ -50,4 +50,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES (#{tutorEmail},#{password})
 	</insert>
 	
+	<resultMap type="TutorLesson" id="activatedmap">
+		<id property="tutorLessonId" column="id"/>
+		<association property="tutor" javaType="Tutor">
+			<id property="tutorId" column="tutor_id"/>
+			<result property="tutorEmail" column="tutor_email"/>
+			<result property="tutorName" column="tutor_name"/>
+			<result property="tutorPhone" column="tutor_phone"/>
+		</association>
+		<association property="lesson" javaType="Lesson">
+			<result property="semester" column="semester"/>
+			<result property="year" column="year"/>
+			<association property="classDict" javaType="ClassDict">
+				<id property="classId" column="class_id"/>
+				<result property="className" column="class_name"/>
+			</association>
+		</association>
+	</resultMap>
+	
+	<select id="findAllActivatedTutorLesson" parameterType="Integer" resultMap="activatedmap">
+		SELECT tl.`id`, ti.`tutor_id`,ti.`tutor_email`,ti.`tutor_name`,ti.`tutor_phone`,
+			lt.`class_id`,cd.`class_name`,lt.`semester`,lt.`year`
+		FROM tutor_lesson tl LEFT JOIN tutor_info ti ON tl.`tutor_id` = ti.`tutor_id`
+		LEFT JOIN lesson_table lt ON tl.`lesson_id` = lt.`lesson_id`
+		LEFT JOIN class_dict cd ON lt.`class_id` = cd.`class_id`
+		WHERE tl.`status`='ACTIVATED'
+	</select>
+	
+	<delete id="deleteTutorLesson" parameterType="Integer">
+		DELETE FROM tutor_lesson WHERE id = #{value};
+	</delete>
+	
+	<update id="updateInfo" parameterType="TutorLesson">
+		UPDATE tutor_lesson SET lesson_id = #{lesson.lessonId} WHERE id = #{tutorLessonId}
+	</update>
+	
 </mapper>

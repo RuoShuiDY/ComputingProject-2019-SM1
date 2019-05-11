@@ -148,10 +148,10 @@
 	                      <td>${tutorLesson.lesson.semester }</td>
 	                      <td>${tutorLesson.lesson.year }</td>
 	                      <td>
-	                      	<c:if test="${tutorLesson.status}!= 'ACTIVATED'">
+	                      	<c:if test="${tutorLesson.status != 'ACTIVATED'}">
 	                      		INVITED
 	                      	</c:if>
-	                      	<c:if test="${tutorLesson.status} == 'ACTIVATED'">
+	                      	<c:if test="${tutorLesson.status == 'ACTIVATED'}">
 	                      		ACTIVATED
 	                      	</c:if>
 	                      </td>

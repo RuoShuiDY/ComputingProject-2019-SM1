@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -13,11 +16,11 @@
     <!-- bootstrap 4.1.0 javascript -->
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <!-- font-awesome.css -->
-    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="../../assets/css/font-awesome.css" rel="stylesheet" />
     <!-- system main css -->
-    <link href="assets/css/main_style.css" rel="stylesheet" />
+    <link href="../../assets/css/main_style.css" rel="stylesheet" />
     <!-- year picker css -->
-    <link rel="stylesheet" href="assets/css/yearpicker.css">
+    <link rel="stylesheet" href="../../assets/css/yearpicker.css">
     <!-- jquery ui css and js -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -42,7 +45,7 @@
           <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-user"><span>Hello, UserName</span></i>
+                <i class="fa fa-user"><span>Hello, ${lecturer.lecturerName}</span></i>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="#">Update Profile</a>
@@ -126,45 +129,33 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                      <td id="id">2</td>
-                      <td>1</td>
-                      <td id="tutor_id">T1234567890</td>
-                      <td id="tutor_email">1234567890@gmail.com</td>
-                      <td id="tutor_name">Yue Deng</td>
-                      <td id="tutor_contact">0000000000</td>
-                      <td id="subject_id">COMP90024</td>
-                      <td id="subject_name">Cloud Computing</td>
-                      <td id="semester">Semester1</td>
-                      <td id="year">2019</td>
+                <c:forEach items="${activatedList}" var="tl" varStatus="index">
+                	<tr>
+                      <td id="id">${tl.tutorLessonId }</td>
+                      <td>${index.count}</td>
+                      <td id="tutor_id">${tl.tutor.tutorId }</td>
+                      <td id="tutor_email">${tl.tutor.tutorEmail }</td>
+                      <td id="tutor_name">${tl.tutor.tutorName }</td>
+                      <td id="tutor_contact">${tl.tutor.tutorPhone }</td>
+                      <td id="subject_id">${tl.lesson.classDict.classId }</td>
+                      <td id="subject_name">${tl.lesson.classDict.className }</td>
+                      <td id="semester">${tl.lesson.semester }</td>
+                      <td id="year">${tl.lesson.year }</td>
                       <td>
                         <button type="button" class="update_button" name="button"><i class="fa fa-edit"></i><span>Update</span></button>
                         <button type="button" class="delete_button" name="button"><i class="fa fa-minus"></i><span>Delete</span></button>
                       </td>
                   </tr>
-                  <tr>
-                    <td id="id">2</td>
-                    <td>2</td>
-                    <td>T1234567890</td>
-                    <td>1234567890@gmail.com</td>
-                    <td>Yuxin Guo</td>
-                    <td>0000000000</td>
-                    <td>COMP90024</td>
-                    <td>Cloud Computing</td>
-                    <td>Semester1</td>
-                    <td>2019</td>
-                    <td>
-                      <button type="button" class="update_button" name="button"><i class="fa fa-edit"></i><span>Update</span></button>
-                      <button type="button" class="delete_button" name="button"><i class="fa fa-minus"></i><span>Delete</span></button>
-                    </td>
-                  </tr>
+                </c:forEach>
+                  
+
                 </tbody>
               </table>
 
               <!-- update tutor -->
               <div class="form_vertical updateTutor" style="display:none">
                 <a class="close" data-dismiss="addSubject">&times;</a>
-                <form class="popup_form" action="index.html" method="post">
+                <form class="popup_form" action="updateInfo" method="post">
                   <h5 class="popup_form_topic">Update Tutor Information</h5>
                   <label><span class="badge badge-secondary"></span> Tutor ID:</label>
                   <label class="showTooltip tutor-id-label showLabel"></label>
@@ -184,8 +175,10 @@
                   <label><span class="badge badge-secondary"></span> Year:</label>
                   <label class="showTooltip subject-year-label"></label>
                   -->
+                  <input type="hidden" name="tutorLessonId" id= "tutorLessonId" value=""/>
+                  <input type="hidden" name="classId" id= "classId" value=""/>
                   <label for="semester">Semester:</label>
-                  <select class="showTooltipSelect showLabel">
+                  <select class="showTooltipSelect showLabel" name="semester">
                     <option>Semester1</option>
                     <option>Semester2</option>
                     <option>Summer Term</option>
@@ -193,10 +186,10 @@
                   </select>
                   <br>
                   <label for="year">Year:</label>
-                  <input type="text" class="yearpicker showTooltip showLabel" value=""/>
+                  <input type="text" class="yearpicker showTooltip showLabel" value="" name="year"/>
                   <br>
                   <div class="row">
-                    <button type="button" name="button" class="form_vertical_button disabled col-lg-5 col-md-5 col-sm-5 col-xs-5" id="update_submit"><i class="fa fa-envelope"></i><span>Update</span></button>
+                    <button type="submit" name="button" class="form_vertical_button disabled col-lg-5 col-md-5 col-sm-5 col-xs-5" id="update_submit"><i class="fa fa-envelope"></i><span>Update</span></button>
                     <button type="button" name="button" class="form_vertical_button cancel col-lg-5 col-md-5 col-sm-5 col-xs-5"><i class="fa fa-times-circle"></i></i><span>Cancel</span></button>
                   </div>                </form>
               </div>
@@ -238,6 +231,8 @@
             $('.update_button').click(function() {
   						if ($(".updateTutor").css("display") == "none") {
   							$(".updateTutor").show();
+  				$("#classId").val($(this).parents("tr").find("#subject_id").text());			
+  				$("#tutorLessonId").val($(this).parents("tr").find("#id").html());
                 $(".tutor-id-label").html($(this).parents("tr").find("#tutor_id").text());
                 $(".tutor-email-label").html($(this).parents("tr").find("#tutor_email").text());
                 $(".tutor-name-label").html($(this).parents("tr").find("#tutor_name").text());
@@ -256,14 +251,17 @@
             });
 
             $('.delete_button').click(function(){
+              tutorLessonId = $(this).parents('tr').find('#id').html();
               $("#dialog-confirm").dialog({
                 resizable: false,
                 height: "auto",
                 width: 350,
                 modal: true,
                 buttons: {
-                  "Delete": function() {
-                    console.log($(this).parents('tr').find('#id').html());
+                  "Delete": function() {  
+                	  $.post("deleteId",{"tutorLessonId":tutorLessonId},function(result){
+							window.location.reload();
+						});
                     $( this ).dialog( "close" );
                   },
                   Cancel: function() {

@@ -46,5 +46,20 @@ public class TutorLessonServiceImpl implements TutorLessonService {
 		// TODO Auto-generated method stub
 		return tutorLessonMapper.addTutor(tutor);
 	}
+	@Override
+	public List<TutorLesson> findAllActivatedTutorLesson(Integer lecturerId) {
+		// TODO Auto-generated method stub
+		return tutorLessonMapper.findAllActivatedTutorLesson(lecturerId);
+	}
+	@Override
+	public Integer deleteTutorLesson(Integer tutorLessonId) {
+		// TODO Auto-generated method stub
+		return tutorLessonMapper.deleteTutorLesson(tutorLessonId);
+	}
+	@Override
+	public Integer updateInfo(TutorLesson tutorLesson) {
+		// TODO Auto-generated method stub
+		return tutorLessonMapper.updateInfo(tutorLesson);
+	}
 
 }
