@@ -12,7 +12,7 @@ body {
   margin-bottom: 20px;
 }
 
-input, td, p, label{
+input, td, p, label, textarea{
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -299,7 +299,7 @@ table th{
 }
 
 .sleeve_text{
-  margin-left: 8px;
+  margin-left: 4px;
 }
 
 #centre_form{

@@ -72,12 +72,12 @@
                     <a class="nav-link" href="marker_invite.html"><span>Marker Invitation</span></a>
                   </li>
                   <li>
-                    <a class="nav-link active" href="#"><span>Marker Overview</span></a>
+                    <a class="nav-link" href="marker.html"><span>Marker Overview</span></a>
                   </li>
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="allocation.html"><i class="fa fa-tasks"></i><span>Marking Allocation</span></a>
+                <a class="nav-link active" href="allocation.html"><i class="fa fa-tasks"></i><span>Marking Allocation</span></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="results.html"><i class="fa fa-file"></i><span>Scores & Results</span></a>
@@ -91,89 +91,67 @@
         <!-- page content -->
         <div class="page-content col-xs-10 col-sm-10 col-md-10 col-lg-10">
           <div class="content">
+              <div class="row">
+                <!-- breadcrumb -->
+                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                  <ol class="breadcrumb row">
+                    <li class="breadcrumb-item"><a href="dashboard.html">Home</a></li>
+                    <li class="breadcrumb-item active"><a href="#">Marking Allocation</a></li>
+                  </ol>
+                </div>
+                <!-- Invite Marker-->
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                  <button class="sleeve" id="allocate">
+                    <i class="fa fa-envelope"></i><span class="sleeve_text">Allocation</span>
+                    <span class="insert">SETUP</span>
+                  </button>
+                </div>
+            </div>
 
-            <!-- breadcrumb -->
-            <ol class="breadcrumb row">
-              <li class="breadcrumb-item"><a href="dashboard.html">Home</a></li>
-              <li class="breadcrumb-item"><a href="#">Marker Information</a></li>
-              <li class="breadcrumb-item active">Marker Overview</a></li>
-            </ol>
-
-            <!-- display Marker-->
+            <!-- display Marking Information-->
             <div class="displayMarker">
-              <table id="marker_table" class="table-responsive table table-hover">
+              <table id="marker_table" class="table table-hover">
                 <thead>
                   <tr>
-                    <th id="id">ID</th>
                     <th>No.</th>
-                    <th>Marker ID</th>
                     <th>Marker Email</th>
-                    <th>Marker Name</th>
-                    <th>Contact</th>
                     <th>Subject ID</th>
                     <th>Subject Name</th>
                     <th>Semester</th>
                     <th>Year</th>
-                    <th><span id="table_th">Operations</span></th>
+                    <th>Assignment</th>
+                    <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                      <td id="id">2</td>
                       <td>1</td>
-                      <td id="marker_id">T1234567890</td>
-                      <td id="marker_email">1234567890@gmail.com</td>
-                      <td id="marker_name">Yue Deng</td>
-                      <td id="marker_contact">0000000000</td>
-                      <td id="subject_id">COMP90024</td>
-                      <td id="subject_name">Cloud Computing</td>
-                      <td id="semester">Semester1</td>
-                      <td id="year">2019</td>
-                      <td>
-                        <button type="button" class="update_button" name="button"><i class="fa fa-edit"></i><span>Update</span></button>
-                        <button type="button" class="delete_button" name="button"><i class="fa fa-minus"></i><span>Delete</span></button>
-                      </td>
+                      <td>evelynguo410@gmail.com</td>
+                      <td>COMP90024</td>
+                      <td>Cloud Computing</td>
+                      <td>Semester1</td>
+                      <td>2019</td>
+                      <td>Assignment1</td>
+                      <td>Allocated</td>
                   </tr>
                   <tr>
-                    <td id="id">2</td>
                     <td>2</td>
-                    <td>T1234567890</td>
-                    <td>1234567890@gmail.com</td>
-                    <td>Yuxin Guo</td>
-                    <td>0000000000</td>
+                    <td>evelynguo410@gmail.com</td>
                     <td>COMP90024</td>
                     <td>Cloud Computing</td>
                     <td>Semester1</td>
                     <td>2019</td>
-                    <td>
-                      <button type="button" class="update_button" name="button"><i class="fa fa-edit"></i><span>Update</span></button>
-                      <button type="button" class="delete_button" name="button"><i class="fa fa-minus"></i><span>Delete</span></button>
-                    </td>
+                    <td>Assignment2</td>
+                    <td>Allocated</td>
                   </tr>
                 </tbody>
               </table>
 
-              <!-- update marker -->
-              <div class="form_vertical updateMarker" style="display:none">
+              <!-- allocate marking -->
+              <div class="form_vertical allocation" style="display:none">
                 <a class="close" data-dismiss="addSubject">&times;</a>
                 <form class="popup_form" action="index.html" method="post">
-                  <h5 class="popup_form_topic">Update Marker Information</h5>
-                  <div class="popup_form_row">
-                    <label><span class="badge badge-secondary"></span> Marker ID:</label>
-                    <label class="showTooltip marker-id-label showLabel"></label>
-                  </div>
-                  <div class="popup_form_row">
-                    <label><span class="badge badge-secondary"></span> Marker Email:</label>
-                    <label class="showTooltip marker-email-label showLabel"></label>
-                  </div>
-                  <div class="popup_form_row">
-                    <label><span class="badge badge-secondary"></span> Marker Name:</label>
-                    <label class="showTooltip marker-name-label showLabel"></label>
-                  </div>
-                  <div class="popup_form_row">
-                    <label><span class="badge badge-secondary"></span> Contact:</label>
-                    <label class="showTooltip marker-contact-label showLabel"></label>
-                  </div>
+                  <h5 class="popup_form_topic">Marking Allocation</h5>
                   <div class="popup_form_row">
                     <label for="subject"><span class="badge badge-secondary check_subject"></span> Subject:</label>
                     <input type="text" class="showTooltip form_content" id="subject_info" name="subject" list="subject" autocomplete="off">
@@ -182,24 +160,16 @@
                       <option value="COMP90024 CCC SEM2 2019"></option>
                     </datalist>
                   </div>
-                  <!--
-                  <label><span class="badge badge-secondary"></span> Semester:</label>
-                  <label class="showTooltip subject-semester-label"></label>
-                  <label><span class="badge badge-secondary"></span> Year:</label>
-                  <label class="showTooltip subject-year-label"></label>
-                  -->
+                  <div class="popup_form_row">
+                    <label for="assignment"><span class=""></span> Assignment:</label>
+                    <input type="assignment" class="showTooltip" name="assignment" id="assignment" value="" autocomplete="off"/>
+                  </div>
                   <div class="row">
-                    <button type="button" name="button" class="form_vertical_button disabled col-lg-5 col-md-5 col-sm-5 col-xs-5" id="update_submit"><i class="fa fa-envelope"></i><span>Update</span></button>
+                    <button type="button" name="button" class="form_vertical_button disabled col-lg-5 col-md-5 col-sm-5 col-xs-5" id="allocate_submit"><i class="fa fa-refresh"></i><span>Allocate</span></button>
                     <button type="button" name="button" class="form_vertical_button cancel col-lg-5 col-md-5 col-sm-5 col-xs-5"><i class="fa fa-times-circle"></i></i><span>Cancel</span></button>
                   </div>
                 </form>
               </div>
-
-              <!-- confirm dialog-->
-              <div id="dialog-confirm" title="Delete?">
-                <p>This items will be permanently deleted and </br> <strong>cannot</strong> be recovered. Are you sure?</p>
-              </div>
-          </div>
             </div>
           </div>
         </div>
@@ -209,12 +179,22 @@
         $(document).ready(function () {
             $('#marker_table').DataTable();
             $('#year').val("");
-            $('#dialog-confirm').hide();
-            $('#marker_table tr').find('#id').hide();
+            var flag1 = false;
+            var flag2 = false;
+            var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+
+            $('#allocate').click(function() {
+  						if ($(".allocation").css("display") == "none") {
+                $('#allocate').blur();
+  							$(".allocation").show();
+  						} else {
+  							$(".allocation").hide();
+              }
+						});
 
             //validation
             $('#subject_info').blur(function(){
-              var flag1 = false;
+              flag1 = false;
               var options=$("#subject").prop("options");
               for(var i=0;i<options.length;i++){
                 var text = options[i].value;
@@ -230,13 +210,12 @@
                 $('.check_subject').removeClass("badge-success");
                 $('.check_subject').addClass("badge-danger");
                 $('.check_subject').html("Invalid");
-                $('#update_submit').addClass("disabled");
+                $('#allocate_submit').addClass("disabled");
               }
               else if(flag1){
-                $('#update_submit').removeClass("disabled");
+                $('#allocate_submit').removeClass("disabled");
               }
             });
-
             //showtooltip
             $('.showTooltip').hover(function(){
               var text = $(this).val();
@@ -254,44 +233,10 @@
               $(this).attr("title",text);
             });
 
-            $('.update_button').click(function() {
-  						if ($(".updateMarker").css("display") == "none") {
-  							$(".updateMarker").show();
-                $(".marker-id-label").html($(this).parents("tr").find("#marker_id").text());
-                $(".marker-email-label").html($(this).parents("tr").find("#marker_email").text());
-                $(".marker-name-label").html($(this).parents("tr").find("#marker_name").text());
-                $(".marker-contact-label").html($(this).parents("tr").find("#marker_contact").text());
-                $(".subject-id-label").html($(this).parents("tr").find("#subject_id").text());
-                $(".subject-name-label").html($(this).parents("tr").find("#subject_name").text());
-                //$(".subject-semester-label").html($(this).parents("tr").find("#semester").text());
-                //$(".subject-year-label").html($(this).parents("tr").find("#year").text());
-  						} else {
-  							$(".updateMarker").hide();
-              }
-						});
-
-            $('#update_submit').click(function(){
-              if(!$(this).hasClass("disabled")){
-                $(".updateMarker").hide();
-              }
-            });
-
-            $('.delete_button').click(function(){
-              $("#dialog-confirm").dialog({
-                resizable: false,
-                height: "auto",
-                width: 350,
-                modal: true,
-                buttons: {
-                  "Delete": function() {
-                    console.log($(this).parents('tr').find('#id').html());
-                    $( this ).dialog( "close" );
-                  },
-                  Cancel: function() {
-                    $( this ).dialog( "close" );
-                  }
-                }
-              });
+            $('#allocate_submit').click(function(){
+              if(!$('#allocate_submit').hasClass("disabled")){
+                $(".allocation").hide();
+              };
             });
 
             $('.cancel,.close').click(function(){
