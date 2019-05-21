@@ -351,3 +351,48 @@ table th{
 #download span, #upload span, #profile span{
   margin-left: 10px;
 }
+
+.charts_selection{
+  float: left;
+  position: relative;
+  left: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.charts_selection #subject_info{
+  width: 300px;
+  margin: 0;
+  padding: 0;
+}
+
+.charts_selection #assignment_info{
+  width: 220px;
+  margin: 0;
+  padding: 0;
+}
+
+.charts_selection button{
+  width: 150px;
+  margin: 0;
+  padding: 0;
+}
+
+.charts{
+  border-top: 1px solid lightgrey;
+  margin-top: 20px;
+}
+
+.line_chart, .doughnut_chart{
+  margin: 0;
+  padding: 10px;
+}
+
+.bar_chart{
+  margin-left: 20%;
+}
+
+#chart_title{
+  text-align: center;
+  color: grey;
+}
