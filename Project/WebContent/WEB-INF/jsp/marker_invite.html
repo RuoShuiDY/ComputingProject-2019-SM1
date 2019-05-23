@@ -162,9 +162,10 @@
                     <label for="subject"><span class="badge badge-secondary check_subject"></span> Subject:</label>
                     <input type="text" class="showTooltip form_content" id="subject_info" name="subject" list="subject" autocomplete="off">
                     <datalist id="subject">
-                      <option value="COMP90004 JAVA SEM1 2019"></option>
-                      <option value="COMP90024 CCC SEM2 2019"></option>
+                      <option value="COMP90004 JAVA SEM1 2019" data-id="1"></option>
+                      <option value="COMP90024 CCC SEM2 2019" data-id="2"></option>
                     </datalist>
+                    <input type="hidden" name="answer" id="answer-hidden">
                   </div>
                   <div class="row">
                     <button type="button" name="button" class="form_vertical_button disabled col-lg-5 col-md-5 col-sm-5 col-xs-5" id="invite_submit"><i class="fa fa-envelope"></i><span>Invite</span></button>
@@ -179,6 +180,22 @@
 
       <script language="javascript">
         $(document).ready(function () {
+            $('input[list]').on('input', function(e) {
+                var $input = $('#subject_info'),
+                    $options = $('#' + $input.attr('list') + ' option'),
+                    $hiddenInput = $('#answer-hidden'),
+                    label = $input.val();
+
+                for(var i = 0; i < $options.length; i++) {
+                    var $option = $options.eq(i);
+                    if($option.val() === label) {
+                        $hiddenInput.val( $option.attr('data-id') );
+                        console.log($hiddenInput.val());
+                        break;
+                    }
+                }
+            });
+
             $('#marker_table').DataTable();
             $('#year').val("");
             var flag1 = false;
