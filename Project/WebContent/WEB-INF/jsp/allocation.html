@@ -165,10 +165,19 @@
                     <label for="assignment"><span class=""></span> Assignment:</label>
                     <input type="assignment" class="showTooltip" name="assignment" id="assignment" value="" autocomplete="off"/>
                   </div>
-                  <div class="row">
-                    <button type="button" name="button" class="form_vertical_button disabled col-lg-5 col-md-5 col-sm-5 col-xs-5" id="allocate_submit"><i class="fa fa-refresh"></i><span>Allocate</span></button>
-                    <button type="button" name="button" class="form_vertical_button cancel col-lg-5 col-md-5 col-sm-5 col-xs-5"><i class="fa fa-times-circle"></i></i><span>Cancel</span></button>
-                  </div>
+          				<div class="row">
+                    <div class="col-lg-11">
+                      <label for="file" class="col-lg-4 left-align"><span class=""></span> Students:</label>
+                      <div class="custom-file col-lg-8 row">
+                        <input type="file" class="custom-file-input col-lg-12">
+                        <label class="custom-file-label">Choose a File from Folder</label>
+                      </div>
+                    </div>
+          				</div>
+                    <div class="row">
+                      <button type="button" name="button" class="form_vertical_button disabled col-lg-5 col-md-5 col-sm-5 col-xs-5" id="allocate_submit"><i class="fa fa-refresh"></i><span>Allocate</span></button>
+                      <button type="button" name="button" class="form_vertical_button cancel col-lg-5 col-md-5 col-sm-5 col-xs-5"><i class="fa fa-times-circle"></i></i><span>Cancel</span></button>
+                    </div>
                 </form>
               </div>
             </div>
@@ -193,7 +202,7 @@
                     }
                 }
             });
-          
+
             $('#marker_table').DataTable();
             $('#year').val("");
             var flag1 = false;
@@ -260,6 +269,19 @@
               $(this).parents(".form_vertical").hide();
             });
         });
+      </script>
+
+      <script type="text/javascript" src="assets/js/bs-custom-file-input.js"></script>
+      <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            bsCustomFileInput.init()
+
+            var btn = document.getElementById('btnResetForm')
+            var form = document.querySelector('form')
+            btn.addEventListener('click', function () {
+              form.reset()
+            })
+          });
       </script>
     </div>
   </body>
