@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.txg.project.domain.Lesson;
 import com.txg.project.domain.Tutor;
 import com.txg.project.domain.TutorLesson;
 
@@ -25,4 +26,6 @@ public interface TutorLessonService {
 	Integer deleteTutorLesson(Integer tutorLessonId);
 
 	Integer updateInfo(TutorLesson tutorLesson);
+	
+	List<Lesson> findLessonsByTutorId(Integer id);
 }

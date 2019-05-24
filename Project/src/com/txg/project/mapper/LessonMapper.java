@@ -24,4 +24,6 @@ public interface LessonMapper {
 	Integer updateLesson(Lesson lesson);
 
 	List<ClassDict> findUniqueLesson(Integer lecturerId);
+
+	Lesson selectLessonById(Integer lessonId);
 }

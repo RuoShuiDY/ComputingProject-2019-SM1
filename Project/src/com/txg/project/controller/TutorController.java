@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.txg.project.domain.ClassDict;
@@ -42,16 +43,45 @@ public class TutorController implements ApplicationContextAware{
 		Lecturer lecturer = (Lecturer) session.getAttribute("lecturer");
 		List<TutorLesson> tutorInfo= tutorLessonService.findAllTutorLesson(lecturer.getLecturerId());
 		
-		List<ClassDict> classDict = lessonService.findUniqueLesson(lecturer.getLecturerId());
-		model.addAttribute("classDict",classDict);
-		
-		for(ClassDict dict:classDict) {
-			System.out.println(dict);
-		}
+		//List<ClassDict> classDict = lessonService.findUniqueLesson(lecturer.getLecturerId());
+		//model.addAttribute("classDict",classDict);
+		List<Lesson> lessonList = lessonService.findAllLessons(lecturer.getLecturerId());
+		model.addAttribute("lesson", lessonList);		
 		
 		model.addAttribute("tutorInfo", tutorInfo);
-		return "tutor_invite";
+		return "marker_invite";
 	}
+	
+	@Transactional
+	@RequestMapping(value="/invite_tutor")
+	public String inviteTutor(HttpSession session, Integer subject_id,
+			@RequestParam(value="subject", required=false) String subject,
+			String email) {
+		Lecturer lecturer = (Lecturer) session.getAttribute("lecturer");
+		boolean newTutor = false;
+		Tutor tutor = tutorLessonService.selectTutorByEmail(email);
+		if(tutor == null) {
+			//No info yet
+			tutor = new Tutor();
+			tutor.setTutorEmail(email);
+			tutor.setPassword(RandomString.generateUUID());
+			tutorLessonService.addTutorInfo(tutor);
+			newTutor = true;
+		}
+		TutorLesson tutorLesson = new TutorLesson();
+		Lesson lesson = lessonService.selectLessonById(subject_id);
+		tutorLesson.setLesson(lesson);
+		tutorLesson.setTutor(tutor);
+		tutorLesson.setStatus(UUID.randomUUID().toString());
+		Integer result = tutorLessonService.inviteTutor(tutorLesson);
+		
+		SendMail sMail = new SendMail(lecturer.getLecturerEmail(),email, tutorLesson, newTutor);
+		sMail.start();
+		return "redirect:/tutor/tutor_invite_list";
+		
+	}
+	
+	/*
 	@Transactional
 	@RequestMapping(value="/invite_tutor")
 	public String inviteTutor(HttpSession session,String subject_id,String semester, 
@@ -89,16 +119,15 @@ public class TutorController implements ApplicationContextAware{
 		sMail.start();
 		return "redirect:/tutor/tutor_invite_list";
 	}
-	
+	*/
 	@RequestMapping(value = "/overview")
 	public String showActivated(HttpSession session,Model model) {
 		Lecturer lecturer = (Lecturer) session.getAttribute("lecturer");
 		List<TutorLesson> activatedList = tutorLessonService.findAllActivatedTutorLesson(lecturer.getLecturerId());
 		model.addAttribute("activatedList",activatedList);
-		for(TutorLesson tl:activatedList) {
-			System.out.println(tl);
-		}
-		return "tutor";
+		List<Lesson> lessonList = lessonService.findAllLessons(lecturer.getLecturerId());
+		model.addAttribute("lesson", lessonList);
+		return "marker";
 	}
 	
 	@RequestMapping(value="/deleteId")
@@ -115,18 +144,10 @@ public class TutorController implements ApplicationContextAware{
 	}
 	
 	@RequestMapping(value="/updateInfo")
-	public String updateInfo(Model model, HttpSession session,Integer tutorLessonId, String classId, Integer year, String semester) {
+	public String updateInfo(Model model, HttpSession session,Integer tutorLessonId,Integer subject_id) {
 		Lecturer lecturer = (Lecturer) session.getAttribute("lecturer");
 		Lesson lesson = new Lesson();
-		lesson.setLecturer(lecturer);
-		lesson.setSemester(semester);
-		lesson.setYear(year);
-		
-		ClassDict classDict = new ClassDict();
-		classDict.setClassId(classId);
-		
-		lesson.setClassDict(classDict);
-		lesson = lessonService.selectLessonByDetail(lesson);
+		lesson.setLessonId(subject_id);
 		
 		TutorLesson tutorLesson = new TutorLesson();
 		tutorLesson.setTutorLessonId(tutorLessonId);

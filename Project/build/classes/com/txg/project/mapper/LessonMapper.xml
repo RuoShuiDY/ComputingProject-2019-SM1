@@ -73,5 +73,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ON lt.`class_id` = cd.`class_id`
 		WHERE lt.`lecturer_id` = #{lecturerId}
 	</select>
+	
+	<select id="selectLessonById" parameterType="Integer" resultMap="lessonResultMap">
+		SELECT  `lesson_id`,`lecturer_id`,`semester`,`year`,`state`,
+				c.`class_id`,`class_name`
+		FROM `lesson_table` l LEFT JOIN `class_dict` c
+		ON l.`class_id` = c.`class_id`
+		WHERE lesson_id = #{lessonId}
+	</select>
 
 </mapper>

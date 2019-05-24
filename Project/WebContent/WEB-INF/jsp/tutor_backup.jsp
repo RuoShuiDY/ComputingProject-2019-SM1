@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -13,11 +16,11 @@
     <!-- bootstrap 4.1.0 javascript -->
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <!-- font-awesome.css -->
-    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="../../assets/css/font-awesome.css" rel="stylesheet" />
     <!-- system main css -->
-    <link href="assets/css/main_style.css" rel="stylesheet" />
+    <link href="../../assets/css/main_style.css" rel="stylesheet" />
     <!-- year picker css -->
-    <link rel="stylesheet" href="assets/css/yearpicker.css">
+    <link rel="stylesheet" href="../../assets/css/yearpicker.css">
     <!-- jquery ui css and js -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -42,7 +45,7 @@
           <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-user"><span>Hello, UserName</span></i>
+                <i class="fa fa-user"><span>Hello, ${lecturer.lecturerName}</span></i>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="#">Update Profile</a>
@@ -69,15 +72,15 @@
                 <a class="nav-link" href="#tutorSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i><span>Tutor Information</span></a>
                 <ul class="list-unstyled" id="tutorSubmenu">
                   <li>
-                    <a class="nav-link" href="tutor_invite.html"/><span>Tutor Invitation</span></a>
+                    <a class="nav-link" href="tutor_invite.html"><span>Tutor Invitation</span></a>
                   </li>
                   <li>
-                    <a class="nav-link" href="tutor.html"><span>Tutor Overview</span></a>
+                    <a class="nav-link active" href="#"><span>Tutor Overview</span></a>
                   </li>
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="#"><i class="fa fa-file"></i><span>Scores & Results</span></a>
+                <a class="nav-link" href="results.html"><i class="fa fa-file"></i><span>Scores & Results</span></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#emailSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-envelope"></i><span>Send Email</span></a>
@@ -103,57 +106,93 @@
             <!-- breadcrumb -->
             <ol class="breadcrumb row">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Scores & Results</a></li>
+              <li class="breadcrumb-item"><a href="#">Tutor Information</a></li>
+              <li class="breadcrumb-item active">Tutor Overview</a></li>
             </ol>
 
             <!-- display Tutor-->
             <div class="displayTutor">
-              <table id="results_table" class="table-responsive table table-hover">
+              <table id="tutor_table" class="table-responsive table table-hover">
                 <thead>
                   <tr>
+                    <th id="id">ID</th>
                     <th>No.</th>
+                    <th>Tutor ID</th>
+                    <th>Tutor Email</th>
+                    <th>Tutor Name</th>
+                    <th>Contact</th>
                     <th>Subject ID</th>
                     <th>Subject Name</th>
                     <th>Semester</th>
                     <th>Year</th>
-                    <th>Tutor ID</th>
-                    <th>Tutor Email</th>
-                    <th>Tutor Name</th>
-                    <th>Student ID</th>
-                    <th>Student Email</th>
-                    <th>Student Username</th>
-                    <th>Student Name</th>
-                    <th>Assignment</th>
-                    <th>Mark</th>
-                    <th>Max Mark</th>
-                    <th>Comment</th>
                     <th><span id="table_th">Operations</span></th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                      <td>1</td>
-                      <td>COMP90024</td>
-                      <td>Cloud Computing</td>
-                      <td>Semester1</td>
-                      <td>2019</td>
-                      <td>T1234567890</td>
-                      <td>1234567890@gmail.com</td>
-                      <td>Yue Deng</td>
-                      <td>875698</td>
-                      <td>yuxing4@student.unimelb.edu.au</td>
-                      <td>yuxing4</td>
-                      <td>Yuxin Guo</td>
-                      <td>1</td>
-                      <td>85</td>
-                      <td>95</td>
-                      <td>Overall Good</td>
+                <c:forEach items="${activatedList}" var="tl" varStatus="index">
+                	<tr>
+                      <td id="id">${tl.tutorLessonId }</td>
+                      <td>${index.count}</td>
+                      <td id="tutor_id">${tl.tutor.tutorId }</td>
+                      <td id="tutor_email">${tl.tutor.tutorEmail }</td>
+                      <td id="tutor_name">${tl.tutor.tutorName }</td>
+                      <td id="tutor_contact">${tl.tutor.tutorPhone }</td>
+                      <td id="subject_id">${tl.lesson.classDict.classId }</td>
+                      <td id="subject_name">${tl.lesson.classDict.className }</td>
+                      <td id="semester">${tl.lesson.semester }</td>
+                      <td id="year">${tl.lesson.year }</td>
                       <td>
                         <button type="button" class="update_button" name="button"><i class="fa fa-edit"></i><span>Update</span></button>
+                        <button type="button" class="delete_button" name="button"><i class="fa fa-minus"></i><span>Delete</span></button>
                       </td>
                   </tr>
+                </c:forEach>
+                  
+
                 </tbody>
               </table>
+
+              <!-- update tutor -->
+              <div class="form_vertical updateTutor" style="display:none">
+                <a class="close" data-dismiss="addSubject">&times;</a>
+                <form class="popup_form" action="updateInfo" method="post">
+                  <h5 class="popup_form_topic">Update Tutor Information</h5>
+                  <label><span class="badge badge-secondary"></span> Tutor ID:</label>
+                  <label class="showTooltip tutor-id-label showLabel"></label>
+                  <label><span class="badge badge-secondary"></span> Tutor Email:</label>
+                  <label class="showTooltip tutor-email-label showLabel"></label>
+                  <label><span class="badge badge-secondary"></span> Tutor Name:</label>
+                  <label class="showTooltip tutor-name-label showLabel"></label>
+                  <label><span class="badge badge-secondary"></span> Contact:</label>
+                  <label class="showTooltip tutor-contact-label showLabel"></label>
+                  <label><span class="badge badge-secondary"></span> Subject ID:</label>
+                  <label class="showTooltip subject-id-label showLabel"></label>
+                  <label><span class="badge badge-secondary"></span> Subject Name:</label>
+                  <label class="showTooltip subject-name-label showLabel"></label>
+                  <!--
+                  <label><span class="badge badge-secondary"></span> Semester:</label>
+                  <label class="showTooltip subject-semester-label"></label>
+                  <label><span class="badge badge-secondary"></span> Year:</label>
+                  <label class="showTooltip subject-year-label"></label>
+                  -->
+                  <input type="hidden" name="tutorLessonId" id= "tutorLessonId" value=""/>
+                  <input type="hidden" name="classId" id= "classId" value=""/>
+                  <label for="semester">Semester:</label>
+                  <select class="showTooltipSelect showLabel" name="semester">
+                    <option>Semester1</option>
+                    <option>Semester2</option>
+                    <option>Summer Term</option>
+                    <option>Winter Term</option>
+                  </select>
+                  <br>
+                  <label for="year">Year:</label>
+                  <input type="text" class="yearpicker showTooltip showLabel" value="" name="year"/>
+                  <br>
+                  <div class="row">
+                    <button type="submit" name="button" class="form_vertical_button disabled col-lg-5 col-md-5 col-sm-5 col-xs-5" id="update_submit"><i class="fa fa-envelope"></i><span>Update</span></button>
+                    <button type="button" name="button" class="form_vertical_button cancel col-lg-5 col-md-5 col-sm-5 col-xs-5"><i class="fa fa-times-circle"></i></i><span>Cancel</span></button>
+                  </div>                </form>
+              </div>
 
               <!-- confirm dialog-->
               <div id="dialog-confirm" title="Delete?">
@@ -167,39 +206,11 @@
 
       <script language="javascript">
         $(document).ready(function () {
-            $('#results_table').DataTable();
+            $('#tutor_table').DataTable();
             $('#year').val("");
             $('#dialog-confirm').hide();
-
-            $('#add').click(function() {
-  						if ($(".addSubject").css("display") == "none") {
-  							$(".addSubject").show();
-  						} else {
-  							$(".addSubject").hide();
-              }
-						});
-
-            $('#subjectid_add_input').blur(function(){
-              var flag = false;
-              var options=$("#subject").prop("options");
-              for(var i=0;i<options.length;i++){
-                var text = options[i].value;
-                if(text==$('#subjectid_add_input').val()){
-                  $('.badge').removeClass("badge-danger");
-                  $('.badge').addClass("badge-success");
-                  $('.badge').html("Valid");
-                  flag = true;
-                  $('#add_submit').removeClass("disabled")
-                  break;
-                }
-              }
-              if(!flag){
-                $('.badge').removeClass("badge-success");
-                $('.badge').addClass("badge-danger");
-                $('.badge').html("Invalid");
-                $('#add_submit').addClass("disabled")
-              }
-            });
+            $('#tutor_table tr').find('#id').hide();
+            
             //showtooltip
             $('.showTooltip').hover(function(){
               var text = $(this).val();
@@ -218,32 +229,39 @@
             });
 
             $('.update_button').click(function() {
-  						if ($(".updateSubject").css("display") == "none") {
-  							$(".updateSubject").show();
-                $(".subjectid-label").html($(this).parents("tr").find(".subject_id").text());
+  						if ($(".updateTutor").css("display") == "none") {
+  							$(".updateTutor").show();
+  				$("#classId").val($(this).parents("tr").find("#subject_id").text());			
+  				$("#tutorLessonId").val($(this).parents("tr").find("#id").html());
+                $(".tutor-id-label").html($(this).parents("tr").find("#tutor_id").text());
+                $(".tutor-email-label").html($(this).parents("tr").find("#tutor_email").text());
+                $(".tutor-name-label").html($(this).parents("tr").find("#tutor_name").text());
+                $(".tutor-contact-label").html($(this).parents("tr").find("#tutor_contact").text());
+                $(".subject-id-label").html($(this).parents("tr").find("#subject_id").text());
+                $(".subject-name-label").html($(this).parents("tr").find("#subject_name").text());
+                //$(".subject-semester-label").html($(this).parents("tr").find("#semester").text());
+                //$(".subject-year-label").html($(this).parents("tr").find("#year").text());
   						} else {
-  							$(".updateSubject").hide();
+  							$(".updateTutor").hide();
               }
 						});
 
             $('#update_submit').click(function(){
-                $(".updateSubject").hide();
-            });
-
-            $('#add_submit').click(function(){
-              if(!$('#add_submit').hasClass("disabled")){
-                $(".addSubject").hide();
-              };
+                $(".updateTutor").hide();
             });
 
             $('.delete_button').click(function(){
+              tutorLessonId = $(this).parents('tr').find('#id').html();
               $("#dialog-confirm").dialog({
                 resizable: false,
                 height: "auto",
                 width: 350,
                 modal: true,
                 buttons: {
-                  "Delete": function() {
+                  "Delete": function() {  
+                	  $.post("deleteId",{"tutorLessonId":tutorLessonId},function(result){
+							window.location.reload();
+						});
                     $( this ).dialog( "close" );
                   },
                   Cancel: function() {
@@ -251,6 +269,10 @@
                   }
                 }
               });
+            });
+
+            $('.cancel,.close').click(function(){
+              $(this).parents(".form_vertical").hide();
             });
         });
       </script>

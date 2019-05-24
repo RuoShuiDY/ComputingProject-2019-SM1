@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -13,11 +16,11 @@
     <!-- bootstrap 4.1.0 javascript -->
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <!-- font-awesome.css -->
-    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="../../assets/css/font-awesome.css" rel="stylesheet" />
     <!-- system main css -->
-    <link href="assets/css/main_style.css" rel="stylesheet" />
+    <link href="../../assets/css/main_style.css" rel="stylesheet" />
     <!-- year picker css -->
-    <link rel="stylesheet" href="assets/css/yearpicker.css">
+    <link rel="stylesheet" href="../../assets/css/yearpicker.css">
     <!-- jquery ui css and js -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -42,7 +45,7 @@
           <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-user"><span>Hello, UserName</span></i>
+                <i class="fa fa-user"><span>Hello, ${lecturer.lecturerName }</span></i>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="#">Update Profile</a>
@@ -69,7 +72,7 @@
                 <a class="nav-link" href="#tutorSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i><span>Tutor Information</span></a>
                 <ul class="list-unstyled" id="tutorSubmenu">
                   <li>
-                    <a class="nav-link" href="tutor_invite.html"/><span>Tutor Invitation</span></a>
+                    <a class="nav-link active" href="#"><span>Tutor Invitation</span></a>
                   </li>
                   <li>
                     <a class="nav-link" href="tutor.html"><span>Tutor Overview</span></a>
@@ -77,7 +80,7 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="#"><i class="fa fa-file"></i><span>Scores & Results</span></a>
+                <a class="nav-link" href="results.html"><i class="fa fa-file"></i><span>Scores & Results</span></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#emailSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-envelope"></i><span>Send Email</span></a>
@@ -86,7 +89,7 @@
                     <a class="nav-link" href="individual_email.html"><span>Individual Sending</span></a>
                   </li>
                   <li>
-                    <a class="nav-link" href="group_sending.html"><span>Group Sending</span></a>
+                    <a class="nav-link" href="group_sending."><span>Group Sending</span></a>
                   </li>
                 </ul>
               </li>
@@ -97,69 +100,103 @@
         </nav>
 
         <!-- page content -->
-        <div class="page-content col-xs-10 col-sm-10 col-md-10 col-lg-10">
+        <div class="page-content col-xs-9 col-sm-9 col-md-9 col-lg-9">
           <div class="content">
-
-            <!-- breadcrumb -->
-            <ol class="breadcrumb row">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Scores & Results</a></li>
-            </ol>
-
+              <div class="row">
+                <!-- breadcrumb -->
+                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                  <ol class="breadcrumb row">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Tutor Information</a></li>
+                    <li class="breadcrumb-item active">Tutor Invitation</a></li>
+                  </ol>
+                </div>
+                <!-- Invite Tutor-->
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                  <button class="sleeve" id="invite">
+                    <i class="fa fa-envelope"></i><span class="sleeve_text">Invitation</span>
+                    <span class="insert">SEND</span>
+                  </button>
+                  <!--
+                  <div class="sendInvitation row">
+                    <button type="button" class="btn-primary" id="invite" name="button"> </button>
+                  </div>
+                  -->
+                </div>
+            </div>
             <!-- display Tutor-->
             <div class="displayTutor">
-              <table id="results_table" class="table-responsive table table-hover">
+              <table id="tutor_table" class="table table-hover">
                 <thead>
                   <tr>
                     <th>No.</th>
+                    <th>Tutor Email</th>
                     <th>Subject ID</th>
                     <th>Subject Name</th>
                     <th>Semester</th>
                     <th>Year</th>
-                    <th>Tutor ID</th>
-                    <th>Tutor Email</th>
-                    <th>Tutor Name</th>
-                    <th>Student ID</th>
-                    <th>Student Email</th>
-                    <th>Student Username</th>
-                    <th>Student Name</th>
-                    <th>Assignment</th>
-                    <th>Mark</th>
-                    <th>Max Mark</th>
-                    <th>Comment</th>
-                    <th><span id="table_th">Operations</span></th>
+                    <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                      <td>1</td>
-                      <td>COMP90024</td>
-                      <td>Cloud Computing</td>
-                      <td>Semester1</td>
-                      <td>2019</td>
-                      <td>T1234567890</td>
-                      <td>1234567890@gmail.com</td>
-                      <td>Yue Deng</td>
-                      <td>875698</td>
-                      <td>yuxing4@student.unimelb.edu.au</td>
-                      <td>yuxing4</td>
-                      <td>Yuxin Guo</td>
-                      <td>1</td>
-                      <td>85</td>
-                      <td>95</td>
-                      <td>Overall Good</td>
-                      <td>
-                        <button type="button" class="update_button" name="button"><i class="fa fa-edit"></i><span>Update</span></button>
-                      </td>
-                  </tr>
+                  <c:forEach var="tutorLesson" varStatus="varStatus" items="${tutorInfo}">                  
+	                  <tr>
+	                      <td>${varStatus.count }</td>
+	                      <td>${tutorLesson.tutor.tutorEmail }</td>
+	                      <td>${tutorLesson.lesson.classDict.classId }</td>
+	                      <td>${tutorLesson.lesson.classDict.className }</td>
+	                      <td>${tutorLesson.lesson.semester }</td>
+	                      <td>${tutorLesson.lesson.year }</td>
+	                      <td>
+	                      	<c:if test="${tutorLesson.status != 'ACTIVATED'}">
+	                      		INVITED
+	                      	</c:if>
+	                      	<c:if test="${tutorLesson.status == 'ACTIVATED'}">
+	                      		ACTIVATED
+	                      	</c:if>
+	                      </td>
+	                  </tr>
+                  </c:forEach>
                 </tbody>
               </table>
 
-              <!-- confirm dialog-->
-              <div id="dialog-confirm" title="Delete?">
-                <p>This items will be permanently deleted and </br> <strong>cannot</strong> be recovered. Are you sure?</p>
+              <!-- invite tutor -->
+              <div class="form_vertical inviteTutor" style="display:none">
+                <a class="close" data-dismiss="addSubject">&times;</a>
+                <form class="popup_form" action="invite_tutor" method="post">
+                  <h5 class="popup_form_topic">Tutor Invitation</h5>
+                  <label for="year">Tutor Email:</label>
+                  <input type="text" class="showTooltip" value="" name="tutor_email"/>
+                  <label for="subject_id"><span class="badge badge-secondary"></span> Subject ID:</label>
+                  <input type="text" id="check" class="showTooltip" name="subject_id" list="subject" autocomplete="off">
+                  <datalist id="subject">
+                  <c:forEach items="${classDict }" var="classdict">
+                  	<option value="${classdict.classId } ${classdict.className}"></option>
+	                  <!--
+	                    <option value="COMP90004"></option>
+	                    <option value="COMP90024"></option>
+	                  -->
+                  </c:forEach>
+                  </datalist>
+                  <br>
+                  <label for="semester">Semester:</label>
+                  <select class="showTooltipSelect" name = "semester">
+                    <option>Semester1</option>
+                    <option>Semester2</option>
+                    <option>Summer Term</option>
+                    <option>Winter Term</option>
+                  </select>
+                  <br>
+                  <label for="year">Year:</label>
+                  <input type="text" class="yearpicker showTooltip" value="" name = "year"/>
+                  <script src="../../assets/js/yearpicker.js" async></script>
+                  <br>
+                  <div class="row">
+                    <button type="submit" name="button" class="form_vertical_button disabled col-lg-5 col-md-5 col-sm-5 col-xs-5" id="invite_submit"><i class="fa fa-envelope"></i><span>Invite</span></button>
+                    <button type="button" name="button" class="form_vertical_button cancel col-lg-5 col-md-5 col-sm-5 col-xs-5"><i class="fa fa-times-circle"></i></i><span>Cancel</span></button>
+                  </div>
+                </form>
               </div>
-          </div>
             </div>
           </div>
         </div>
@@ -167,29 +204,29 @@
 
       <script language="javascript">
         $(document).ready(function () {
-            $('#results_table').DataTable();
+            $('#tutor_table').DataTable();
             $('#year').val("");
-            $('#dialog-confirm').hide();
 
-            $('#add').click(function() {
-  						if ($(".addSubject").css("display") == "none") {
-  							$(".addSubject").show();
+            $('#invite').click(function() {
+  						if ($(".inviteTutor").css("display") == "none") {
+                $('#invite').blur();
+  							$(".inviteTutor").show();
   						} else {
-  							$(".addSubject").hide();
+  							$(".inviteTutor").hide();
               }
 						});
 
-            $('#subjectid_add_input').blur(function(){
+            $('#check').blur(function(){
               var flag = false;
               var options=$("#subject").prop("options");
               for(var i=0;i<options.length;i++){
                 var text = options[i].value;
-                if(text==$('#subjectid_add_input').val()){
+                if(text==$('#check').val()){
                   $('.badge').removeClass("badge-danger");
                   $('.badge').addClass("badge-success");
                   $('.badge').html("Valid");
                   flag = true;
-                  $('#add_submit').removeClass("disabled")
+                  $('#invite_submit').removeClass("disabled")
                   break;
                 }
               }
@@ -197,7 +234,7 @@
                 $('.badge').removeClass("badge-success");
                 $('.badge').addClass("badge-danger");
                 $('.badge').html("Invalid");
-                $('#add_submit').addClass("disabled")
+                $('#invite_submit').addClass("disabled")
               }
             });
             //showtooltip
@@ -217,40 +254,14 @@
               $(this).attr("title",text);
             });
 
-            $('.update_button').click(function() {
-  						if ($(".updateSubject").css("display") == "none") {
-  							$(".updateSubject").show();
-                $(".subjectid-label").html($(this).parents("tr").find(".subject_id").text());
-  						} else {
-  							$(".updateSubject").hide();
-              }
-						});
-
-            $('#update_submit').click(function(){
-                $(".updateSubject").hide();
-            });
-
-            $('#add_submit').click(function(){
-              if(!$('#add_submit').hasClass("disabled")){
-                $(".addSubject").hide();
+            $('#invite_submit').click(function(){
+              if(!$('#invite_submit').hasClass("disabled")){
+                $(".inviteTutor").hide();
               };
             });
 
-            $('.delete_button').click(function(){
-              $("#dialog-confirm").dialog({
-                resizable: false,
-                height: "auto",
-                width: 350,
-                modal: true,
-                buttons: {
-                  "Delete": function() {
-                    $( this ).dialog( "close" );
-                  },
-                  Cancel: function() {
-                    $( this ).dialog( "close" );
-                  }
-                }
-              });
+            $('.cancel,.close').click(function(){
+              $(this).parents(".form_vertical").hide();
             });
         });
       </script>

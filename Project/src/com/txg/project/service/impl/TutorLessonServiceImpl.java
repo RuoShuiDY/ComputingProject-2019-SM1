@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.txg.project.domain.Lesson;
 import com.txg.project.domain.Tutor;
 import com.txg.project.domain.TutorLesson;
 import com.txg.project.mapper.TutorLessonMapper;
@@ -60,6 +61,11 @@ public class TutorLessonServiceImpl implements TutorLessonService {
 	public Integer updateInfo(TutorLesson tutorLesson) {
 		// TODO Auto-generated method stub
 		return tutorLessonMapper.updateInfo(tutorLesson);
+	}
+	@Override
+	public List<Lesson> findLessonsByTutorId(Integer id) {
+		// TODO Auto-generated method stub
+		return tutorLessonMapper.findLessonsByTutorId(id);
 	}
 
 }

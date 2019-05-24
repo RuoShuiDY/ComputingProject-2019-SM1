@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.txg.project.mapper.MarkerMapper">
+	<select id="findMarkerById" parameterType="Integer" resultType="Tutor">
+		SELECT `tutor_id`, `tutor_email`, `tutor_phone`, `tutor_name`, `password` 
+		FROM `tutor_info`
+		WHERE tutor_id = #{id} 
+	</select>
+
+	<update id="updateMarker" parameterType="Tutor">
+		UPDATE `tutor_info` 
+		SET `tutor_phone` = #{tutorPhone},`tutor_name` = #{tutorName}, `password` = #{password} 
+		WHERE `tutor_id` = #{tutorId};
+	</update>
+	
+</mapper>

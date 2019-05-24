@@ -53,7 +53,8 @@ public class UserController {
 				model.addAttribute("tutor", tutor);
 				session.setAttribute("id", "Tutor");
 				session.setAttribute("tutor", tutor);
-				return "menu";
+				//return "marker_dashboard";
+				return "redirect:/marker/profile_list";
 			}else {
 				model.addAttribute("msg", false);
 			}

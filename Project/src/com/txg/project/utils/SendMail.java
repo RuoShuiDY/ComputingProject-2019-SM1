@@ -99,7 +99,7 @@ public class SendMail extends Thread {
 			message.setContent(mainPart);
 
 			// ·¢ËÍÏûÏ¢
-			Transport.send(message);
+			//Transport.send(message);
 			System.out.println("Sent message successfully");
 		} catch (MessagingException mex) {
 			mex.printStackTrace();

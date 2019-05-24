@@ -21,4 +21,6 @@ public interface LessonService {
 	List<ClassDict> findUniqueLesson(Integer lecturerId);
 	
 	Lesson selectLessonByDetail(Lesson lesson);
+
+	Lesson selectLessonById(Integer subject_id);
 }

@@ -70,4 +70,10 @@ public class LessonServiceImpl implements LessonService{
 		return lessonMapper.selectLesson(lesson);
 	}
 
+	@Override
+	public Lesson selectLessonById(Integer lessonId) {
+		// TODO Auto-generated method stub
+		return lessonMapper.selectLessonById(lessonId);
+	}
+
 }
