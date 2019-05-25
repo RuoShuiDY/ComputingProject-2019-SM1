@@ -21,6 +21,7 @@
 
     if (label) {
       defaultText = label.innerHTML;
+      console.log(defaultText);
     }
 
     return defaultText;
@@ -53,6 +54,7 @@
 
     if (label) {
       label.innerHTML = getSelectedFiles(this);
+      label.innerHTML = label.innerHTML.replace(/C:\\fakepath\\/i,"");
     }
   }
 
