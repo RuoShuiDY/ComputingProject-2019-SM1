@@ -353,7 +353,7 @@ table th{
   margin-left: 10px;
 }
 
-.charts_selection{
+.charts_selection {
   float: left;
   position: relative;
   left: 20px;
@@ -361,19 +361,19 @@ table th{
   padding: 0;
 }
 
-.charts_selection #subject_info{
+.charts_selection #subject_info {
   width: 300px;
   margin: 0;
   padding: 0;
 }
 
-.charts_selection #assignment_info{
+.charts_selection #assignment_info {
   width: 220px;
   margin: 0;
   padding: 0;
 }
 
-.charts_selection button{
+.charts_selection button {
   width: 150px;
   margin: 0;
   padding: 0;
@@ -419,4 +419,13 @@ table th{
 
 .file_title{
   margin-right: 15px;
+}
+
+.blank{
+  height: 20px;
+}
+
+.searchbar{
+  border-bottom: 1px solid lightgrey;
+  padding-bottom: 20px;
 }

@@ -108,77 +108,119 @@
               </div>
             </div>
 
-            <!-- display Results-->
-            <div class="displayResults">
-              <table id="results_table" class="table-responsive table table-hover">
-                <thead>
-                  <tr>
-                    <th>
-                      All<input type="checkbox" name="" id="checkall" value="">
-                    </th>
-                    <th>No.</th>
-                    <th>Subject</th>
-                    <th>Tutor Email</th>
-                    <th>Student ID</th>
-                    <th>Student Email</th>
-                    <th>Student Username</th>
-                    <th>Student Name</th>
-                    <th>Assignment</th>
-                    <th>Mark</th>
-                    <th>Max Mark</th>
-                    <th>Comment</th>
-                    <th><span id="table_th">Operations</span></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                      <td>
-                        <input type="checkbox" class="checkbox" name="" value="">
-                      </td>
-                      <td>1</td>
-                      <td id="subject">COMP90024 Sem1 2019</td>
-                      <td>1234567890@gmail.com</td>
-                      <td id="student_id">875698</td>
-                      <td id="student_email">yuxing4@student.unimelb.edu.au</td>
-                      <td>yuxing4</td>
-                      <td>Yuxin Guo</td>
-                      <td id="assignment">1</td>
-                      <td id="mark">85</td>
-                      <td>95</td>
-                      <td id="comment">Overall Good</td>
-                      <td>
-                        <button type="button" class="update_button" name="button" id="update_results"><i class="fa fa-edit"></i><span>Update</span></button>
-                      </td>
-                  </tr>
-                </tbody>
-              </table>
+            <!-- search bar -->
+            <div class="row searchbar">
+              <form class="results_selection" action="index.html" method="post">
+                <div class="row charts_selection">
+                  <div class="col-lg-4">
+                    <label for="subject"><span class="badge badge-secondary check_subject"></span> Subject:</label>
+                    <br>
+                    <input type="text" class="showTooltip" id="subject_info" name="subject" list="subject" autocomplete="off">
+                    <datalist id="subject">
+                      <option value="COMP90004 JAVA SEM1 2019" data-id="1"></option>
+                      <option value="COMP90024 CCC SEM2 2019" data-id="2"></option>
+                    </datalist>
+                    <input type="hidden" name="answer" id="answer-hidden">
+                  </div>
+                  <div class="col-lg-3">
+                    <label for="assignment"><span class="badge badge-secondary check_assignment"></span> Assignment:</label>
+                    <br>
+                    <input type="text" class="showTooltip" id="assignment_info" name="assignment" list="assignment" autocomplete="off" placeholder=" Can Be None">
+                    <datalist id="assignment">
+                      <option value="Assignment1"></option>
+                      <option value="Project2"></option>
+                    </datalist>
+                  </div>
+                  <div class="col-lg-2">
+                    <label>Operation:</label><br>
+                    <button type="submit" class="button" id="generate" name="button">Show Results</button>
+                  </div>
+                  <div class="col-lg-1">
+                    <label>TOTAL NUMBER of STUDENTS:</label>
+                    <label>350</label>
+                  </div>
+                  <div class="col-lg-2">
 
-              <!-- update results -->
-              <div class="form_vertical updateResults" style="display:none">
-                <a class="close" data-dismiss="updateResults">&times;</a>
-                <form class="popup_form" action="index.html" method="post">
-                  <h5 class="popup_form_topic">Update Scores & Results</h5>
-                  <div class="popup_form_row">
-                    <label>Subject:</label>
-                    <label class="showTooltip subject_label showLabel"></label>
-                    <label>Student ID:</label>
-                    <label class="showTooltip student_id_label showLabel"></label>
-                    <label>Student Email:</label>
-                    <label class="showTooltip student_email_label showLabel"></label>
-                    <label>Assignment:</label>
-                    <label class="showTooltip assignment-label showLabel"></label>
-                    <label>Mark:</label>
-                    <input type="text" class="showTooltip mark_label showLabel" name="" value="" required>
-                    <label>Comment</label>
-                    <textarea name="name" rows="5" cols="62" class="comment_label" required></textarea>
                   </div>
-                  <div class="row">
-                    <button type="button" name="button" class="disabled form_vertical_button col-lg-5 col-md-5 col-sm-5 col-xs-5" id="update_submit"><i class="fa fa-edit"></i><span>Update</span></button>
-                    <button type="button" name="button" class="form_vertical_button cancel col-lg-5 col-md-5 col-sm-5 col-xs-5"><i class="fa fa-times-circle"></i></i><span>Cancel</span></button>
-                  </div>
-                </form>
+                </div>
+              </form>
+            </div>
+
+            <div class="">
+              <div class="blank"></div>
+              <div class="displayResults">
+                <table id="results_table" class="table-responsive table table-hover">
+                  <thead>
+                    <tr>
+                      <th>
+                        All<input type="checkbox" name="" id="checkall" value="">
+                      </th>
+                      <th>No.</th>
+                      <th>Subject</th>
+                      <th>Tutor Email</th>
+                      <th>Student ID</th>
+                      <th>Student Email</th>
+                      <th>Student Username</th>
+                      <th>Student Name</th>
+                      <th>Assignment</th>
+                      <th>Mark</th>
+                      <th>Max Mark</th>
+                      <th>Comment</th>
+                      <th><span id="table_th">Operations</span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <td>
+                          <input type="checkbox" class="checkbox" name="" value="">
+                        </td>
+                        <td>1</td>
+                        <td id="subject">COMP90024 Sem1 2019</td>
+                        <td>1234567890@gmail.com</td>
+                        <td id="student_id">875698</td>
+                        <td id="student_email">yuxing4@student.unimelb.edu.au</td>
+                        <td>yuxing4</td>
+                        <td>Yuxin Guo</td>
+                        <td id="assignment">1</td>
+                        <td id="mark">85</td>
+                        <td>95</td>
+                        <td id="comment">Overall Good</td>
+                        <td>
+                          <button type="button" class="update_button" name="button" id="update_results"><i class="fa fa-edit"></i><span>Update</span></button>
+                        </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <!-- update results -->
+                <div class="form_vertical updateResults" style="display:none">
+                  <a class="close" data-dismiss="updateResults">&times;</a>
+                  <form class="popup_form" action="index.html" method="post">
+                    <h5 class="popup_form_topic">Update Scores & Results</h5>
+                    <div class="popup_form_row">
+                      <label>Subject:</label>
+                      <label class="showTooltip subject_label showLabel"></label>
+                      <label>Student ID:</label>
+                      <label class="showTooltip student_id_label showLabel"></label>
+                      <label>Student Email:</label>
+                      <label class="showTooltip student_email_label showLabel"></label>
+                      <label>Assignment:</label>
+                      <label class="showTooltip assignment-label showLabel"></label>
+                      <label>Mark:</label>
+                      <input type="text" class="showTooltip mark_label showLabel" name="" value="" required>
+                      <label>Comment</label>
+                      <textarea name="name" rows="5" cols="62" class="comment_label" required></textarea>
+                    </div>
+                    <div class="row">
+                      <button type="button" name="button" class="disabled form_vertical_button col-lg-5 col-md-5 col-sm-5 col-xs-5" id="update_submit"><i class="fa fa-edit"></i><span>Update</span></button>
+                      <button type="button" name="button" class="form_vertical_button cancel col-lg-5 col-md-5 col-sm-5 col-xs-5"><i class="fa fa-times-circle"></i></i><span>Cancel</span></button>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
+            <!-- display Results-->
+
           </div>
         </div>
       </div>
