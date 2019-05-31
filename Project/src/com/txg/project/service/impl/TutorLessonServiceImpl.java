@@ -77,5 +77,14 @@ public class TutorLessonServiceImpl implements TutorLessonService {
 		// TODO Auto-generated method stub
 		return tutorLessonMapper.findTutorLessonByTutorId(tutorId);
 	}
+	@Override
+	public Tutor acknowledge(String ackNum) {
+		// TODO Auto-generated method stub
+		Tutor tutor = tutorLessonMapper.findTutorByAckId(ackNum);
+		if (tutor != null) {
+			tutorLessonMapper.acknowledge(ackNum);
+		}
+		return tutor;
+	}
 
 }

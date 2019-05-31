@@ -24,4 +24,14 @@
 		<!-- 后缀 -->
 		<property name="suffix" value=".jsp" />
 	</bean>
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/user/loginUI"/>
+            <mvc:exclude-mapping path="/user/login"/>
+            <bean class="com.txg.project.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+	</mvc:interceptors>
+	
 </beans>

@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -13,13 +16,13 @@
     <!-- bootstrap 4.1.0 javascript -->
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <!-- font-awesome.css -->
-    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="../../assets/css/font-awesome.css" rel="stylesheet" />
     <!-- system main css -->
-    <link href="assets/css/main_style.css" rel="stylesheet" />
+    <link href="../../assets/css/main_style.css" rel="stylesheet" />
     <!-- Charts -->
-    <script src="assets/js/Chart.min.js"></script>
-    <script type="text/javascript" src="assets/js/echarts.common.min.js"></script>
-    <script type="text/javascript" src="assets/js/main.js"></script>
+    <script src="../../assets/js/Chart.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/echarts.common.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/main.js"></script>
   </head>
 
   <body>
@@ -27,7 +30,7 @@
         <!-- top navigation -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top top-navbar">
           <button type="button" id="toggler" name="button"><i class="fa fa-align-left"></i></button>
-          <a class="navbar-brand" href="dashboard.html"><span>Teaching and Marking System</span></a>
+          <a class="navbar-brand" href="/dashboard/dashboardUI"><span>Teaching and Marking System</span></a>
           <!-- navbar toggler -->
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -38,12 +41,12 @@
             <ul class="navbar-nav ml-auto">
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fa fa-user"><span>Hello, UserName</span></i>
+                  <i class="fa fa-user"><span>Hello, ${lecturer.lecturerName }</span></i>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="#">Update Profile</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Logout</a>
+                  <a class="dropdown-item" href="/user/logout">Logout</a>
                 </div>
               </li>
             </ul>
@@ -56,30 +59,30 @@
           <nav id="sidebar" class="bg-light navbar-light col-xs-2 col-sm-2 col-md-2 col-lg-2 visible">
             <ul class="list-unstyled">
                 <li class="nav-item">
-                  <a class="nav-link" href="dashboard.html"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
+                  <a class="nav-link" href="/dashboard/dashboardUI"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="subject.html"><i class="fa fa-book"></i><span>Subject Information</span></a>
+                  <a class="nav-link" href="/lesson/lessonlist"><i class="fa fa-book"></i><span>Subject Information</span></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#markerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i><span>Marker Information</span></a>
                   <ul class="collapse list-unstyled" id="markerSubmenu">
                     <li>
-                      <a class="nav-link" href="marker_invite.html"><span>Marker Invitation</span></a>
+                      <a class="nav-link" href="/tutor/tutor_invite_list"><span>Marker Invitation</span></a>
                     </li>
                     <li>
-                      <a class="nav-link" href="marker.html"><span>Marker Overview</span></a>
+                      <a class="nav-link" href="/tutor/overview"><span>Marker Overview</span></a>
                     </li>
                   </ul>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="allocation.html"><i class="fa fa-tasks"></i><span>Marking Allocation</span></a>
+                  <a class="nav-link" href="/assign/list"><i class="fa fa-tasks"></i><span>Marking Allocation</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="results.html"><i class="fa fa-file"></i><span>Scores & Results</span></a>
+                  <a class="nav-link" href="/mark/list"><i class="fa fa-file"></i><span>Scores & Results</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active" href="score_charts.html"><i class="fa fa-bar-chart-o"></i><span>Score Charts</span></a>
+                  <a class="nav-link active" href="/mark/showChart"><i class="fa fa-bar-chart-o"></i><span>Score Charts</span></a>
                 </li>
               </ul>
           </nav>
@@ -88,30 +91,35 @@
           <div class="page-content col-xs-10 col-sm-10 col-md-10 col-lg-10">
             <!-- breadcrumb -->
             <ol class="breadcrumb row">
-              <li class="breadcrumb-item"><a href="dashboard.html">Home</a></li>
+              <li class="breadcrumb-item"><a href="/dashboard/dashboardUI">Home</a></li>
               <li class="breadcrumb-item active">Score Charts</li>
             </ol>
             <!-- page -->
             <div class="row">
-              <form class="" action="index.html" method="post">
+              <form class="" action="showChart" method="post">
                 <div class="row charts_selection">
                   <div class="col-lg-4">
                     <label for="subject"><span class="badge badge-secondary check_subject"></span> Subject:</label>
                     <br>
                     <input type="text" class="showTooltip" id="subject_info" name="subject" list="subject" autocomplete="off">
                     <datalist id="subject">
-                      <option value="COMP90004 JAVA SEM1 2019" data-id="1"></option>
-                      <option value="COMP90024 CCC SEM2 2019" data-id="2"></option>
+                      <c:forEach items="${lessons }" var="lesson">
+                        <option value="${lesson.classDict.classId } ${lesson.semester } ${lesson.year}" data-id="${lesson.lessonId }"></option>
+                      
+                      </c:forEach>
                     </datalist>
-                    <input type="hidden" name="answer" id="answer-hidden">
+                    <input type="hidden" name="lessonId" id="answer-hidden">
                   </div>
                   <div class="col-lg-3">
                     <label for="assignment"><span class="badge badge-secondary check_assignment"></span> Assignment:</label>
                     <br>
                     <input type="text" class="showTooltip" id="assignment_info" name="assignment" list="assignment" autocomplete="off" placeholder=" Can Be None">
                     <datalist id="assignment">
-                      <option value="Assignment1"></option>
-                      <option value="Project2"></option>
+                      <option value="1"></option>
+                      <option value="2"></option>
+                      <option value="3"></option>
+                      <option value="4"></option>
+                      <option value="5"></option>
                     </datalist>
                   </div>
                   <div class="col-lg-2">
@@ -120,7 +128,7 @@
                   </div>
                   <div class="col-lg-1">
                     <label>TOTAL NUMBER of STUDENTS:</label>
-                    <label>350</label>
+                    <label>${number }</label>
                   </div>
                 </div>
               </form>
@@ -142,7 +150,6 @@
           </div>
         </div>
       </div>
-
       <script>
           window.chartColors = {
               red: 'rgb(255, 99, 132)',
@@ -162,35 +169,25 @@
               type: 'line',
               data: {
                   labels: ["H1", "H2A", "H2B", "H3", "P", "N", "Others"],
-                  datasets: [{
-                      label: "Assignment1",
+                  datasets: [
+               	  <c:forEach items="${numbers}" var="numberArray" varStatus = "listIndex">
+                  {
+                      label: "Assignment${assignList[listIndex.index]}",
                       backgroundColor: window.chartColors.red,
                       borderColor: window.chartColors.red,
                       data: [
-                          randomScalingFactor(),
-                          randomScalingFactor(),
-                          randomScalingFactor(),
-                          randomScalingFactor(),
-                          randomScalingFactor(),
-                          randomScalingFactor(),
-                          randomScalingFactor()
+                          ${numberArray[0]},
+                          ${numberArray[1]},
+                          ${numberArray[2]},
+                          ${numberArray[3]},
+                          ${numberArray[4]},
+                          ${numberArray[5]},
+                          ${numberArray[6]}
                       ],
                       fill: false,
-                  }, {
-                      label: "Assignment2",
-                      fill: false,
-                      backgroundColor: window.chartColors.blue,
-                      borderColor: window.chartColors.blue,
-                      data: [
-                          randomScalingFactor(),
-                          randomScalingFactor(),
-                          randomScalingFactor(),
-                          randomScalingFactor(),
-                          randomScalingFactor(),
-                          randomScalingFactor(),
-                          randomScalingFactor()
-                      ],
-                  },]
+                  },
+                  </c:forEach>
+                  ]
               },
               options: {
                   responsive: true,
@@ -249,7 +246,7 @@
               data: {
                   datasets: [{
                       data: [
-                          400, 300, 100, 800, 600,100,100
+                          ${combined[0]}, ${combined[1]}, ${combined[2]}, ${combined[3]}, ${combined[4]},${combined[5]},${combined[6]}
                       ],
                       backgroundColor: [
                           window.chartColors.red,
@@ -296,7 +293,7 @@
           app.title = 'Bar Chart';
 
           var namedate = ['H1', 'H2A', 'H2B', 'H3', 'P', 'N', 'Others'];
-          var numdate = [60, 70, 80, 50, 70, 90, 100];
+          var numdate = [${combined[0]}, ${combined[1]}, ${combined[2]}, ${combined[3]}, ${combined[4]},${combined[5]},${combined[6]}];
           var colorlist = [];
           numdate.forEach(element => {
             if (element < 60) {

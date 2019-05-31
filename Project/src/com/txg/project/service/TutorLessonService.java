@@ -32,4 +32,6 @@ public interface TutorLessonService {
 	List<TutorLesson> findTutorsByLessonId(Integer lessonId);
 	
 	List<TutorLesson> findTutorLessonByTutorId(Integer tutorId);
+
+	Tutor acknowledge(String ackNum);
 }

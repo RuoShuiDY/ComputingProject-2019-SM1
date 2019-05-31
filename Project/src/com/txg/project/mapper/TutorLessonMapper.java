@@ -32,4 +32,8 @@ public interface TutorLessonMapper {
 	List<TutorLesson> findTutorsByLessonId(Integer lessonId);
 	
 	List<TutorLesson> findTutorLessonByTutorId(Integer tutorId);
+
+	Tutor findTutorByAckId(String ackNum);
+
+	void acknowledge(String ackNum);
 }

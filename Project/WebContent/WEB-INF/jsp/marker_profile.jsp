@@ -34,7 +34,7 @@
     <div class="wrapper">
         <!-- top navigation -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top top-navbar">
-          <a class="navbar-brand" href="marker_dashboard.html"><span>Teaching and Marking System</span></a>
+          <a class="navbar-brand" href="/dashboard/markerDashboard"><span>Teaching and Marking System</span></a>
           <!-- navbar toggler -->
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -48,9 +48,9 @@
                   <i class="fa fa-user"><span>Hello, ${tutor.tutorName }</span></i>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="marker_profile.html">Update Profile</a>
+                  <a class="dropdown-item" href="/marker/updateProfile">Update Profile</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Logout</a>
+                  <a class="dropdown-item" href="/user/logout">Logout</a>
                 </div>
               </li>
             </ul>
@@ -63,13 +63,13 @@
           <nav id="sidebar" class="bg-light navbar-light col-xs-2 col-sm-2 col-md-2 col-lg-2">
             <ul class="list-unstyled">
                 <li class="nav-item">
-                  <a class="nav-link" href="marker_dashboard.html"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
+                  <a class="nav-link" href="/dashboard/markerDashboard"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#markerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i><span>Marker Information</span></a>
                   <ul class="list-unstyled" id="markerSubmenu">
                     <li>
-                      <a class="nav-link active" href="marker_profile.html"><span>Update Profile</span></a>
+                      <a class="nav-link active" href="/marker/updateProfile"><span>Update Profile</span></a>
                     </li>
                   </ul>
                 </li>
@@ -77,10 +77,10 @@
                   <a class="nav-link" href="#spreadsheetSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-file"></i><span>Spreadsheets</span></a>
                   <ul class="collapse list-unstyled" id="spreadsheetSubmenu">
                     <li>
-                      <a class="nav-link" href="download_spreadsheet.html"><span>Download Document</span></a>
+                      <a class="nav-link" href="/file/downloadUI"><span>Download Document</span></a>
                     </li>
                     <li>
-                      <a class="nav-link" href="upload_spreadsheet.html"><span>Upload Document</span></a>
+                      <a class="nav-link" href="/file/uploadUI"><span>Upload Document</span></a>
                     </li>
                   </ul>
                 </li>
@@ -94,7 +94,7 @@
                 <!-- breadcrumb -->
                 <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                   <ol class="breadcrumb row">
-                    <li class="breadcrumb-item"><a href="marker_dashboard.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/dashboard/markerDashboard">Home</a></li>
                     <li class="breadcrumb-item"><a href="#">Marker Information</a></li>
                     <li class="breadcrumb-item active">Marker Proile</li>
                   </ol>

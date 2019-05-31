@@ -1,5 +1,7 @@
 package com.txg.project.controller;
 
+import javax.mail.Session;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +43,7 @@ public class UserController {
 				model.addAttribute("lecturer", lecturer);
 				session.setAttribute("id", "Professor");
 				session.setAttribute("lecturer", lecturer);
-				//return "redirect:/dashboard/dashboardUI";
-				//return "redirect:/tutor/tutor_invite_list"; 
-				//return "redirect:/assign/list";
-				return "redirect:/mark/list";
+				return "redirect:/dashboard/dashboardUI";
 			}else {
 				model.addAttribute("msg", false);
 			}
@@ -57,11 +56,17 @@ public class UserController {
 				session.setAttribute("tutor", tutor);
 				//return "marker_dashboard";
 				//return "redirect:/marker/profile_list";
-				return "redirect:/file/uploadUI";
+				return "redirect:/dashboard/markerDashboard";
 			}else {
 				model.addAttribute("msg", false);
 			}
 		}
+		return "login";
+	}
+	@RequestMapping("logout")
+	public String logout(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.invalidate();
 		return "login";
 	}
 }

@@ -161,7 +161,15 @@ public class TutorController implements ApplicationContextAware{
 		}
 		return "redirect:/tutor/overview";
 	}
-	
+	@RequestMapping(value="/acknowledge")
+	public String acknowledge(HttpSession session, String ackNum) {
+		Tutor tutor = tutorLessonService.acknowledge(ackNum);
+		if (tutor!=null) {
+			return "marker_dashboard";			
+		}else {
+			return "menu";
+		}
+	}
 	@Override
 	public void setApplicationContext(ApplicationContext arg0) throws BeansException {
 		// TODO Auto-generated method stub

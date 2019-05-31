@@ -11,4 +11,8 @@ public class DashboardController {
 	public String showDashboardUI() {
 		return "dashboard";
 	}
+	@RequestMapping(value="/markerDashboard")
+	public String markerDashboard() {
+		return "marker_dashboard";
+	}
 }

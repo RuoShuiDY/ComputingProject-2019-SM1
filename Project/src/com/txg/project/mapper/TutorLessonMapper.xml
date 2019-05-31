@@ -122,4 +122,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND ti.`tutor_id`= #{id}
 	</select>
 	
+	<select id="findTutorByAckId" parameterType="String" resultType="Tutor">
+		SELECT ti.`tutor_id`,ti.`tutor_email`
+		FROM tutor_lesson tl LEFT JOIN tutor_info ti ON tl.`tutor_id` = ti.`tutor_id`
+		WHERE tl.`status` = #{str}
+	</select>
+	
+	<update id="acknowledge" parameterType="String" >
+		UPDATE tutor_lesson set status = 'ACTIVATED'
+		WHERE status = #{str}
+	</update>
+	
 </mapper>

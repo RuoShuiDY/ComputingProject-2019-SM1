@@ -65,7 +65,9 @@ public class SendInviteMail extends Thread {
 		try {
 			String emailContent = "This email is a tutor invitation.</br>" + "You are invited as a tutor of "
 					+ tutorLesson.getLesson().getClassDict().getClassId() + " class " + "in "
-					+ tutorLesson.getLesson().getSemester() + " of " + tutorLesson.getLesson().getYear() + ".</br>";
+					+ tutorLesson.getLesson().getSemester() + " of " + tutorLesson.getLesson().getYear() + ".</br>"+
+					"Go to website to acknowledge:</br>"+
+					"<a href='localhost:8080/tutor/acknowledge?ackNum="+tutorLesson.getStatus()+"'> localhost:8080/tutor/acknowledge?ackNum="+tutorLesson.getStatus()+"</a>";
 			if (newTutor == true) {
 				emailContent += "It seems that you are a new user of this system.</br>"
 						+ "You may login this system by your email address and the initial password </br>"
