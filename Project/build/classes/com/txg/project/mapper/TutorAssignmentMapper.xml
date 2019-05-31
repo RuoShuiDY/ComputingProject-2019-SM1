@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.txg.project.mapper.TutorAssignmentMapper">
+
+	<resultMap type="TutorAssignment" id="tutorAssignment">
+		<id column="tutor_assignment_id" property="tutorAssignmentId"/>
+		<result column="assignment" property="assignment"/>
+		<association property="tutorLesson" javaType="TutorLesson">
+			<association property="lesson" javaType="Lesson">
+				<result column="semester" property="semester"/>
+				<result column="year" property="year"/>
+			
+				<association property="classDict" javaType="ClassDict">
+					<id column="class_id" property="classId"/>
+					<result column="class_name" property="className"/>
+				</association>
+			</association>
+			<association property="tutor" javaType="Tutor">
+				<result column="tutor_email" property="tutorEmail"/>
+			</association>
+		</association>
+	</resultMap>
+
+	<select id="getAllocationList" parameterType="Integer" resultMap="tutorAssignment">
+		SELECT ta.`tutor_assignment_id`, ti.`tutor_email`, cd.`class_id`, cd.`class_name`, lt.`semester`,lt.`year`, ta.`assignment` 
+		FROM tutor_assignment ta LEFT JOIN tutor_lesson tl ON ta.`tutor_lesson_id` = tl.`id`
+		LEFT JOIN lesson_table lt ON tl.`lesson_id` = lt.`lesson_id`
+		LEFT JOIN class_dict cd ON cd.`class_id` = lt.`class_id`
+		LEFT JOIN tutor_info ti ON ti.`tutor_id` = tl.`tutor_id`; 
+	</select>
+	
+	<insert id="insertTutorAssignment" parameterType="TutorAssignment" useGeneratedKeys="true">
+		<selectKey order="AFTER" keyProperty="tutorAssignmentId" resultType="Integer">
+			select LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO tutor_assignment (tutor_lesson_id, assignment)
+		VALUES (#{tutorLesson.tutorLessonId}, #{assignment})
+	</insert>
+	
+	<resultMap type="TutorAssignment" id="lessonMapWithAssign">
+		<result column="assignment" property="assignment"/>
+		<association property="tutorLesson" javaType="TutorLesson">
+			<association property="lesson" javaType="Lesson">
+				<id column="lesson_id" property="lessonId"/>
+			</association>
+		</association>
+	</resultMap>
+	
+	<select id="findTutorAssignmentByTutorId" parameterType="Integer" resultMap="lessonMapWithAssign">
+		SELECT tl.`lesson_id`, ta.`assignment` 
+		FROM tutor_assignment ta
+		LEFT JOIN tutor_lesson tl ON ta.`tutor_lesson_id` = tl.`id`
+		WHERE tl.`tutor_id` = #{tutorId}; 
+	</select>
+	
+	
+	<select id="findTutorAssignmentByDetail" parameterType="TutorAssignment" resultType="TutorAssignment">
+		SELECT * FROM tutor_assignment
+		WHERE tutor_lesson_id=#{tutorLesson.tutorLessonId} AND assignment=#{assignment}
+	</select>
+	
+	<update id="updateExcelFile" parameterType="TutorAssignment">
+		UPDATE tutor_assignment set mark_excel=#{markExcel}
+		WHERE tutor_assignment_id=#{tutorAssignmentId}
+	</update>
+	
+</mapper>

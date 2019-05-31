@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.txg.project.mapper.MarkMapper">
+
+	<insert id="insertMarks" parameterType="Mark">
+		INSERT INTO `mark_table`
+		(`tutor_assignment_id`,`student_id`)
+		VALUES
+		(#{tutorAssignment.tutorAssignmentId}, #{student.studentId}) ;
+
+	</insert>
+	
+	
+	<select id="findCountByTutorAssignmentId" parameterType="Integer" resultType="Integer">
+		SELECT COUNT(*) FROM mark_table
+		WHERE tutor_assignment_id=#{id}
+	</select>
+	
+	<update id="updateMarkDetails" parameterType="Mark">
+		UPDATE mark_table
+		SET marks=#{marks},max_mark=#{maxMark},comment=#{comment}
+		WHERE tutor_assignment_id=#{tutorAssignment.tutorAssignmentId} AND student_id=#{student.studentId}
+	</update>
+	
+	
+	
+	<select id="findAllMarks" parameterType="QueryMark" resultType="QueryMarkDomain">
+		SELECT mt.`mark_id`, cd.`class_id`, lt.`semester`, lt.`year`, ti.`tutor_email`,si.`student_id`,si.`student_email`,
+		si.`student_username`,si.`student_surname`,si.`student_givenname`,ta.`assignment`,mt.`marks`,mt.`max_mark`,mt.`comment`
+		FROM mark_table mt
+		LEFT JOIN tutor_assignment ta ON ta.`tutor_assignment_id` = mt.`tutor_assignment_id`
+		LEFT JOIN student_info si ON si.`student_id` = mt.`student_id`
+		LEFT JOIN tutor_lesson tl ON ta.`tutor_lesson_id` = tl.`id`
+		LEFT JOIN lesson_table lt ON lt.`lesson_id` = tl.`lesson_id`
+		LEFT JOIN class_dict cd ON cd.`class_id` = lt.`class_id`
+		LEFT JOIN tutor_info ti ON ti.`tutor_id` = tl.`tutor_id`
+		<where>
+			lt.`lecturer_id` = #{lecturerId}
+			<if test="assignment!= null and assignment != ''">
+				AND ta.`assignment` = #{assignment}
+			</if>
+			<if test="year!= null and year!= ''">
+				AND lt.`year` = #{year}
+			</if>
+			<if test="lessonId!=null and lessonId != ''">
+				AND lt.`lesson_id` = #{lessonId}
+			</if>
+		</where>
+	</select>
+	
+	<update id="updateMarkDomain" parameterType="QueryMarkDomain">
+		UPDATE mark_table
+		SET marks=#{marks},comment=#{comment}
+		WHERE mark_id=#{markId}
+	</update>
+	
+	<select id="findMarksByIds" resultType="QueryMarkDomain">
+		SELECT mt.`mark_id`, cd.`class_id`, lt.`semester`, lt.`year`, ti.`tutor_email`,si.`student_id`,si.`student_email`,
+		si.`student_username`,si.`student_surname`,si.`student_givenname`,ta.`assignment`,mt.`marks`,mt.`max_mark`,mt.`comment`
+		FROM mark_table mt
+		LEFT JOIN tutor_assignment ta ON ta.`tutor_assignment_id` = mt.`tutor_assignment_id`
+		LEFT JOIN student_info si ON si.`student_id` = mt.`student_id`
+		LEFT JOIN tutor_lesson tl ON ta.`tutor_lesson_id` = tl.`id`
+		LEFT JOIN lesson_table lt ON lt.`lesson_id` = tl.`lesson_id`
+		LEFT JOIN class_dict cd ON cd.`class_id` = lt.`class_id`
+		LEFT JOIN tutor_info ti ON ti.`tutor_id` = tl.`tutor_id`
+		WHERE mt.`mark_id` IN
+		<foreach collection="array" open="(" separator="," close=")" item="id">
+			#{id}
+		</foreach>
+	</select>
+
+</mapper>

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.txg.project.domain.ClassDict;
 import com.txg.project.domain.Lecturer;
 import com.txg.project.domain.Lesson;
 import com.txg.project.domain.Tutor;
@@ -24,7 +23,7 @@ import com.txg.project.domain.TutorLesson;
 import com.txg.project.service.LessonService;
 import com.txg.project.service.TutorLessonService;
 import com.txg.project.utils.RandomString;
-import com.txg.project.utils.SendMail;
+import com.txg.project.utils.SendInviteMail;
 
 @Controller
 @RequestMapping(value="/tutor")
@@ -75,7 +74,7 @@ public class TutorController implements ApplicationContextAware{
 		tutorLesson.setStatus(UUID.randomUUID().toString());
 		Integer result = tutorLessonService.inviteTutor(tutorLesson);
 		
-		SendMail sMail = new SendMail(lecturer.getLecturerEmail(),email, tutorLesson, newTutor);
+		SendInviteMail sMail = new SendInviteMail(lecturer.getLecturerEmail(),email, tutorLesson, newTutor);
 		sMail.start();
 		return "redirect:/tutor/tutor_invite_list";
 		

@@ -12,6 +12,8 @@
 	<!-- 配置注解驱动 -->
 	<mvc:annotation-driven />
 	<mvc:resources location="/assets/" mapping="/assets/**"/>
+	<mvc:resources location="/upload/" mapping="/upload/**"/>
+	<mvc:resources location="/download/" mapping="/download/**"/>
 	<mvc:default-servlet-handler/>
 
 

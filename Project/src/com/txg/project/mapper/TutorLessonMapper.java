@@ -28,4 +28,8 @@ public interface TutorLessonMapper {
 	Integer updateInfo(TutorLesson tutorLesson);
 
 	List<Lesson> findLessonsByTutorId(Integer id);
+
+	List<TutorLesson> findTutorsByLessonId(Integer lessonId);
+	
+	List<TutorLesson> findTutorLessonByTutorId(Integer tutorId);
 }

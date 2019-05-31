@@ -103,4 +103,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE tl.`tutor_id` = #{id}
 	</select>
 	
+	<select id="findTutorsByLessonId" parameterType="Integer" resultMap="activatedmap">
+		SELECT tl.`id`, ti.`tutor_id`,ti.`tutor_email`,ti.`tutor_name`,ti.`tutor_phone`,
+			lt.`class_id`,cd.`class_name`,lt.`semester`,lt.`year`
+		FROM tutor_lesson tl LEFT JOIN tutor_info ti ON tl.`tutor_id` = ti.`tutor_id`
+		LEFT JOIN lesson_table lt ON tl.`lesson_id` = lt.`lesson_id`
+		LEFT JOIN class_dict cd ON lt.`class_id` = cd.`class_id`
+		WHERE tl.`lesson_id` = #{id} AND tl.`status` = 'ACTIVATED';		
+	</select>
+	
+	<select id="findTutorLessonByTutorId" parameterType="Integer" resultMap="activatedmap">
+		SELECT tl.`id`, ti.`tutor_id`,ti.`tutor_email`,ti.`tutor_name`,ti.`tutor_phone`,
+			lt.`class_id`,cd.`class_name`,lt.`semester`,lt.`year`
+		FROM tutor_lesson tl LEFT JOIN tutor_info ti ON tl.`tutor_id` = ti.`tutor_id`
+		LEFT JOIN lesson_table lt ON tl.`lesson_id` = lt.`lesson_id`
+		LEFT JOIN class_dict cd ON lt.`class_id` = cd.`class_id`
+		WHERE tl.`status`='ACTIVATED'
+		AND ti.`tutor_id`= #{id}
+	</select>
+	
 </mapper>
