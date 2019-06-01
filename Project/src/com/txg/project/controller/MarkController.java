@@ -82,6 +82,12 @@ public class MarkController {
 	@RequestMapping("showChart")
 	public String showChart(HttpSession session, Model model, Integer lessonId, Integer assignment) {
 		Lecturer lecturer = (Lecturer) session.getAttribute("lecturer");
+		List<Lesson> lessons = lessonService.findAllLessons(lecturer.getLecturerId());
+		model.addAttribute("lessons", lessons);
+		if(lessonId == null && assignment == null) {
+			return "score_charts";
+		}
+		
 		QueryMark queryMark = new QueryMark();
 		queryMark.setLecturerId(lecturer.getLecturerId());
 		if (lessonId != null) {
@@ -95,7 +101,6 @@ public class MarkController {
 		}
 		List<QueryMarkDomain> marks = markService.findAllMarks(queryMark);
 
-		List<Lesson> lessons = lessonService.findAllLessons(lecturer.getLecturerId());	/////////
 
 		//Line chart
 		ArrayList<Integer> assignList = new ArrayList<Integer>();
@@ -126,8 +131,10 @@ public class MarkController {
 			Float proportion = (float) -1;
 			if (mark != null) {
 				proportion = mark / maxMark;
+				System.out.println(proportion);
 			}
 			Integer level = GradeLevel.getGradeLevel(proportion);
+			System.out.println(level);
 			Integer assignIndex = assignList.indexOf(assign);
 			numbers.get(assignIndex)[level] ++;
 		}
@@ -146,7 +153,7 @@ public class MarkController {
 		}
 		
 		model.addAttribute("combined", combined);
-		model.addAttribute("lessons", lessons);
+		
 		model.addAttribute("number", Math.ceil((int)marks.size()*1.0/assignList.size()));
 		//model.addAttribute("number", uniqueStudentId.size());
 		return "score_charts";

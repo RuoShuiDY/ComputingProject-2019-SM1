@@ -87,6 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<resultMap type="Lesson" id="lessonResult">
+		<id property="lessonId" column="lesson_id"/>
 		<result property="semester" column="semester"/>
 		<result property="year" column="year"/>
 		<association property="classDict" javaType="ClassDict">
@@ -97,7 +98,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<select id="findLessonsByTutorId" parameterType="Integer" resultMap="lessonResult">
-		SELECT cd.`class_id`, cd.`class_name`, lt.`semester`,lt.`year` FROM 
+		SELECT tl.`lesson_id`, cd.`class_id`, cd.`class_name`, lt.`semester`,lt.`year` FROM 
 		tutor_lesson tl LEFT JOIN lesson_table lt ON tl.`lesson_id` = lt.`lesson_id`
 		LEFT JOIN class_dict cd ON lt.`class_id` = cd.`class_id` 
 		WHERE tl.`tutor_id` = #{id}
