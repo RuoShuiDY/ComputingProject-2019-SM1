@@ -45,7 +45,8 @@ public class UserController {
 				session.setAttribute("lecturer", lecturer);
 				return "redirect:/dashboard/dashboardUI";
 			}else {
-				model.addAttribute("msg", false);
+				model.addAttribute("operation", false);
+	        	model.addAttribute("msg", "Login Fail");
 			}
 		}else if(id.equals("TUTOR")) {
 			Tutor tutor = tutorLessonService.tutorLogin(email, password);
@@ -58,7 +59,8 @@ public class UserController {
 				//return "redirect:/marker/profile_list";
 				return "redirect:/dashboard/markerDashboard";
 			}else {
-				model.addAttribute("msg", false);
+				model.addAttribute("operation", false);
+	        	model.addAttribute("msg", "Login Fail");
 			}
 		}
 		return "login";

@@ -134,7 +134,7 @@
                     </div>
                   </div>
                   <div class="row">
-                    <button type="submit" name="button" class="col-lg-5 col-md-5 col-sm-5 col-xs-5" id="upload" ><i class="fa fa-upload"></i><span>Upload</span></button>
+                    <button type="submit" name="button" class="disabled col-lg-5 col-md-5 col-sm-5 col-xs-5" id="upload" ><i class="fa fa-upload"></i><span>Upload</span></button>
                   </div>
                 </form>
               </div>

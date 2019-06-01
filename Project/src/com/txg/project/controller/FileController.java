@@ -70,6 +70,8 @@ public class FileController {
         	model.addAttribute("msg", "No such assignment");
         	return "redirect:downloadUI";
         }else {
+        	model.addAttribute("operation", true);
+        	model.addAttribute("msg", "Download Successfully");
         	return "forward:download";
         }
 	}
@@ -89,8 +91,6 @@ public class FileController {
         headers.setContentDispositionFormData("attachment", downloadFileName);
         
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        
-        //MediaType:互联网媒介类型  contentType：具体请求中的媒体类型信息
         
         return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),headers,HttpStatus.CREATED);
         
@@ -118,10 +118,14 @@ public class FileController {
 		
 		tutorAssignment = tutorAssignmentService.getTutorAssignmentByDetail(tutorAssignment);
 		if(tutorAssignment.getMarkExcel()!= null) {
+			model.addAttribute("operation", false);
+        	model.addAttribute("msg", "Already Upload Before");
 			return "redirect:uploadUI";
 		}
 		
 		if(markExcel == null) {
+			model.addAttribute("operation", false);
+        	model.addAttribute("msg", "No file upload");
 			return "redirect:uploadUI";
 		}
 		String rootPath = request.getServletContext().getRealPath("marks");
@@ -138,6 +142,8 @@ public class FileController {
 		
 		Integer stuNum = markService.findCountByTutorAssignmentId(tutorAssignment.getTutorAssignmentId());
 		if(stuNum != marks.size()) {
+			model.addAttribute("operation", false);
+        	model.addAttribute("msg", "File number invalid");
 			return "redirect:uploadUI";
 		}
 		

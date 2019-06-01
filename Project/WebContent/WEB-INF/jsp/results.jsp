@@ -50,8 +50,6 @@
               <i class="fa fa-user"><span>Hello, ${lecturer.lecturerName}</span></i>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Update Profile</a>
-              <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="/user/logout">Logout</a>
             </div>
           </li>
@@ -113,12 +111,12 @@
 
             <!-- search bar -->
             <div class="row searchbar">
-              <form class="results_selection" action="list" method="post">
+              <form class="results_selection" action="list" method="post" id="result_selection_id">
                 <div class="row charts_selection">
                   <div class="col-lg-4">
                     <label for="subject"><span class="badge badge-secondary check_subject"></span> Subject:</label>
                     <br>
-                    <input type="text" class="showTooltip" id="subject_info" name="subject" list="subject" autocomplete="off">
+                    <input type="text" class="showTooltip" id="subject_info" name="subject" list="subject" autocomplete="off" autofocus>
                     <datalist id="subject">
                       <c:forEach items="${lessons }" var="lesson">
                         <option value="${lesson.classDict.classId } ${lesson.semester } ${lesson.year}" data-id="${lesson.lessonId }"></option>
@@ -141,7 +139,7 @@
                   </div>
                   <div class="col-lg-2">
                     <label>Operation:</label><br>
-                    <button type="submit" class="button" id="generate" name="button">Show Results</button>
+                    <button type="button" class="button disabled" id="show" name="button">Show Results</button>
                   </div>
                   <div class="col-lg-1">
                     <label>TOTAL NUMBER of STUDENTS:</label>
@@ -240,6 +238,23 @@
 
       <script language="javascript">
         $(document).ready(function () {
+        	
+        	$('input[list]').on('input', function(e) {
+                var $input = $('#subject_info'),
+                    $options = $('#' + $input.attr('list') + ' option'),
+                    $hiddenInput = $('#answer-hidden'),
+                    label = $input.val();
+
+                for(var i = 0; i < $options.length; i++) {
+                    var $option = $options.eq(i);
+                    if($option.val() === label) {
+                        $hiddenInput.val( $option.attr('data-id') );
+                        console.log($hiddenInput.val());
+                        break;
+                    }
+                }
+            });
+        	
             $('#results_table').DataTable();
             //showtooltip
             $('.showTooltip').hover(function(){
@@ -305,6 +320,67 @@
             	$.post("sendEmails",{"mkids":mkids},function(result){
     				window.alert('Send Successfully!');
     			});
+            });
+            
+			var flag1 = false;
+			var flag2 = false;
+            $('#subject_info').on("blur",function(){
+                flag1 = false;
+                var options=$("#subject").prop("options");
+                for(var i=0;i<options.length;i++){
+                  var text = options[i].value;
+                  if(text==$('#subject_info').val()){
+                    $('.check_subject').removeClass("badge-danger");
+                    $('.check_subject').addClass("badge-success");
+                    $('.check_subject').html("Valid");
+                    $('#generate').addClass("flag1");
+                    flag1 = true;
+                    break;
+                  }
+                }
+                if(!flag1){
+                  $('.check_subject').removeClass("badge-success");
+                  $('.check_subject').addClass("badge-danger");
+                  $('.check_subject').html("Invalid");
+                  $('#generate').addClass("disabled");
+                  $('#generate').removeClass("flag1");
+                }
+                else if(($('#generate').hasClass("flag1") && $('#generate').hasClass("flag2"))  || ($('#generate').hasClass("flag1") && $('#assignment_info').val().trim()=="")){
+                  $('#generate').removeClass("disabled");
+                }
+                console.log($('#generate').hasClass("disabled"));
+              });
+
+            $('#assignment_info').on("blur", function(){
+                flag2 = false;
+                var options=$("#assignment").prop("options");
+                for(var i=0;i<options.length;i++){
+                  var text = options[i].value;
+                  if(text==$('#assignment_info').val() || $('#assignment_info').val().trim()==""){
+                    $('.check_assignment').removeClass("badge-danger");
+                    $('.check_assignment').addClass("badge-success");
+                    $('.check_assignment').html("Valid");
+                    $('#generate').addClass("flag2");
+                    flag2 = true;
+                    break;
+                  }
+                }
+                if(!flag2){
+                  $('.check_assignment').removeClass("badge-success");
+                  $('.check_assignment').addClass("badge-danger");
+                  $('.check_assignment').html("Invalid");
+                  $('#generate').addClass("disabled");
+                  $('#generate').removeClass("flag2");
+                }
+                else if($('#generate').hasClass("flag1") && $('#generate').hasClass("flag2")){
+                  $('#generate').removeClass("disabled");
+                }
+                console.log($('#generate').hasClass("disabled"));
+              });
+            $("#show").click(function(){
+            	if(flag1==true && flag2==true){
+            		$("#result_selection_id").submit();
+            	}
             });
             
           });

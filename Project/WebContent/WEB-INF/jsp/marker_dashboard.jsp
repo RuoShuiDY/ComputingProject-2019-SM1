@@ -18,6 +18,7 @@
     <link href="../../assets/css/font-awesome.css" rel="stylesheet" />
     <!-- system main css -->
     <link href="../../assets/css/main_style.css" rel="stylesheet" />
+    <script type="text/javascript" src="../../assets/js/main.js"></script>
     <style>
       /* Make the image fully responsive */
       .carousel-inner img {
@@ -31,6 +32,7 @@
     <div class="wrapper">
         <!-- top navigation -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top top-navbar">
+          <button type="button" id="toggler" name="button"><i class="fa fa-align-left"></i></button>
           <a class="navbar-brand" href="/dashboard/markerDashboard"><span>Teaching and Marking System</span></a>
           <!-- navbar toggler -->
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,7 +59,7 @@
         <!--  page -->
         <div class="row" id="page">
           <!-- sidebar -->
-          <nav id="sidebar" class="bg-light navbar-light col-xs-2 col-sm-2 col-md-2 col-lg-2">
+          <nav id="sidebar" class="bg-light navbar-light col-xs-2 col-sm-2 col-md-2 col-lg-2 visible">
             <ul class="list-unstyled">
                 <li class="nav-item">
                   <a class="nav-link active" href="/dashboard/markerDashboard"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
@@ -99,14 +101,14 @@
               </ol>
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img src="https://static.runoob.com/images/mix/img_fjords_wide.jpg">
+                  <img src="../../assets/img/banner.jpg">
                   <div class="carousel-caption">
                     <h4>Welcome to Teaching and Marking System</h4>
-                    <h5>${tutor.tutorName }</h5>
+                    <h5>UserName</h5>
                   </div>
                 </div>
                 <div class="carousel-item">
-                  <img src="https://static.runoob.com/images/mix/img_nature_wide.jpg">
+                  <img src="../../assets/img/melbuni.jpg">
                   <div class="carousel-caption">
                     <h4 id="date"></h4>
                     <h5 id="weekday"></h5>

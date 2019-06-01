@@ -47,11 +47,9 @@
           <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-user"><span>Hello, ${lecturer.lecturerId }</span></i>
+                <i class="fa fa-user"><span>Hello, ${lecturer.lecturerName }</span></i>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Update Profile</a>
-                <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/user/logout">Logout</a>
               </div>
             </li>
@@ -180,6 +178,7 @@
               <div class="form_vertical updateSubject" style="display:none">
                 <a class="close" data-dismiss="updateSubject">&times;</a>
                 <form class="popup_form" action="updatelesson" method="post">
+                <input id="hidden_lesson_id" type="hidden" name="lesson_id" />
                   <h5 class="popup_form_topic">Update Subject</h5>
                   <div class="popup_form_row">
                     <label>Subject ID:</label>
@@ -347,7 +346,8 @@
             $('.update_button').click(function() {
   						if ($(".updateSubject").css("display") == "none") {
   							$(".updateSubject").show();
-                $(".subjectid-label").html($(this).parents("tr").find(".subject_id").text());
+  							$("#hidden_lesson_id").val($(this).parents("tr").attr("id"))
+                			$(".subjectid-label").html($(this).parents("tr").find(".subject_id").text());
   						} else {
   							$(".updateSubject").hide();
               }

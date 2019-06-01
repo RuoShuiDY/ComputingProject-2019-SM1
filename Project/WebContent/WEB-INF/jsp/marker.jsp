@@ -48,8 +48,6 @@
                 <i class="fa fa-user"><span>Hello, ${lecturer.lecturerName}</span></i>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Update Profile</a>
-                <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/user/logout">Logout</a>
               </div>
             </li>

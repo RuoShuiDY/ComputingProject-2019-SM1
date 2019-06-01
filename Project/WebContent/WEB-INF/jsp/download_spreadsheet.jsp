@@ -132,7 +132,7 @@
                       </div>
                     </div> -->
                     <div class="row">
-                      <button type="submit" name="button" class="col-lg-5 col-md-5 col-sm-5 col-xs-5" id="download"><i class="fa fa-download"></i><span>Download</span></button>
+                      <button type="submit" name="button" class="disabled col-lg-5 col-md-5 col-sm-5 col-xs-5" id="download"><i class="fa fa-download"></i><span>Download</span></button>
                     </div>
                   </form>
                 </div>

@@ -25,15 +25,13 @@
           height: 100%;
       }
     </style>
-    <script type="text/javascript" src="../../assets/js/main.js"></script>
   </head>
 
   <body>
     <div class="wrapper">
         <!-- top navigation -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top top-navbar">
-          <button type="button" id="toggler" name="button"><i class="fa fa-align-left"></i></button>
-          <a class="navbar-brand" href="/dashboard/dashboardUI"><span>Teaching and Marking System</span></a>
+          <a class="navbar-brand" href="/dashboard/markerDashboard"><span>Teaching and Marking System</span></a>
           <!-- navbar toggler -->
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -43,10 +41,12 @@
             <!-- navbar user -->
             <ul class="navbar-nav ml-auto">
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fa fa-user"><span>Hello, ${lecturer.lecturerName}</span></i>
+                <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-user"><span>Hello, ${tutor.tutorName }</span></i>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="/marker/updateProfile">Update Profile</a>
+                  <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="/user/logout">Logout</a>
                 </div>
               </li>
@@ -57,34 +57,29 @@
         <!--  page -->
         <div class="row" id="page">
           <!-- sidebar -->
-          <nav id="sidebar" class="bg-light navbar-light col-xs-2 col-sm-2 col-md-2 col-lg-2 visible">
+          <nav id="sidebar" class="bg-light navbar-light col-xs-2 col-sm-2 col-md-2 col-lg-2">
             <ul class="list-unstyled">
                 <li class="nav-item">
-                  <a class="nav-link active" href="/dashboard/dashboardUI"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/lesson/lessonlist"><i class="fa fa-book"></i><span>Subject Information</span></a>
+                  <a class="nav-link active" href="/dashboard/markerDashboard"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#markerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i><span>Marker Information</span></a>
                   <ul class="collapse list-unstyled" id="markerSubmenu">
                     <li>
-                      <a class="nav-link" href="/tutor/tutor_invite_list"><span>Marker Invitation</span></a>
-                    </li>
-                    <li>
-                      <a class="nav-link" href="/tutor/overview"><span>Marker Overview</span></a>
+                      <a class="nav-link" href="/marker/updateProfile"><span>Update Profile</span></a>
                     </li>
                   </ul>
                 </li>
-                
                 <li class="nav-item">
-                  <a class="nav-link" href="/assign/list"><i class="fa fa-tasks"></i><span>Marking Allocation</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/mark/list"><i class="fa fa-file"></i><span>Scores & Results</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/mark/showChart"><i class="fa fa-bar-chart-o"></i><span>Score Charts</span></a>
+                  <a class="nav-link" href="#spreadsheetSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-file"></i><span>Spreadsheets</span></a>
+                  <ul class="collapse list-unstyled" id="spreadsheetSubmenu">
+                    <li>
+                      <a class="nav-link" href="/file/downloadUI"><span>Download Document</span></a>
+                    </li>
+                    <li>
+                      <a class="nav-link" href="/file/uploadUI"><span>Upload Document</span></a>
+                    </li>
+                  </ul>
                 </li>
               </ul>
           </nav>
@@ -93,7 +88,7 @@
           <div class="page-content col-xs-10 col-sm-10 col-md-10 col-lg-10">
             <!-- breadcrumb -->
             <ol class="breadcrumb row">
-              <li class="breadcrumb-item"><a href="/dashboard/dashboardUI">Home</a></li>
+              <li class="breadcrumb-item"><a href="/dashboard/markerDashboard">Home</a></li>
               <li class="breadcrumb-item active">Dashboard</a></li>
             </ol>
             <!-- welcome -->
@@ -104,14 +99,14 @@
               </ol>
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img src="../../assets/img/banner.jpg">
+                  <img src="https://static.runoob.com/images/mix/img_fjords_wide.jpg">
                   <div class="carousel-caption">
                     <h4>Welcome to Teaching and Marking System</h4>
-                    <h5>${lecturer.lecturerName}</h5>
+                    <h5>${tutor.tutorName }</h5>
                   </div>
                 </div>
                 <div class="carousel-item">
-                  <img src="../../assets/img/melbuni.jpg">
+                  <img src="https://static.runoob.com/images/mix/img_nature_wide.jpg">
                   <div class="carousel-caption">
                     <h4 id="date"></h4>
                     <h5 id="weekday"></h5>
@@ -127,7 +122,6 @@
                 <span class="sr-only">Next</span>
               </a>
             </div>
-
           </div>
         </div>
       </div>

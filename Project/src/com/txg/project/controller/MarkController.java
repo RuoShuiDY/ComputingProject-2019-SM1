@@ -55,12 +55,20 @@ public class MarkController {
 	}
 
 	@RequestMapping("update")
-	public String updateMark(Integer mark_id, Float mark, String comment) {
+	public String updateMark(Integer mark_id, Model model, Float mark, String comment) {
 		QueryMarkDomain queryMarkDomain = new QueryMarkDomain();
 		queryMarkDomain.setMarkId(mark_id);
 		queryMarkDomain.setMarks(mark);
 		queryMarkDomain.setComment(comment);
 		Integer result = markService.updateMarkDomain(queryMarkDomain);
+		if(result == 0) {
+			model.addAttribute("operation", false);
+			model.addAttribute("msg", "Update fail");
+			
+		}else {
+			model.addAttribute("operation", true);
+        	model.addAttribute("msg", "Update Successfully");
+		}
 		return "redirect:list";
 
 	}

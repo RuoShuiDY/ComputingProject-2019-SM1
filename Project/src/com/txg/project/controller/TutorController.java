@@ -53,7 +53,7 @@ public class TutorController implements ApplicationContextAware{
 	
 	@Transactional
 	@RequestMapping(value="/invite_tutor")
-	public String inviteTutor(HttpSession session, Integer subject_id,
+	public String inviteTutor(HttpSession session, Model model, Integer subject_id,
 			@RequestParam(value="subject", required=false) String subject,
 			String email) {
 		Lecturer lecturer = (Lecturer) session.getAttribute("lecturer");
@@ -73,7 +73,11 @@ public class TutorController implements ApplicationContextAware{
 		tutorLesson.setTutor(tutor);
 		tutorLesson.setStatus(UUID.randomUUID().toString());
 		Integer result = tutorLessonService.inviteTutor(tutorLesson);
-		
+		if (result == 0) {
+			model.addAttribute("operation", false);
+        	model.addAttribute("msg", "Already Invited");
+        	return "redirect:/tutor/tutor_invite_list";
+		}
 		SendInviteMail sMail = new SendInviteMail(lecturer.getLecturerEmail(),email, tutorLesson, newTutor);
 		sMail.start();
 		return "redirect:/tutor/tutor_invite_list";

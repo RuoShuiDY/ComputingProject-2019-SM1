@@ -57,9 +57,11 @@ public class TutorAssignmentContoller {
 	
 	@Transactional
 	@RequestMapping(value = "/allocate")
-	public String allocate(HttpSession session, HttpServletRequest request, 
+	public String allocate(HttpSession session, Model model, HttpServletRequest request, 
 			Integer lessonId, Integer assignment, MultipartFile stuExcel) throws Exception {
 		if(stuExcel == null) {
+			model.addAttribute("operation", false);
+        	model.addAttribute("msg", "No excel upload");
 			return "redirect:list";
 		}
 		String rootPath = request.getServletContext().getRealPath("upload");
@@ -74,6 +76,8 @@ public class TutorAssignmentContoller {
 		stuExcel.transferTo(excelFile);
 		List<Student> list = new ExcelUtils().getExcelStudent(excelFile.getAbsolutePath());
 		if(list == null) {
+			model.addAttribute("operation", false);
+        	model.addAttribute("msg", "Excel Fault");
 			return "redirect:list";
 		}
 		Collections.shuffle(list);

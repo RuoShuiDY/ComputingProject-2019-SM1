@@ -63,11 +63,11 @@ CREATE TABLE `lesson_table` (
   KEY `FK_right_id_idx` (`state`),
   CONSTRAINT `FK_class_id` FOREIGN KEY (`class_id`) REFERENCES `class_dict` (`class_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_lecture_id` FOREIGN KEY (`lecturer_id`) REFERENCES `lecturer_info` (`lecturer_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Data for the table `lesson_table` */
 
-insert  into `lesson_table`(`lesson_id`,`class_id`,`lecturer_id`,`semester`,`year`,`state`) values (1,'COMP90007',927046,'Semester1',2019,'ABLE'),(2,'COMP90038',927046,'Semester1',2018,'ABLE');
+insert  into `lesson_table`(`lesson_id`,`class_id`,`lecturer_id`,`semester`,`year`,`state`) values (1,'COMP90007',927046,'Semester2',2019,'ABLE'),(2,'COMP90038',927046,'Semester1',2018,'ABLE'),(3,'COMP90038',927046,'Semester2',2019,'ABLE');
 
 /*Table structure for table `mark_table` */
 
@@ -75,20 +75,21 @@ DROP TABLE IF EXISTS `mark_table`;
 
 CREATE TABLE `mark_table` (
   `mark_id` int(11) NOT NULL AUTO_INCREMENT,
-  `tutor_lesson_id` int(11) NOT NULL,
+  `tutor_assignment_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
-  `assignment` int(11) NOT NULL,
-  `marks` float NOT NULL,
-  `max_mark` float NOT NULL,
-  `comment` text NOT NULL,
+  `marks` float DEFAULT NULL,
+  `max_mark` float DEFAULT NULL,
+  `comment` text,
   PRIMARY KEY (`mark_id`),
-  KEY `FK_tutor_lesson_id_idx` (`tutor_lesson_id`),
   KEY `FK_student_id_idx` (`student_id`),
+  KEY `FK_tutor_assignment_id` (`tutor_assignment_id`),
   CONSTRAINT `FK_student_id` FOREIGN KEY (`student_id`) REFERENCES `student_info` (`student_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_tutor_lesson_id` FOREIGN KEY (`tutor_lesson_id`) REFERENCES `tutor_lesson` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `FK_tutor_assignment_id` FOREIGN KEY (`tutor_assignment_id`) REFERENCES `tutor_assignment` (`tutor_assignment_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 /*Data for the table `mark_table` */
+
+insert  into `mark_table`(`mark_id`,`tutor_assignment_id`,`student_id`,`marks`,`max_mark`,`comment`) values (1,14,123456,1,10,'You FAIL'),(2,14,345678,2,10,'You FAIL'),(3,14,912345,3,10,'You FAIL'),(4,15,234567,4,10,'You FAIL'),(5,15,456789,5,10,'You Barely PASS'),(6,14,567891,6,10,'H3'),(7,14,678912,7,10,'H2'),(8,14,789123,8,10,'H1'),(9,14,891234,10,10,'GOOOOOOOOOOOOOOOOOOD');
 
 /*Table structure for table `record_table` */
 
@@ -132,22 +133,42 @@ CREATE TABLE `student_info` (
 
 /*Data for the table `student_info` */
 
+insert  into `student_info`(`student_id`,`student_email`,`student_username`,`student_surname`,`student_givenname`) values (123456,'abc@student.unimelb.edu.au','abc','ABC','Alice'),(234567,'bcd@student.unimelb.edu.au','bcd','BCD','Bob'),(345678,'cde@student.unimelb.edu.au','cde','CDE','Cassy'),(456789,'def@student.unimelb.edu.au','def','DEF','DENG'),(567891,'efg@student.unimelb.edu.au','efg','EFG','Ella'),(678912,'fgh@student.unimelb.edu.au','fgh','FGH','Fly'),(789123,'ghi@student.unimelb.edu.au','ghi','GHI','GUO'),(891234,'hij@student.unimelb.edu.au','hij','HIJ','Halen'),(912345,'ijk@student.unimelb.edu.au','ijk','IJK','Irsh');
+
+/*Table structure for table `tutor_assignment` */
+
+DROP TABLE IF EXISTS `tutor_assignment`;
+
+CREATE TABLE `tutor_assignment` (
+  `tutor_assignment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tutor_lesson_id` int(11) DEFAULT NULL,
+  `assignment` int(11) DEFAULT NULL,
+  `mark_excel` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`tutor_assignment_id`),
+  KEY `FK_tutor_lesson` (`tutor_lesson_id`),
+  CONSTRAINT `FK_tutor_lesson` FOREIGN KEY (`tutor_lesson_id`) REFERENCES `tutor_lesson` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tutor_assignment` */
+
+insert  into `tutor_assignment`(`tutor_assignment_id`,`tutor_lesson_id`,`assignment`,`mark_excel`) values (14,13,1,'D:\\Java Tools\\apache-tomcat-7.0.52\\webapps\\Project\\marks\\c346f3066b764f86b5f7b1669d13c6cb.xlsx'),(15,14,1,NULL);
+
 /*Table structure for table `tutor_info` */
 
 DROP TABLE IF EXISTS `tutor_info`;
 
 CREATE TABLE `tutor_info` (
-  `tutor_id` int(11) NOT NULL,
+  `tutor_id` int(11) NOT NULL AUTO_INCREMENT,
   `tutor_email` varchar(100) NOT NULL,
   `tutor_phone` varchar(20) DEFAULT NULL,
-  `tutor_name` varchar(50) NOT NULL,
+  `tutor_name` varchar(50) DEFAULT NULL,
   `password` varchar(20) NOT NULL,
   PRIMARY KEY (`tutor_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tutor_info` */
 
-insert  into `tutor_info`(`tutor_id`,`tutor_email`,`tutor_phone`,`tutor_name`,`password`) values (123456,'yuxing4@student.unimelb.edu.au','123456','Evelyn GUO','123456');
+insert  into `tutor_info`(`tutor_id`,`tutor_email`,`tutor_phone`,`tutor_name`,`password`) values (2,'deng4@student.unimelb.edu.au','18840824073','Devin DENG','meiyoumima'),(3,'dengyue941228@163.com','18840824073','Yue DENG','meiyoumima'),(4,'2430070746@qq.com','0431683781','Purple Sum','123456'),(5,'123456789@qq.com',NULL,NULL,'[C@78524f84');
 
 /*Table structure for table `tutor_lesson` */
 
@@ -156,18 +177,19 @@ DROP TABLE IF EXISTS `tutor_lesson`;
 CREATE TABLE `tutor_lesson` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tutor_id` int(11) NOT NULL,
-  `lession_id` int(11) NOT NULL,
-  `tutor_right_id` int(11) NOT NULL,
+  `lesson_id` int(11) NOT NULL,
+  `status` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_tutor_id_idx` (`tutor_id`),
-  KEY `FK_lesson_id_idx` (`lession_id`),
-  KEY `FK_tutor_right_id_idx` (`tutor_right_id`),
-  CONSTRAINT `FK_lesson_id` FOREIGN KEY (`lession_id`) REFERENCES `lesson_table` (`lesson_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_tutor_id` FOREIGN KEY (`tutor_id`) REFERENCES `tutor_info` (`tutor_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_tutor_right_id` FOREIGN KEY (`tutor_right_id`) REFERENCES `right_table` (`right_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `FK_lesson_id_idx` (`lesson_id`),
+  KEY `FK_tutor_right_id_idx` (`status`),
+  CONSTRAINT `FK_lesson_id` FOREIGN KEY (`lesson_id`) REFERENCES `lesson_table` (`lesson_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_tutor_id` FOREIGN KEY (`tutor_id`) REFERENCES `tutor_info` (`tutor_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tutor_lesson` */
+
+insert  into `tutor_lesson`(`id`,`tutor_id`,`lesson_id`,`status`) values (13,2,1,'ACTIVATED'),(14,3,1,'ACTIVATED'),(15,2,2,'ACTIVATED');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
