@@ -72,7 +72,7 @@ public class TutorController implements ApplicationContextAware{
 		tutorLesson.setLesson(lesson);
 		tutorLesson.setTutor(tutor);
 		tutorLesson.setStatus(UUID.randomUUID().toString());
-		Integer result = tutorLessonService.inviteTutor(tutorLesson);
+		Integer result = tutorLessonService.inviteTutor(tutorLesson); 
 		if (result == 0) {
 			model.addAttribute("operation", false);
         	model.addAttribute("msg", "Already Invited");

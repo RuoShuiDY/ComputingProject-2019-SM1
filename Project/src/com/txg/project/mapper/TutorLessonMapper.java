@@ -36,4 +36,6 @@ public interface TutorLessonMapper {
 	Tutor findTutorByAckId(String ackNum);
 
 	void acknowledge(String ackNum);
+	
+	Integer findTutorLessonCountByDetail(TutorLesson tutorLesson);
 }

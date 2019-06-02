@@ -40,7 +40,11 @@ public class TutorLessonServiceImpl implements TutorLessonService {
 	@Override
 	public Integer inviteTutor(TutorLesson tutorLesson) {
 		// TODO Auto-generated method stub
-		return tutorLessonMapper.addTutorLesson(tutorLesson);
+		if (tutorLessonMapper.findTutorLessonCountByDetail(tutorLesson) == 1) {
+			return 0;
+		}else {
+			return tutorLessonMapper.addTutorLesson(tutorLesson);			
+		}
 	}
 	@Override
 	public Integer addTutorInfo(Tutor tutor) {

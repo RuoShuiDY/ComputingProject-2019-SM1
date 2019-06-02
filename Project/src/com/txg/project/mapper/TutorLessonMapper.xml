@@ -134,4 +134,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE status = #{str}
 	</update>
 	
+	<select id="findTutorLessonCountByDetail" parameterType="TutorLesson" resultType="Integer">
+		SELECT COUNT(*) FROM tutor_lesson tl
+		LEFT JOIN lesson_table lt ON tl.`lesson_id` = lt.`lesson_id`
+		LEFT JOIN tutor_info ti ON ti.`tutor_id` = tl.`tutor_id`
+		WHERE lt.`lesson_id` = #{lesson.lessonId} AND ti.`tutor_id` = #{tutor.tutorId};
+	</select>
+	
 </mapper>
