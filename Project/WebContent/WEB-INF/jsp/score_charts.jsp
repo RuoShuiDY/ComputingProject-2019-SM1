@@ -122,7 +122,7 @@
                   </div>
                   <div class="col-lg-2">
                     <label>Operation:</label><br>
-                    <button type="button" class="button disabled" id="generate" name="button">Generate Charts</button>
+                    <button type="button" class="button" id="generate" name="button">Generate Charts</button>
                   </div>
                   <div class="col-lg-1">
                     <label>TOTAL NUMBER of STUDENTS:</label>
@@ -148,7 +148,31 @@
           </div>
         </div>
       </div>
+      
+      	<!-- alert -->
+		<div class="alert alert-warning alert-dismissible fade show warning"
+			hidden>
+			<button type="button" class="close" data-dismiss="alert"
+				style="margin: 10px; padding: 0">&times;</button>
+			<strong>Warning!</strong>&nbsp;<span id="warning"></span>
+		</div>
+		<!-- alert -->
+		<div class="alert alert-danger alert-dismissible fade show error"
+			hidden>
+			<button type="button" class="close" data-dismiss="alert"
+				style="margin: 10px; padding: 0">&times;</button>
+			<strong>Error!</strong>&nbsp;<span id="error"></span>
+		</div>
+		<!-- alert -->
+		<div class="alert alert-success alert-dismissible fade show success"
+			hidden>
+			<button type="button" class="close" data-dismiss="alert"
+				style="margin: 10px; padding: 0">&times;</button>
+			<strong>Success!</strong>&nbsp;<span id="success"></span>
+		</div>
+      
       <script>
+      (function ($) {
           window.chartColors = {
               red: 'rgb(255, 99, 132)',
               orange: 'rgb(255, 159, 64)',
@@ -222,6 +246,7 @@
           };
           var lineCtx = document.getElementById("chartjs-line-chart").getContext("2d");
           window.myLine = new Chart(lineCtx, lineConfig);
+      } (jQuery));
       </script>
 
       <script>
@@ -280,7 +305,6 @@
 
           var doughnutCtx = document.getElementById("chartjs-doughnut-chart").getContext("2d");
           window.myDoughnut = new Chart(doughnutCtx, doughnutConfig);
-
       </script>
 
       <script type="text/javascript">
@@ -463,10 +487,27 @@
             }
             console.log($('#generate').hasClass("disabled"));
           });
+        
         $("#generate").click(function(){
-        	if(flag1 == true && flag2 == true){
+        	if(flag1==true && flag2==true){
         		$("#showChart_id").submit();
-        	}
+        	}else if(flag1==false){
+             	 $('#warning').text("Please input a valid subject!");
+      	         $('.warning').removeAttr("hidden");
+      	         setTimeout(function(){
+      	            $('.warning').attr("hidden", true);
+      	         }, 5000);
+        	}else if(flag2==false && flag1==true){
+        		if($('#assignment_info').val().trim()!=""){
+                 	 $('#warning').text("Please input a valid assignment!");
+          	         $('.warning').removeAttr("hidden");
+          	         setTimeout(function(){
+          	            $('.warning').attr("hidden", true);
+          	         }, 5000);
+        		}else{
+        			$("#showChart_id").submit();
+          	   	}
+           	}
         });
       });
       </script>
