@@ -148,6 +148,29 @@
           </div>
         </div>
       </div>
+      
+      		<!-- alert -->
+		<div class="alert alert-warning alert-dismissible fade show warning"
+			hidden>
+			<button type="button" class="close" data-dismiss="alert"
+				style="margin: 10px; padding: 0">&times;</button>
+			<strong>Warning!</strong>&nbsp;<span id="warning"></span>
+		</div>
+		<!-- alert -->
+		<div class="alert alert-danger alert-dismissible fade show error"
+			hidden>
+			<button type="button" class="close" data-dismiss="alert"
+				style="margin: 10px; padding: 0">&times;</button>
+			<strong>Error!</strong>&nbsp;<span id="error"></span>
+		</div>
+		<!-- alert -->
+		<div class="alert alert-success alert-dismissible fade show success"
+			hidden>
+			<button type="button" class="close" data-dismiss="alert"
+				style="margin: 10px; padding: 0">&times;</button>
+			<strong>Success!</strong>&nbsp;<span id="success"></span>
+		</div>
+      
       <script>
           window.chartColors = {
               red: 'rgb(255, 99, 132)',
@@ -465,12 +488,26 @@
             }
             console.log($('#generate').hasClass("disabled"));
           });
+        
         $("#generate").click(function(){
         	if(flag1 == true && flag2 == true){
         		$("#showChart_id").submit();
+  			}else if(flag1==true && $('#assignment_info').val().trim()==""){
+        		$("#showChart_id").submit();
+        	}else if(flag1==false){
+             	 $('#warning').text("Please input valid Subject!");
+      	         $('.warning').removeAttr("hidden");
+      	         setTimeout(function(){
+      	            $('.warning').attr("hidden", true);
+      	         }, 5000);
+        	}else if(flag2==false){
+             	 $('#warning').text("Please input valid Assignment!");
+      	         $('.warning').removeAttr("hidden");
+      	         setTimeout(function(){
+      	            $('.warning').attr("hidden", true);
+      	         }, 5000);
         	}
         });
-
       } (jQuery));
       </script>
 

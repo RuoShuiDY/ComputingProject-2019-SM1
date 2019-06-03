@@ -256,7 +256,7 @@
                 $('.check_email').html("Invalid");
                 $('#invite_submit').addClass("disabled");
               }
-              else if(flag1 && flag2){
+              else if(flag1 && flag2 && $('#email').val().trim()!="" && $('#subject_info').val().trim()!=""){
                 $('#invite_submit').removeClass("disabled");
               }
             });
@@ -280,7 +280,7 @@
                 $('.check_subject').html("Invalid");
                 $('#invite_submit').addClass("disabled");
               }
-              else if(flag1 && flag2){
+              else if(flag1 && flag2 && $('#email').val().trim()!="" && $('#subject_info').val().trim()!=""){
                 $('#invite_submit').removeClass("disabled");
                 $('#invite_form').submit();
               }
