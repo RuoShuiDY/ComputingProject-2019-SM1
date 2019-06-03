@@ -31,7 +31,8 @@ public class MarkController {
 	private LessonService lessonService;
 
 	@RequestMapping(value = "list")
-	public String markList(HttpSession session, Model model, Integer lessonId, Integer assignment) {
+	public String markList(HttpSession session, Model model, Boolean operation, 
+			String msg, Integer lessonId, Integer assignment) {
 		Lecturer lecturer = (Lecturer) session.getAttribute("lecturer");
 		QueryMark queryMark = new QueryMark();
 		queryMark.setLecturerId(lecturer.getLecturerId());
@@ -51,6 +52,8 @@ public class MarkController {
 		model.addAttribute("marks", marks);
 		model.addAttribute("lessons", lessons);
 		model.addAttribute("number", marks.size());
+		model.addAttribute("operation", operation);
+		model.addAttribute("msg", msg);
 		return "results";
 	}
 
@@ -140,7 +143,6 @@ public class MarkController {
 		}
 		model.addAttribute("assignList", assignList);
 		model.addAttribute("numbers", numbers);
-		
 		
 		Integer[] combined = new Integer[7];
 		for(int i=0;i<7;i++) {
