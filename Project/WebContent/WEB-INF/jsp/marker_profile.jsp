@@ -48,7 +48,7 @@
                   <i class="fa fa-user"><span>Hello, ${tutor.tutorName }</span></i>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="/marker/updateProfile">Update Profile</a>
+                  <a class="dropdown-item" href="/marker/profile_list">Update Profile</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="/user/logout">Logout</a>
                 </div>
@@ -69,7 +69,7 @@
                   <a class="nav-link" href="#markerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i><span>Marker Information</span></a>
                   <ul class="list-unstyled" id="markerSubmenu">
                     <li>
-                      <a class="nav-link active" href="/marker/updateProfile"><span>Update Profile</span></a>
+                      <a class="nav-link active" href="/marker/profile_list"><span>Update Profile</span></a>
                     </li>
                   </ul>
                 </li>
