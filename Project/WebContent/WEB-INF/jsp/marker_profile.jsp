@@ -115,7 +115,7 @@
             </div>
 
             <div class="row" id="profile">
-                <form id="centre_form" class="col-lg-8 col-md-8 col-sm-8 col-xs-8" action="updateProfile" method="post">
+                <form id="centre_form" class="col-lg-8 col-md-8 col-sm-8 col-xs-8" action="updateProfile" method="post" id="profile_form">
                   <h5 class="form_topic">Marker Profile</h5>
                     <input type="hidden" value="${tutor.tutorId }" name="tutor_id">
                     <div class="form_row">
@@ -124,22 +124,22 @@
                     </div>
                     <div class="form_row">
                       <label for="marker_name">Marker Name:</label>
-                      <input type="text" name="tutor_name" class="form_content" id="marker_name" value="${tutor.tutorName }" autofocus>
+                      <input type="text" name="tutor_name" class="form_content" id="marker_name" value="${tutor.tutorName }" autofocus required>
                     </div>
                     <div class="form_row">
                       <label for="marker_contact">Marker Contact:</label>
-                      <input type="text" name="tutor_phone" class="form_content" id="marker_contact" value="${tutor.tutorPhone }">
+                      <input type="text" name="tutor_phone" class="form_content" id="marker_contact" value="${tutor.tutorPhone }" autofocus required>
                     </div>
                     <div class="form_row">
                       <label for="marker_oldpwd">Original Password:</label>
-                      <input type="password" name="o_password" class="form_content" id="marker_oldpwd" value="">
+                      <input type="password" name="o_password" class="form_content" id="marker_oldpwd" value="" autofocus required>
                     </div>
                     <div class="form_row">
                       <label for="marker_newpwd">New Password:</label>
-                      <input type="password" name="n_password" class="form_content" id="marker_newpwd" value="">
+                      <input type="password" name="n_password" class="form_content" id="marker_newpwd" value="" autofocus required>
                     </div>
                     <div class="row">
-                      <button type="submit" name="button" class="col-lg-5 col-md-5 col-sm-5 col-xs-5" id="profile"><i class="fa fa-edit"></i><span>Update</span></button>
+                      <button type="button" name="button" class="col-lg-5 col-md-5 col-sm-5 col-xs-5" id="profile"><i class="fa fa-edit"></i><span>Update</span></button>
                     </div>
                 </form>
               </div>
@@ -175,7 +175,27 @@
                     </div>
                   </form>
               </div>
-
+			<!-- alert -->
+			<div class="alert alert-warning alert-dismissible fade show warning"
+				hidden>
+				<button type="button" class="close" data-dismiss="alert"
+					style="margin: 10px; padding: 0">&times;</button>
+				<strong>Warning!</strong>&nbsp;<span id="warning"></span>
+			</div>
+			<!-- alert -->
+			<div class="alert alert-danger alert-dismissible fade show error"
+				hidden>
+				<button type="button" class="close" data-dismiss="alert"
+					style="margin: 10px; padding: 0">&times;</button>
+				<strong>Error!</strong>&nbsp;<span id="error"></span>
+			</div>
+			<!-- alert -->
+			<div class="alert alert-success alert-dismissible fade show success"
+				hidden>
+				<button type="button" class="close" data-dismiss="alert"
+					style="margin: 10px; padding: 0">&times;</button>
+				<strong>Success!</strong>&nbsp;<span id="success"></span>
+			</div>
             </div>
           </div>
         </div>
@@ -213,8 +233,50 @@
             $('.cancel,.close').click(function(){
               $(this).parents(".form_vertical").hide();
             });
+            
+            $('#profile').click(function(){
+              if($('#marker_oldpwd').val().trim()!=="" && $('#marker_newpwd').val().trim()!=="" ){
+            	 $('#profile_form').submit();
+              }else{
+              	 $('#warning').text("Please input a valid password!");
+      	         $('.warning').removeAttr("hidden");
+      	         setTimeout(function(){
+      	            $('.warning').attr("hidden", true);
+      	         }, 5000);
+              }
+            });
         });
       </script>
+      
+   <script type="text/javascript">
+	  console.log("ok");
+	  $.noConflict();
+	  if (${operation} == false){
+		  var msg = "${msg}";
+	  	//window.alert("Username or password wrong");
+	  	 (function ($) {
+	  		$('#error').text(msg);
+	  		$('.error').attr("hidden", false);
+	      	setTimeout(function(){
+	    	  $('.error').attr("hidden", true);
+	      	}, 5000)
+	     } (jQuery));
+	  }
+  </script>
+  
+  <script type="text/javascript">
+  if (${operation} == true){
+	  var msg = "${msg}";
+  	//window.alert("Username or password wrong");
+  	 (function ($) {
+  		$('#success').text(msg);
+  		$('.success').attr("hidden", false);
+      	setTimeout(function(){
+    	  $('.success').attr("hidden", true);
+      	}, 5000)
+     } (jQuery));
+  }
+  </script>
     </div>
   </body>
 </html>

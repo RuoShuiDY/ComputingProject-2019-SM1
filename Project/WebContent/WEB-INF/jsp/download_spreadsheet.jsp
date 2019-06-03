@@ -103,7 +103,7 @@
                     <h5 class="form_topic">Download Spreadsheet</h5>
                     <div class="form_row">
                       <label for="subject"><span class="badge badge-secondary check_subject"></span> Subject:</label>
-                      <input type="text" class="showTooltip form_content" id="subject_info" name="subject" list="subject" autocomplete="off">
+                      <input type="text" class="showTooltip form_content" id="subject_info" name="subject" list="subject" autocomplete="off" required>
                       <datalist id="subject">
                         <c:forEach items="${lessons}" var="lesson">
                         	<option value="${lesson.classDict.classId} ${lesson.classDict.className}-${lesson.semester}-${lesson.year}" data-id="${lesson.lessonId }"></option>
@@ -113,7 +113,7 @@
                     </div>
                     <div class="form_row">
                       <label for="assignment"><span class="badge badge-secondary check_assignment"></span> Assignment:</label>
-                      <input type="text" class="showTooltip form_content" id="assignment_info" name="assignment" list="assignment" autocomplete="off">
+                      <input type="text" class="showTooltip form_content" id="assignment_info" name="assignment" list="assignment" autocomplete="off" required>
                       <datalist id="assignment">
                         <option value="1"></option>
                         <option value="2"></option>
@@ -132,7 +132,7 @@
                       </div>
                     </div> -->
                     <div class="row">
-                      <button type="submit" name="button" class="disabled col-lg-5 col-md-5 col-sm-5 col-xs-5" id="download"><i class="fa fa-download"></i><span>Download</span></button>
+                      <button type="button" name="button" class="disabled col-lg-5 col-md-5 col-sm-5 col-xs-5" id="download"><i class="fa fa-download"></i><span>Download</span></button>
                     </div>
                   </form>
                 </div>
@@ -209,6 +209,49 @@
             }
           });
         });
+        
+        $('#download').click(function(){
+            if($('#subject_info').val().trim()!=="" && $('#assignment_info').val().trim()!==""){
+           	 $('#centre_form').submit();
+             }else{
+             	 $('#warning').text("Please input a valid Subject/Assignment!");
+     	         $('.warning').removeAttr("hidden");
+     	         setTimeout(function(){
+     	            $('.warning').attr("hidden", true);
+     	         }, 5000);
+             }
+        });       
       </script>
+      
+  <script type="text/javascript">
+	  console.log("ok");
+	  $.noConflict();
+	  if (${operation} == false){
+		  var msg = "${msg}";
+	  	//window.alert("Username or password wrong");
+	  	 (function ($) {
+	  		$('#error').text(msg);
+	  		$('.error').attr("hidden", false);
+	      	setTimeout(function(){
+	    	  $('.error').attr("hidden", true);
+	      	}, 5000)
+	     } (jQuery));
+	  }
+  </script>
+  
+  <script type="text/javascript">
+  if (${operation} == true){
+	  var msg = "${msg}";
+  	//window.alert("Username or password wrong");
+  	 (function ($) {
+  		$('#success').text(msg);
+  		$('.success').attr("hidden", false);
+      	setTimeout(function(){
+    	  $('.success').attr("hidden", true);
+      	}, 5000)
+     } (jQuery));
+  }
+  </script>
+
   </body>
 </html>

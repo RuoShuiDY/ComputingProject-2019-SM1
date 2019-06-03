@@ -104,7 +104,7 @@
                   <h5 class="form_topic">Upload Spreadsheet</h5>
                   <div class="form_row">
                     <label for="subject"><span class="badge badge-secondary check_subject"></span> Subject:</label>
-                    <input type="text" class="showTooltip form_content" id="subject_info" name="subject" list="subject" autocomplete="off">
+                    <input type="text" class="showTooltip form_content" id="subject_info" name="subject" list="subject" autocomplete="off" required>
                     <datalist id="subject">
                         <c:forEach items="${tutorLesson}" var="tutorLesson">
                         	<option value="${tutorLesson.lesson.classDict.classId} ${tutorLesson.lesson.classDict.className}-${tutorLesson.lesson.semester}-${tutorLesson.lesson.year}" data-id="${tutorLesson.tutorLessonId}"></option>
@@ -115,7 +115,7 @@
                   </div>
                   <div class="form_row">
                     <label for="assignment"><span class="badge badge-secondary check_assignment"></span> Assignment:</label>
-                    <input type="text" class="showTooltip form_content" id="assignment_info" name="assignment" list="assignment" autocomplete="off">
+                    <input type="text" class="showTooltip form_content" id="assignment_info" name="assignment" list="assignment" autocomplete="off" required>
                     <datalist id="assignment">
                       <option value="1"></option>
                       <option value="2"></option>
@@ -128,13 +128,13 @@
                     <div class="file">
                       <label for="file" class="col-lg-4 file_title"><span class=""></span> Marking File:</label>
                       <div class="custom-file col-lg-8 row">
-                        <input type="file" class="custom-file-input col-lg-12" name="markExcel">
+                        <input type="file" class="custom-file-input col-lg-12" name="markExcel" id="file">
                         <label class="custom-file-label">Choose a File from Folder</label>
                       </div>
                     </div>
                   </div>
                   <div class="row">
-                    <button type="submit" name="button" class="disabled col-lg-5 col-md-5 col-sm-5 col-xs-5" id="upload" ><i class="fa fa-upload"></i><span>Upload</span></button>
+                    <button type="button" name="button" class="disabled col-lg-5 col-md-5 col-sm-5 col-xs-5" id="upload" ><i class="fa fa-upload"></i><span>Upload</span></button>
                   </div>
                 </form>
               </div>
@@ -143,6 +143,28 @@
         </div>
       </div>
 
+			<!-- alert -->
+			<div class="alert alert-warning alert-dismissible fade show warning"
+				hidden>
+				<button type="button" class="close" data-dismiss="alert"
+					style="margin: 10px; padding: 0">&times;</button>
+				<strong>Warning!</strong>&nbsp;<span id="warning"></span>
+			</div>
+			<!-- alert -->
+			<div class="alert alert-danger alert-dismissible fade show error"
+				hidden>
+				<button type="button" class="close" data-dismiss="alert"
+					style="margin: 10px; padding: 0">&times;</button>
+				<strong>Error!</strong>&nbsp;<span id="error"></span>
+			</div>
+			<!-- alert -->
+			<div class="alert alert-success alert-dismissible fade show success"
+				hidden>
+				<button type="button" class="close" data-dismiss="alert"
+					style="margin: 10px; padding: 0">&times;</button>
+				<strong>Success!</strong>&nbsp;<span id="success"></span>
+			</div>
+			
       <script type="text/javascript">
       $(document).ready(function () {
         $('input[list]').on('input', function(e) {
@@ -211,6 +233,19 @@
             $('#upload').removeClass("disabled");
           }
         });
+        
+        $('#upload').click(function(){
+            if($('#subject_info').val().trim()!=="" && $('#assignment_info').val().trim()!=="" &&  $('#file').val().trim()!=="" ){
+           	 $('#centre_form').submit();
+             }else{
+             	 $('#warning').text("Please input a valid Subject/Assignment/File!");
+     	         $('.warning').removeAttr("hidden");
+     	         setTimeout(function(){
+     	            $('.warning').attr("hidden", true);
+     	         }, 5000);
+             }
+        });
+        
       });
       </script>
       <script type="text/javascript" src="../../assets/js/bs-custom-file-input.js"></script>
@@ -219,5 +254,39 @@
             bsCustomFileInput.init();
           });
       </script>
+      
+      
+  <script type="text/javascript">
+	  console.log("ok");
+	  $.noConflict();
+	  if (${operation} == false){
+		  var msg = "${msg}";
+	  	//window.alert("Username or password wrong");
+	  	 (function ($) {
+	  		$('#error').text(msg);
+	  		$('.error').attr("hidden", false);
+	      	setTimeout(function(){
+	    	  $('.error').attr("hidden", true);
+	      	}, 5000)
+	     } (jQuery));
+	  }
+  </script>
+  
+  <script type="text/javascript">
+  if (${operation} == true){
+	  var msg = "${msg}";
+  	//window.alert("Username or password wrong");
+  	 (function ($) {
+  		$('#success').text(msg);
+  		$('.success').attr("hidden", false);
+      	setTimeout(function(){
+    	  $('.success').attr("hidden", true);
+      	}, 5000)
+     } (jQuery));
+  }
+  </script>
+  
+  
+  
   </body>
 </html>
