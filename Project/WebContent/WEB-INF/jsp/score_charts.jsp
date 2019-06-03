@@ -492,14 +492,14 @@
         	if(flag1==true && flag2==true){
         		$("#showChart_id").submit();
         	}else if(flag1==false){
-             	 $('#warning').text("Please input a valid subject!");
+             	 $('#warning').text("Please input a valid Subject!");
       	         $('.warning').removeAttr("hidden");
       	         setTimeout(function(){
       	            $('.warning').attr("hidden", true);
       	         }, 5000);
         	}else if(flag2==false && flag1==true){
         		if($('#assignment_info').val().trim()!=""){
-                 	 $('#warning').text("Please input a valid assignment!");
+                 	 $('#warning').text("Please input a valid Assignment!");
           	         $('.warning').removeAttr("hidden");
           	         setTimeout(function(){
           	            $('.warning').attr("hidden", true);
