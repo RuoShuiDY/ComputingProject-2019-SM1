@@ -159,7 +159,7 @@
                   <thead>
                     <tr>
                       <th>
-                        All<input type="checkbox" name="" id="checkall" value="">
+                        All<input type="checkbox" name="" id="checkall" unchecked>
                       </th>
                       <th>No.</th>
                       <th>Subject</th>
@@ -301,14 +301,17 @@
                 $(".updateResults").hide();
             });
 
-            $('#checkall').click(function(){
-              if(!$(this).hasClass("checked")){
-                $('#checkall').addClass("checked")
-                $(".checkbox").attr("checked", true);
-              }else{
-                $('#checkall').removeClass("checked")
-                $(".checkbox").attr("checked", false);
-              }
+            $('#checkall').click(function(event) {
+                if(this.checked) {
+                    // Iterate each checkbox
+                    $(':checkbox').each(function() {
+                        this.checked = true;
+                    });
+                } else {
+                    $(':checkbox').each(function() {
+                        this.checked = false;
+                    });
+                }
             });
             
             $('#invite').click(function(){

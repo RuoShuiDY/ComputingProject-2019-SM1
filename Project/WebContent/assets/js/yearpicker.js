@@ -1,6 +1,6 @@
+(function ($) {
 const version = '1.0.0';
 const appName = 'YearPicker';
-
 
 var defaults = {
     // Auto Hide
@@ -506,3 +506,4 @@ if ($.fn) {
 };
 
 $('.yearpicker').yearpicker();
+} (jQuery));

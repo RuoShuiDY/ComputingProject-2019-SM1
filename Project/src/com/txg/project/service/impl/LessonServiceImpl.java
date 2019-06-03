@@ -53,10 +53,15 @@ public class LessonServiceImpl implements LessonService{
 	}
 
 	@Override
-	public Integer updateLesson(Lesson lesson) {
-		// TODO Auto-generated method stub
-		return lessonMapper.updateLesson(lesson);
-	}
+	 public Integer updateLesson(Lesson lesson) {
+	  // TODO Auto-generated method stub
+	  Lesson newLesson = lessonMapper.selectLesson(lesson);
+	  System.out.println(newLesson);
+	  if(newLesson != null) {
+	   return 0;
+	  }
+	  return lessonMapper.updateLesson(lesson);   
+	 }
 
 	@Override
 	public List<ClassDict> findUniqueLesson(Integer lecturerId) {

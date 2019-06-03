@@ -429,3 +429,25 @@ table th{
   border-bottom: 1px solid lightgrey;
   padding-bottom: 20px;
 }
+
+.alert{
+  width: auto;
+  min-width: 200px;
+  position: absolute;
+  height: auto;
+  float: right;
+  right: 1%;
+  display: block;
+  z-index: 2000;
+  font-size:1em;
+}
+
+.warning, .success{
+  position: absolute;
+  top: 20px;
+}
+
+.error{
+  position: absolute;
+  top: 75px;
+}

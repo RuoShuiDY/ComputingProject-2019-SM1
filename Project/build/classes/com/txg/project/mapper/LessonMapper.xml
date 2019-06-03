@@ -51,12 +51,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="selectLesson" parameterType="Lesson" resultType="Lesson">
-		SELECT lesson_id from lesson_table 
-		WHERE class_id=#{classDict.classId} 
-		AND lecturer_id=#{lecturer.lecturerId} 
-		AND semester=#{semester} 
-		AND year=#{year}
-	</select>
+	  SELECT lesson_id from lesson_table 
+	  <where>
+	   <if test="classDict!=null and classDict.classId!=null">
+	    class_id=#{classDict.classId} AND
+	   </if>
+	  
+	  lecturer_id=#{lecturer.lecturerId} 
+	  AND semester=#{semester} 
+	  AND year=#{year}
+	  </where>
+	 </select>
 	
 	<delete id="deleteLesson" parameterType="Integer" >
 		DELETE FROM lesson_table WHERE lesson_id = #{lessonId}

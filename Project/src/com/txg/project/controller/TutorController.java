@@ -1,6 +1,8 @@
 package com.txg.project.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -124,26 +126,30 @@ public class TutorController implements ApplicationContextAware{
 	}
 	*/
 	@RequestMapping(value = "/overview")
-	public String showActivated(HttpSession session,Model model) {
+	public String showActivated(HttpSession session,Model model, Boolean operation, String msg) {
 		Lecturer lecturer = (Lecturer) session.getAttribute("lecturer");
 		List<TutorLesson> activatedList = tutorLessonService.findAllActivatedTutorLesson(lecturer.getLecturerId());
 		model.addAttribute("activatedList",activatedList);
 		List<Lesson> lessonList = lessonService.findAllLessons(lecturer.getLecturerId());
 		model.addAttribute("lesson", lessonList);
+		model.addAttribute("operation", operation);
+		model.addAttribute("msg",msg);
 		return "marker";
 	}
 	
 	@RequestMapping(value="/deleteId")
 	@ResponseBody
-	public void deleteTutorLesson(Integer tutorLessonId, Model model) {
+	public Map<String, Object> deleteTutorLesson(Integer tutorLessonId, Model model) {
 		Integer result = tutorLessonService.deleteTutorLesson(tutorLessonId);
+		Map<String, Object> map = new HashMap<String, Object>();
 		if(result == 1) {
-			model.addAttribute("operation", true);
-			model.addAttribute("msg","Delete Success");
+			map.put("operation", true);
+			map.put("msg","Delete Success");
 		}else {
-			model.addAttribute("operation",false);
-			model.addAttribute("msg", "Delete Fail");
+			map.put("operation",false);
+			map.put("msg", "Delete Fail");
 		}
+		return map;
 	}
 	
 	@RequestMapping(value="/updateInfo")

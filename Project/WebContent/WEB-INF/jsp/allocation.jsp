@@ -144,11 +144,11 @@
               <!-- allocate marking -->
               <div class="form_vertical allocation" style="display:none">
                 <a class="close" data-dismiss="addSubject">&times;</a>
-                <form class="popup_form" action="allocate" method="post" enctype="multipart/form-data">
+                <form class="popup_form" action="allocate" method="post" enctype="multipart/form-data" id="allocate_form">
                   <h5 class="popup_form_topic">Marking Allocation</h5>
                   <div class="popup_form_row">
                     <label for="subject"><span class="badge badge-secondary check_subject"></span> Subject:</label>
-                    <input type="text" class="showTooltip form_content" id="subject_info" name="subject" list="subject" autocomplete="off">
+                    <input type="text" class="showTooltip form_content" id="subject_info" name="subject" list="subject" autocomplete="off" required autofocus>
                     <datalist id="subject">
                       <c:forEach items="${lesson}" var="lessonItem">
                         <option value="${lessonItem.classDict.classId} ${lessonItem.semester } ${lessonItem.year } " data-id="${lessonItem.lessonId }"></option>
@@ -158,19 +158,19 @@
                   </div>
                   <div class="popup_form_row">
                     <label for="assignment"><span class=""></span> Assignment:</label>
-                    <input type="assignment" class="showTooltip" name="assignment" id="assignment" value="" autocomplete="off" name="assignment"/>
+                    <input type="assignment" class="showTooltip" name="assignment" id="assignment" value="" autocomplete="off" name="assignment" required autofocus/>
                   </div>
           				<div class="row">
                     <div class="col-lg-11">
                       <label for="file" class="col-lg-4 left-align"><span class=""></span> Students:</label>
                       <div class="custom-file col-lg-8 row">
-                        <input type="file" class="custom-file-input col-lg-12" name="stuExcel">
+                        <input type="file" class="custom-file-input col-lg-12" name="stuExcel" id="file" required>
                         <label class="custom-file-label">Choose a File from Folder</label>
                       </div>
                     </div>
           				</div>
                     <div class="row">
-                      <button type="submit" name="button" class="form_vertical_button disabled col-lg-5 col-md-5 col-sm-5 col-xs-5" id="allocate_submit"><i class="fa fa-refresh"></i><span>Allocate</span></button>
+                      <button type="button" name="button" class="form_vertical_button col-lg-5 col-md-5 col-sm-5 col-xs-5" id="allocate_submit" disabled><i class="fa fa-refresh"></i><span>Allocate</span></button>
                       <button type="button" name="button" class="form_vertical_button cancel col-lg-5 col-md-5 col-sm-5 col-xs-5"><i class="fa fa-times-circle"></i></i><span>Cancel</span></button>
                     </div>
                 </form>
@@ -231,10 +231,10 @@
                 $('.check_subject').removeClass("badge-success");
                 $('.check_subject').addClass("badge-danger");
                 $('.check_subject').html("Invalid");
-                $('#allocate_submit').addClass("disabled");
+                $('#allocate_submit').attr("disabled", true);
               }
               else if(flag1){
-                $('#allocate_submit').removeClass("disabled");
+                $('#allocate_submit').removeAttr("disabled");
               }
             });
             //showtooltip
@@ -255,9 +255,17 @@
             });
 
             $('#allocate_submit').click(function(){
-              if(!$('#allocate_submit').hasClass("disabled")){
+              if($('#assignment').val()!="" && $('#file').val()!=""){
+            	 $('#allocate_form').submit();
                 $(".allocation").hide();
-              };
+              }else{
+            	  console.log("ok");
+               	 $('#warning').text("Please input assignmnet/file!");
+      	         $('.warning').removeAttr("hidden");
+      	         setTimeout(function(){
+      	            $('.warning').attr("hidden", true);
+      	         }, 5000);
+              }
             });
 
             $('.cancel,.close').click(function(){

@@ -1,3 +1,4 @@
+(function ($) {
 $(document).ready(function () {
   $('#toggler').click(function(){
     if(!$(this).hasClass("sidebar-collapse")){
@@ -23,5 +24,8 @@ $(document).ready(function () {
       $('.page-content').addClass('col-md-10');
       $('.page-content').addClass('col-lg-10');
     }
-  });
+  });  
 });
+} (jQuery));
+
+

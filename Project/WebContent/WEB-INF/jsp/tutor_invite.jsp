@@ -202,6 +202,23 @@
         </div>
       </div>
 
+
+    <!-- alert -->
+    <div class="alert alert-warning alert-dismissible fade show warning" hidden>
+      <button type="button" class="close" data-dismiss="alert" style="">&times;</button>
+      <strong>Warning!</strong>&nbsp;<span id="warning"></span>
+    </div>
+    <!-- alert -->
+    <div class="alert alert-danger alert-dismissible fade show error" hidden>
+      <button type="button" class="close" data-dismiss="alert" style="">&times;</button>
+      <strong>Error!</strong>&nbsp;<span id="error"></span>
+    </div>
+    <!-- alert -->
+    <div class="alert alert-success alert-dismissible fade show success" hidden>
+      <button type="button" class="close" data-dismiss="alert" style="margin:10px;padding:0">&times;</button>
+      <strong>Success!</strong>&nbsp;<span id="success"></span>
+    </div>	
+    
       <script language="javascript">
         $(document).ready(function () {
             $('#tutor_table').DataTable();
@@ -265,6 +282,29 @@
             });
         });
       </script>
+      
+      <script type="text/javascript">
+	      $.noConflict();
+	      var msg = "${msg}";
+	      console.log(msg);
+	      if (${operation} == true){
+	         (function ($) {
+	          $('#success').text(msg);
+	          $('.success').removeAttr("hidden");
+	            setTimeout(function(){
+	            $('.success').attr("hidden", true);
+	          }, 5000);
+	         } (jQuery));
+	      }else if (${operation} == false){
+	        (function ($) {
+	          $('#error').text(msg);
+	          $('.error').removeAttr("hidden");
+	            setTimeout(function(){
+	            $('.error').attr("hidden", true);
+	          }, 5000);
+	         } (jQuery));
+	      }
+  	  </script>
     </div>
   </body>
 </html>
