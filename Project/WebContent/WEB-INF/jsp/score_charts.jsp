@@ -99,7 +99,7 @@
                   <div class="col-lg-4">
                     <label for="subject"><span class="badge badge-secondary check_subject"></span> Subject:</label>
                     <br>
-                    <input type="text" class="showTooltip" id="subject_info" name="subject" list="subject" autocomplete="off" autofocus>
+                    <input type="text" class="showTooltip" id="subject_info" name="subject" list="subject" autocomplete="off" autofocus required>
                     <datalist id="subject">
                       <c:forEach items="${lessons }" var="lesson">
                         <option value="${lesson.classDict.classId } ${lesson.semester } ${lesson.year}" data-id="${lesson.lessonId }"></option>
