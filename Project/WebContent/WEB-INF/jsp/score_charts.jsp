@@ -507,9 +507,40 @@
       	            $('.warning').attr("hidden", true);
       	         }, 5000);
         	}
-        });
-      } (jQuery));
+          });
+  		});
+      }(jQuery));
       </script>
 
+   <script type="text/javascript">
+	  console.log("ok");
+	  $.noConflict();
+	  if (${operation} == false){
+		  var msg = "${msg}";
+	  	//window.alert("Username or password wrong");
+	  	 (function ($) {
+	  		$('#error').text(msg);
+	  		$('.error').attr("hidden", false);
+	      	setTimeout(function(){
+	    	  $('.error').attr("hidden", true);
+	      	}, 5000)
+	     } (jQuery));
+	  }
+	</script>
+  
+  <script type="text/javascript">
+  if (${operation} == true){
+	  var msg = "${msg}";
+  	//window.alert("Username or password wrong");
+  	 (function ($) {
+  		$('#success').text(msg);
+  		$('.success').attr("hidden", false);
+      	setTimeout(function(){
+    	  $('.success').attr("hidden", true);
+      	}, 5000)
+     } (jQuery));
+  }
+  </script>
+  
   </body>
 </html>

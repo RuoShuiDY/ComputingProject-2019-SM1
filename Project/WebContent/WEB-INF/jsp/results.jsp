@@ -343,7 +343,11 @@
             		mkids.push($(this).val());
             	});
             	$.post("sendEmails",{"mkids":mkids},function(result){
-    				window.alert('Send Successfully!');
+                	 $('#success').text("Send Successfully!");
+          	         $('.success').removeAttr("hidden");
+          	         setTimeout(function(){
+          	            $('.success').attr("hidden", true);
+          	         }, 5000);
     			});
             });
             
