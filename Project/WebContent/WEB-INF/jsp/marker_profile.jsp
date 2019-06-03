@@ -96,7 +96,7 @@
                   <ol class="breadcrumb row">
                     <li class="breadcrumb-item"><a href="/dashboard/markerDashboard">Home</a></li>
                     <li class="breadcrumb-item"><a href="#">Marker Information</a></li>
-                    <li class="breadcrumb-item active">Marker Proile</li>
+                    <li class="breadcrumb-item active">Marker Profile</li>
                   </ol>
                 </div>
 

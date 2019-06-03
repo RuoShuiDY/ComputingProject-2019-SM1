@@ -103,7 +103,7 @@
                     <h5 class="form_topic">Download Spreadsheet</h5>
                     <div class="form_row">
                       <label for="subject"><span class="badge badge-secondary check_subject"></span> Subject:</label>
-                      <input type="text" class="showTooltip form_content" id="subject_info" name="subject" list="subject" autocomplete="off" required>
+                      <input type="text" class="showTooltip form_content" id="subject_info" name="subject" list="subject" autocomplete="off" autofocus required>
                       <datalist id="subject">
                         <c:forEach items="${lessons}" var="lesson">
                         	<option value="${lesson.classDict.classId} ${lesson.classDict.className}-${lesson.semester}-${lesson.year}" data-id="${lesson.lessonId }"></option>
@@ -113,7 +113,7 @@
                     </div>
                     <div class="form_row">
                       <label for="assignment"><span class="badge badge-secondary check_assignment"></span> Assignment:</label>
-                      <input type="text" class="showTooltip form_content" id="assignment_info" name="assignment" list="assignment" autocomplete="off" required>
+                      <input type="text" class="showTooltip form_content" id="assignment_info" name="assignment" list="assignment" autocomplete="off" autofocus required>
                       <datalist id="assignment">
                         <option value="1"></option>
                         <option value="2"></option>
