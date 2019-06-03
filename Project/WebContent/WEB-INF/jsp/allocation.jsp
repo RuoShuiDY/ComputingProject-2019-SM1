@@ -162,7 +162,7 @@
                   </div>
           				<div class="row">
                     <div class="col-lg-11">
-                      <label for="file" class="col-lg-4 left-align"><span class=""></span> Students&nbsp(Excel):</label>
+                      <label for="file" class="col-lg-4 left-align"><span class=""></span> Students:</label>
                       <div class="custom-file col-lg-8 row">
                         <input type="file" class="custom-file-input col-lg-12" name="stuExcel" id="file" required>
                         <label class="custom-file-label">Choose a File from Folder</label>
@@ -179,29 +179,7 @@
           </div>
         </div>
       </div>
-      
-		<!-- alert -->
-		<div class="alert alert-warning alert-dismissible fade show warning"
-			hidden>
-			<button type="button" class="close" data-dismiss="alert"
-				style="margin: 10px; padding: 0">&times;</button>
-			<strong>Warning!</strong>&nbsp;<span id="warning"></span>
-		</div>
-		<!-- alert -->
-		<div class="alert alert-danger alert-dismissible fade show error"
-			hidden>
-			<button type="button" class="close" data-dismiss="alert"
-				style="margin: 10px; padding: 0">&times;</button>
-			<strong>Error!</strong>&nbsp;<span id="error"></span>
-		</div>
-		<!-- alert -->
-		<div class="alert alert-success alert-dismissible fade show success"
-			hidden>
-			<button type="button" class="close" data-dismiss="alert"
-				style="margin: 10px; padding: 0">&times;</button>
-			<strong>Success!</strong>&nbsp;<span id="success"></span>
-		</div>
-	</div>
+
       <script language="javascript">
         $(document).ready(function () {
             $('input[list]').on('input', function(e) {
@@ -233,7 +211,7 @@
   						} else {
   							$(".allocation").hide();
               }
-			});
+						});
 
             //validation
             $('#subject_info').blur(function(){
@@ -256,7 +234,7 @@
                 $('#allocate_submit').attr("disabled", true);
               }
               else if(flag1){
-                $('#allocate_submit').attr("disabled", false);
+                $('#allocate_submit').removeAttr("disabled");
               }
             });
             //showtooltip
@@ -281,8 +259,9 @@
             	 $('#allocate_form').submit();
                 $(".allocation").hide();
               }else{
-               	 $('#warning').text("Please input Assignmnet/File!");
-      	         $('.warning').attr("hidden", false);
+            	  console.log("ok");
+               	 $('#warning').text("Please input assignmnet/file!");
+      	         $('.warning').removeAttr("hidden");
       	         setTimeout(function(){
       	            $('.warning').attr("hidden", true);
       	         }, 5000);
@@ -298,8 +277,14 @@
       <script type="text/javascript" src="../../assets/js/bs-custom-file-input.js"></script>
       <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function() {
-            bsCustomFileInput.init(); 
-        });
+            bsCustomFileInput.init()
+
+            var btn = document.getElementById('btnResetForm')
+            var form = document.querySelector('form')
+            btn.addEventListener('click', function () {
+              form.reset()
+            })
+          });
       </script>
     </div>
   </body>

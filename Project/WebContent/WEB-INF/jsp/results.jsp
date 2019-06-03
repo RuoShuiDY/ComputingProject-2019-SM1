@@ -128,7 +128,7 @@
                   <div class="col-lg-3">
                     <label for="assignment"><span class="badge badge-secondary check_assignment"></span> Assignment:</label>
                     <br>
-                    <input type="text" class="showTooltip" id="assignment_info" name="assignment" list="assignment" autocomplete="off" placeholder=" Can Be None" autofocus>
+                    <input type="text" class="showTooltip" id="assignment_info" name="assignment" list="assignment" autocomplete="off" placeholder=" Can Be None">
                     <datalist id="assignment">
                       <option value="1"></option>
                       <option value="2"></option>
@@ -139,7 +139,7 @@
                   </div>
                   <div class="col-lg-2">
                     <label>Operation:</label><br>
-                    <button type="button" class="button" id="show" name="button">Show Results</button>
+                    <button type="button" class="button disabled" id="show" name="button">Show Results</button>
                   </div>
                   <div class="col-lg-1">
                     <label>TOTAL NUMBER of STUDENTS:</label>
@@ -231,31 +231,10 @@
               </div>
             </div>
             <!-- display Results-->
+
           </div>
         </div>
       </div>
-
-		<!-- alert -->
-		<div class="alert alert-warning alert-dismissible fade show warning"
-			hidden>
-			<button type="button" class="close" data-dismiss="alert"
-				style="margin: 10px; padding: 0">&times;</button>
-			<strong>Warning!</strong>&nbsp;<span id="warning"></span>
-		</div>
-		<!-- alert -->
-		<div class="alert alert-danger alert-dismissible fade show error"
-			hidden>
-			<button type="button" class="close" data-dismiss="alert"
-				style="margin: 10px; padding: 0">&times;</button>
-			<strong>Error!</strong>&nbsp;<span id="error"></span>
-		</div>
-		<!-- alert -->
-		<div class="alert alert-success alert-dismissible fade show success"
-			hidden>
-			<button type="button" class="close" data-dismiss="alert"
-				style="margin: 10px; padding: 0">&times;</button>
-			<strong>Success!</strong>&nbsp;<span id="success"></span>
-		</div>
 
       <script language="javascript">
         $(document).ready(function () {
@@ -342,12 +321,7 @@
             		mkids.push($(this).val());
             	});
             	$.post("sendEmails",{"mkids":mkids},function(result){
-    				//window.alert('Send Successfully!');
-                	 $('#success').text("Send Successfully!");
-          	         $('.success').removeAttr("hidden");
-          	         setTimeout(function(){
-          	            $('.success').attr("hidden", true);
-          	         }, 5000);
+    				window.alert('Send Successfully!');
     			});
             });
             
@@ -406,28 +380,12 @@
                 }
                 console.log($('#generate').hasClass("disabled"));
               });
-            
             $("#show").click(function(){
             	if(flag1==true && flag2==true){
             		$("#result_selection_id").submit();
-            	}else if(flag1==false){
-                 	 $('#warning').text("Please input a valid subject!");
-          	         $('.warning').removeAttr("hidden");
-          	         setTimeout(function(){
-          	            $('.warning').attr("hidden", true);
-          	         }, 5000);
-            	}else if(flag2==false && flag1==true){
-            		if($('#assignment_info').val().trim()!=""){
-	                 	 $('#warning').text("Please input a valid assignment!");
-	          	         $('.warning').removeAttr("hidden");
-	          	         setTimeout(function(){
-	          	            $('.warning').attr("hidden", true);
-	          	         }, 5000);
-            		}else{
-	                 	$("#result_selection_id").submit();
-	          	   	}
-               	}
-            });            
+            	}
+            });
+            
           });
       </script>
     </div>
