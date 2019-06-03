@@ -122,7 +122,7 @@
                   </div>
                   <div class="col-lg-2">
                     <label>Operation:</label><br>
-                    <button type="button" class="button disabled" id="generate" name="button">Generate Charts</button>
+                    <button type="button" class="button" id="generate" name="button">Generate Charts</button>
                   </div>
                   <div class="col-lg-1">
                     <label>TOTAL NUMBER of STUDENTS:</label>
@@ -284,6 +284,7 @@
       </script>
 
       <script type="text/javascript">
+	  	  $.noConflict();
           var dom = document.getElementById("container");
           var myChart = echarts.init(dom);
           var app = {};
@@ -383,13 +384,14 @@
                   }
               ]
           };
-          ;
+
           if (option && typeof option === "object") {
               myChart.setOption(option, true);
           }
       </script>
 
       <script type="text/javascript">
+      (function ($) {
       $(document).ready(function () {
         $('input[list]').on('input', function(e) {
             var $input = $('#subject_info'),
@@ -468,7 +470,8 @@
         		$("#showChart_id").submit();
         	}
         });
-      });
+
+      } (jQuery));
       </script>
 
   </body>

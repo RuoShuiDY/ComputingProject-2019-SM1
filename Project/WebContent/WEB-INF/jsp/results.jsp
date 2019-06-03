@@ -139,7 +139,7 @@
                   </div>
                   <div class="col-lg-2">
                     <label>Operation:</label><br>
-                    <button type="button" class="button disabled" id="show" name="button">Show Results</button>
+                    <button type="button" class="button" id="show" name="button">Show Results</button>
                   </div>
                   <div class="col-lg-1">
                     <label>TOTAL NUMBER of STUDENTS:</label>
@@ -223,7 +223,7 @@
                       <textarea name="comment" rows="5" cols="62" class="comment_label" required></textarea>
                     </div>
                     <div class="row">
-                      <button type="submit" name="button" class="disabled form_vertical_button col-lg-5 col-md-5 col-sm-5 col-xs-5" id="update_submit"><i class="fa fa-edit"></i><span>Update</span></button>
+                      <button type="button" name="button" class="form_vertical_button col-lg-5 col-md-5 col-sm-5 col-xs-5" id="update_submit"><i class="fa fa-edit"></i><span>Update</span></button>
                       <button type="button" name="button" class="form_vertical_button cancel col-lg-5 col-md-5 col-sm-5 col-xs-5"><i class="fa fa-times-circle"></i></i><span>Cancel</span></button>
                     </div>
                   </form>
@@ -235,6 +235,28 @@
           </div>
         </div>
       </div>
+
+		<!-- alert -->
+		<div class="alert alert-warning alert-dismissible fade show warning"
+			hidden>
+			<button type="button" class="close" data-dismiss="alert"
+				style="margin: 10px; padding: 0">&times;</button>
+			<strong>Warning!</strong>&nbsp;<span id="warning"></span>
+		</div>
+		<!-- alert -->
+		<div class="alert alert-danger alert-dismissible fade show error"
+			hidden>
+			<button type="button" class="close" data-dismiss="alert"
+				style="margin: 10px; padding: 0">&times;</button>
+			<strong>Error!</strong>&nbsp;<span id="error"></span>
+		</div>
+		<!-- alert -->
+		<div class="alert alert-success alert-dismissible fade show success"
+			hidden>
+			<button type="button" class="close" data-dismiss="alert"
+				style="margin: 10px; padding: 0">&times;</button>
+			<strong>Success!</strong>&nbsp;<span id="success"></span>
+		</div>
 
       <script language="javascript">
         $(document).ready(function () {
@@ -383,11 +405,56 @@
             $("#show").click(function(){
             	if(flag1==true && flag2==true){
             		$("#result_selection_id").submit();
+            	}else if(flag1==true && $('#assignment_info').val().trim()==""){
+            		$("#result_selection_id").submit();
+            	}else if(flag1==false){
+                 	 $('#warning').text("Please input valid Subject!");
+          	         $('.warning').removeAttr("hidden");
+          	         setTimeout(function(){
+          	            $('.warning').attr("hidden", true);
+          	         }, 5000);
+            	}else if(flag2==false){
+                 	 $('#warning').text("Please input valid Assignment!");
+          	         $('.warning').removeAttr("hidden");
+          	         setTimeout(function(){
+          	            $('.warning').attr("hidden", true);
+          	         }, 5000);
             	}
             });
             
           });
       </script>
+      
+   <script type="text/javascript">
+	  console.log("ok");
+	  $.noConflict();
+	  if (${operation} == false){
+		  var msg = "${msg}";
+	  	//window.alert("Username or password wrong");
+	  	 (function ($) {
+	  		$('#error').text(msg);
+	  		$('.error').attr("hidden", false);
+	      	setTimeout(function(){
+	    	  $('.error').attr("hidden", true);
+	      	}, 5000)
+	     } (jQuery));
+	  }
+	</script>
+  
+  <script type="text/javascript">
+  if (${operation} == true){
+	  var msg = "${msg}";
+  	//window.alert("Username or password wrong");
+  	 (function ($) {
+  		$('#success').text(msg);
+  		$('.success').attr("hidden", false);
+      	setTimeout(function(){
+    	  $('.success').attr("hidden", true);
+      	}, 5000)
+     } (jQuery));
+  }
+  </script>
+  
     </div>
   </body>
 </html>
