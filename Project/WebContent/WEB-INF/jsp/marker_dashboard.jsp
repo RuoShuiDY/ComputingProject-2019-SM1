@@ -104,7 +104,7 @@
                   <img src="../../assets/img/banner.jpg">
                   <div class="carousel-caption">
                     <h4>Welcome to Teaching and Marking System</h4>
-                    <h5>UserName</h5>
+                    <h5>${Tutor.tutorName}</h5>
                   </div>
                 </div>
                 <div class="carousel-item">
