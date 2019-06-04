@@ -115,7 +115,7 @@
             </div>
 
             <div class="row" id="profile">
-                <form id="centre_form" class="col-lg-8 col-md-8 col-sm-8 col-xs-8" action="updateProfile" method="post" id="profile_form">
+                <form id="centre_form" class="col-lg-8 col-md-8 col-sm-8 col-xs-8" action="updateProfile" method="post">
                   <h5 class="form_topic">Marker Profile</h5>
                     <input type="hidden" value="${tutor.tutorId }" name="tutor_id">
                     <div class="form_row">
@@ -175,6 +175,11 @@
                     </div>
                   </form>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
 			<!-- alert -->
 			<div class="alert alert-warning alert-dismissible fade show warning"
 				hidden>
@@ -196,11 +201,7 @@
 					style="margin: 10px; padding: 0">&times;</button>
 				<strong>Success!</strong>&nbsp;<span id="success"></span>
 			</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+			
       <script language="javascript">
         $(document).ready(function () {
             //$('#marker_subject_table').DataTable();
@@ -235,8 +236,8 @@
             });
             
             $('#profile').click(function(){
-              if($('#marker_oldpwd').val().trim()!=="" && $('#marker_newpwd').val().trim()!=="" ){
-            	 $('#profile_form').submit();
+            if($('#marker_oldpwd').val().trim()!=="" && $('#marker_newpwd').val().trim()!=="" ){
+            	 $('#centre_form').submit();
               }else{
               	 $('#warning').text("Please input a valid password!");
       	         $('.warning').removeAttr("hidden");
@@ -244,6 +245,7 @@
       	            $('.warning').attr("hidden", true);
       	         }, 5000);
               }
+           	 //$('#profile_form').submit();
             });
         });
       </script>

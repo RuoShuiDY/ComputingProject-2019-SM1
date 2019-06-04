@@ -24,18 +24,32 @@ public class MarkerController {
 	@Autowired
 	private TutorLessonService tutorLessonService;
 
+//	@RequestMapping(value = "profile_list")
+//	public String showProfile(HttpSession session, Model model) {
+//		Tutor tutor = (Tutor) session.getAttribute("tutor");
+//		tutor = markerService.findMarkerById(tutor.getTutorId());
+//		List<Lesson> history = tutorLessonService.findLessonsByTutorId(tutor.getTutorId());
+//
+//		model.addAttribute("tutor", tutor);
+//		model.addAttribute("history", history);
+//
+//		return "/marker_profile";
+//	}
+
 	@RequestMapping(value = "profile_list")
-	public String showProfile(HttpSession session, Model model) {
-		Tutor tutor = (Tutor) session.getAttribute("tutor");
-		tutor = markerService.findMarkerById(tutor.getTutorId());
-		List<Lesson> history = tutorLessonService.findLessonsByTutorId(tutor.getTutorId());
+	 public String showProfile(HttpSession session, Model model, Boolean operation, String msg) {
+	  Tutor tutor = (Tutor) session.getAttribute("tutor");
+	  tutor = markerService.findMarkerById(tutor.getTutorId());
+	  List<Lesson> history = tutorLessonService.findLessonsByTutorId(tutor.getTutorId());
 
-		model.addAttribute("tutor", tutor);
-		model.addAttribute("history", history);
-
-		return "/marker_profile";
-	}
-
+	  model.addAttribute("tutor", tutor);
+	  model.addAttribute("history", history);
+	  model.addAttribute("operation",operation);
+	  model.addAttribute("msg",msg);
+	  
+	  return "/marker_profile";
+	 }
+	
 	@RequestMapping(value = "updateProfile")
 	public String updateProfile(HttpSession session, Model model,
 			@RequestParam(value = "tutor_id", required = false) Integer tutorId,
