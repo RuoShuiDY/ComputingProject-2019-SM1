@@ -84,7 +84,7 @@ public class FileController {
 		path = path+"/"+subject;
 		File file = new File(path+"/"+tutor.getTutorName()+" assign"+assignment+".xlsx");
         
-        HttpHeaders headers = new HttpHeaders();//http头信息
+        HttpHeaders headers = new HttpHeaders();//http头锟斤拷息
         
         String downloadFileName = tutor.getTutorName()+" assign"+assignment+".xlsx";
         
@@ -95,17 +95,32 @@ public class FileController {
         return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),headers,HttpStatus.CREATED);
         
     }
+//	@RequestMapping(value="uploadUI")
+//	public String uploadUI(HttpSession session, Model model) {
+//		Tutor tutor = (Tutor) session.getAttribute("tutor");
+//		
+//		List<TutorLesson> tutorlessons = tutorLessonService.findTutorLessonByTutorId(tutor.getTutorId());
+//		List<TutorAssignment> tutorAssignments = tutorAssignmentService.findTutorAssignmentByTutorId(tutor.getTutorId());
+//		
+//		model.addAttribute("tutorLesson", tutorlessons);
+//		model.addAttribute("tutorAssignments", tutorAssignments);
+//		return "upload_spreadsheet";
+//	} 
+	
 	@RequestMapping(value="uploadUI")
-	public String uploadUI(HttpSession session, Model model) {
-		Tutor tutor = (Tutor) session.getAttribute("tutor");
-		
-		List<TutorLesson> tutorlessons = tutorLessonService.findTutorLessonByTutorId(tutor.getTutorId());
-		List<TutorAssignment> tutorAssignments = tutorAssignmentService.findTutorAssignmentByTutorId(tutor.getTutorId());
-		
-		model.addAttribute("tutorLesson", tutorlessons);
-		model.addAttribute("tutorAssignments", tutorAssignments);
-		return "upload_spreadsheet";
-	} 
+	 public String uploadUI(HttpSession session, Model model, Boolean operation, String msg) {
+	  Tutor tutor = (Tutor) session.getAttribute("tutor");
+	  
+	  List<TutorLesson> tutorlessons = tutorLessonService.findTutorLessonByTutorId(tutor.getTutorId());
+	  List<TutorAssignment> tutorAssignments = tutorAssignmentService.findTutorAssignmentByTutorId(tutor.getTutorId());
+	  
+	  model.addAttribute("tutorLesson", tutorlessons);
+	  model.addAttribute("tutorAssignments", tutorAssignments);
+	  model.addAttribute("operation", operation);
+	  model.addAttribute("msg",msg);
+	  return "upload_spreadsheet";
+	 }
+	
 	@Transactional
 	@RequestMapping(value = "/upload")
 	public String allocate(Model model, HttpServletRequest request, Integer tutorLessonId, 
