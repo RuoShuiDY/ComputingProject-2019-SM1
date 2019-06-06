@@ -37,6 +37,7 @@
 <link
 	href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css"
 	rel="stylesheet" />
+<script type="text/javascript" src="../../assets/js/main.js"></script>
 </head>
 
 <body>
@@ -44,6 +45,7 @@
 		<!-- top navigation -->
 		<nav
 			class="navbar navbar-expand-lg navbar-light bg-light fixed-top top-navbar">
+			<button type="button" id="toggler" name="button"><i class="fa fa-align-left"></i></button>
 			<a class="navbar-brand" href="/dashboard/dashboardUI"><span>Teaching
 					and Marking System</span></a>
 			<!-- navbar toggler -->
