@@ -113,7 +113,7 @@
 
             <!-- display Marking Information-->
             <div class="displayMarker">
-              <table id="marker_table" class="table table-hover">
+              <table id="marker_table" class="table-responsive table table-hover">
                 <thead>
                   <tr>
                     <th>No.</th>
